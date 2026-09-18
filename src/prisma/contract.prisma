@@ -10,7 +10,4 @@ model Project {
   creationDate  TimestamptzString
   insights      String?
   tools         String?
-
-  createdAt TimestamptzString @default(now())
-  updatedAt temporal.updatedAtString()
 }

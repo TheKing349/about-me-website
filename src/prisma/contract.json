@@ -15,13 +15,6 @@
         "models": {
           "Project": {
             "fields": {
-              "createdAt": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "kind": "scalar"
-                }
-              },
               "creationDate": {
                 "nullable": false,
                 "type": {
@@ -84,21 +77,11 @@
                   "codecId": "pg/text@1",
                   "kind": "scalar"
                 }
-              },
-              "updatedAt": {
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "kind": "scalar"
-                }
               }
             },
             "relations": {},
             "storage": {
               "fields": {
-                "createdAt": {
-                  "column": "createdAt"
-                },
                 "creationDate": {
                   "column": "creationDate"
                 },
@@ -125,9 +108,6 @@
                 },
                 "tools": {
                   "column": "tools"
-                },
-                "updatedAt": {
-                  "column": "updatedAt"
                 }
               },
               "namespaceId": "public",
@@ -145,15 +125,6 @@
           "table": {
             "project": {
               "columns": {
-                "createdAt": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "default": {
-                    "expression": "now()",
-                    "kind": "function"
-                  },
-                  "nativeType": "timestamptz",
-                  "nullable": false
-                },
                 "creationDate": {
                   "codecId": "pg/timestamptz-string@1",
                   "nativeType": "timestamptz",
@@ -202,11 +173,6 @@
                   "codecId": "pg/text@1",
                   "nativeType": "text",
                   "nullable": true
-                },
-                "updatedAt": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "nativeType": "timestamptz",
-                  "nullable": false
                 }
               },
               "foreignKeys": [],
@@ -224,29 +190,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "d2ec23dacf2fcd06bb695fea501e257aceab9d667acd230d2e0eadc0280a58a2"
-  },
-  "execution": {
-    "executionHash": "f21583b960037ac3ba7ffe09b448ff6dc451cd430b11004b11bf8726bd14a4de",
-    "mutations": {
-      "defaults": [
-        {
-          "onCreate": {
-            "id": "timestampNow",
-            "kind": "generator"
-          },
-          "onUpdate": {
-            "id": "timestampNow",
-            "kind": "generator"
-          },
-          "ref": {
-            "column": "updatedAt",
-            "namespace": "public",
-            "table": "project"
-          }
-        }
-      ]
-    }
+    "storageHash": "5106e41ad073afdc09f004a02ffe78576e68bd45299c02f79492cbf378f1f25b"
   },
   "capabilities": {
     "postgres": {
