@@ -2,12 +2,13 @@ export const dynamic = "force-dynamic";
 
 export default async function Home() {
 
-  const { listUsers } = await import("../prisma/users");
+  const { listProjects } = await import("../prisma/projects");
   const formatter = new Intl.DateTimeFormat("en", {
     dateStyle: "medium",
     timeStyle: "short",
   });
-  const users = await listUsers(10).catch(() => undefined);
+  console.log(await listProjects());
+  const projects = await listProjects().catch(() => undefined);
 
   return (
     <main className="shell">
@@ -24,31 +25,32 @@ export default async function Home() {
       <section className="panel">
         <div className="panelHeader">
           <h2>Seeded users</h2>
-          <span>{users?.length ?? 0} total</span>
+          <span>{projects?.length ?? 0} total</span>
         </div>
 
-        {!users ? (
+        {!projects ? (
           <p className="empty">
             Could not query users yet. Run <code>contract:emit</code> and apply your schema,
             then refresh.
           </p>
-        ) : users.length === 0 ? (
+        ) : projects.length === 0 ? (
           <p className="empty">No users found.</p>
         ) : (
           <ul className="users">
-            {users.map((user) => (
-              <li key={user.id}>
+            {projects.map((project) => (
+              <li key={project.id}>
                 <div>
-                  <strong>{user.name ?? "Unnamed user"}</strong>
-                  <p>{user.username ? `@${user.username}` : user.email}</p>
+                  <strong>{project.title}</strong>
+                  <p>{project.desc}</p>
+                  <p>{project.image}</p>
+                  <p>{project.publishLink}</p>
+                  <p>{project.githubLink}</p>
+                  <p>{project.insights}</p>
+                  <p>{project.tools}</p>
                 </div>
-                {user.createdAt ? (
-                  <time dateTime={user.createdAt}>
-                    {formatter.format(new Date(user.createdAt))}
-                  </time>
-                ) : (
-                  <span className="empty">No timestamp</span>
-                )}
+                <time dateTime={project.creationDate}>
+                  {formatter.format(new Date(project.creationDate))}
+                </time>
               </li>
             ))}
           </ul>

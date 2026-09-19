@@ -1,21 +1,22 @@
 import { connectDatabase, db } from "./db.ts";
 
-const users = [
-  { email: "alice@prisma.io", username: "alice", name: "Alice" },
-  { email: "bob@prisma.io", username: "bob", name: "Bob" },
-  { email: "carol@prisma.io", username: "carol", name: "Carol" },
+const projects = [
+  { id: 1, title: "One", desc: "Desc One", image: "https://placehold.net/default.svg", publishLink: "https://example.com", githubLink: "https://github.com/example/example-repo", creationDate: "2026-09-19T16:24:00Z", insights: "SKILLS", tools: "GitHub"},
+  { id: 2, title: "Two", desc: "Desc Two", image: "https://placehold.net/default.svg", publishLink: "https://example.com", githubLink: "https://github.com/example/example-repo", creationDate: "2026-09-19T16:24:00Z", insights: "SKILLS", tools: "GitHub"},
+  { id: 3, title: "Three", desc: "Desc Three", image: "https://placehold.net/default.svg", publishLink: "https://example.com", githubLink: "https://github.com/example/example-repo", creationDate: "2026-09-19T16:24:00Z", insights: "SKILLS", tools: "GitHub"},
 ];
 
 let pendingSeed: Promise<void> | undefined;
 
 async function runSeed(): Promise<void> {
   await connectDatabase();
+  console.log("CONNECT");
 
-  for (const user of users) {
-    await db.orm.public.User.upsert({
-      create: user,
+  for (const project of projects) {
+    await db.orm.public.Project.upsert({
+      create: project,
       update: {},
-      conflictOn: { email: user.email },
+      conflictOn: { id: project.id },
     });
   }
 }

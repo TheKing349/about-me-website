@@ -6,7 +6,7 @@ export { db };
 export async function listProjects() {
   await seed();
   const projects = await db.orm.public.Project.select("id", "title", "desc", "image", "publishLink", "githubLink", "creationDate", "insights", "tools").all();
-
+  console.log("projects: " + projects);
   return projects;
 }
 
