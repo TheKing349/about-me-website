@@ -23,7 +23,7 @@ export default function() {
             key={link.name}
             href={link.href}
             className={`no-underline hover:underline ${
-              isActive ? 'underline decoration-2 underline-offset-4' : ''
+              isActive ? 'underline decoration-2 underline-offset-5' : ''
             }`}
           >
             {link.name}
