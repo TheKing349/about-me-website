@@ -43,11 +43,12 @@
                   "kind": "scalar"
                 }
               },
-              "image": {
+              "images": {
+                "many": true,
                 "nullable": false,
                 "type": {
-                  "codecId": "pg/text@1",
-                  "kind": "scalar"
+                  "kind": "valueObject",
+                  "name": "Image"
                 }
               },
               "insights": {
@@ -94,8 +95,8 @@
                 "id": {
                   "column": "id"
                 },
-                "image": {
-                  "column": "image"
+                "images": {
+                  "column": "images"
                 },
                 "insights": {
                   "column": "insights"
@@ -112,6 +113,40 @@
               },
               "namespaceId": "public",
               "table": "project"
+            }
+          }
+        },
+        "valueObjects": {
+          "Image": {
+            "fields": {
+              "alt": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "height": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "url": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "width": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              }
             }
           }
         }
@@ -149,9 +184,9 @@
                   "nativeType": "int4",
                   "nullable": false
                 },
-                "image": {
-                  "codecId": "pg/text@1",
-                  "nativeType": "text",
+                "images": {
+                  "codecId": "pg/jsonb@1",
+                  "nativeType": "jsonb",
                   "nullable": false
                 },
                 "insights": {
@@ -190,7 +225,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "5106e41ad073afdc09f004a02ffe78576e68bd45299c02f79492cbf378f1f25b"
+    "storageHash": "4500baf9956c7d9aead31be241270eaaac5f9b97cca49a77fec9a9008f857f15"
   },
   "capabilities": {
     "postgres": {

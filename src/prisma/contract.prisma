@@ -4,10 +4,17 @@ model Project {
   id            Int      @id @default(autoincrement())
   title         String
   desc          String
-  image         String
+  images        Image[]
   publishLink   String?
   githubLink    String?
   creationDate  TimestamptzString
   insights      String?
   tools         String?
+}
+
+type Image {
+  width       Int
+  height      Int
+  url         String
+  alt         String
 }

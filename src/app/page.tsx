@@ -1,4 +1,5 @@
 export const dynamic = "force-dynamic";
+import Image from "next/image"
 
 export default async function Home() {
 
@@ -7,7 +8,6 @@ export default async function Home() {
     dateStyle: "medium",
     timeStyle: "short",
   });
-  console.log(await listProjects());
   const projects = await listProjects().catch(() => undefined);
 
   return (
@@ -42,7 +42,9 @@ export default async function Home() {
                 <div>
                   <strong>{project.title}</strong>
                   <p>{project.desc}</p>
-                  <p>{project.image}</p>
+                  {project.images.map((image, index) => (
+                    <Image key={project.id - index} {...image} src={image.url}/>
+                  ))}
                   <p>{project.publishLink}</p>
                   <p>{project.githubLink}</p>
                   <p>{project.insights}</p>

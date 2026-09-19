@@ -34,7 +34,7 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'5106e41ad073afdc09f004a02ffe78576e68bd45299c02f79492cbf378f1f25b'>;
+  StorageHashBase<'4500baf9956c7d9aead31be241270eaaac5f9b97cca49a77fec9a9008f857f15'>;
 export type ExecutionHash = ExecutionHashBase<string>;
 export type ProfileHash =
   ProfileHashBase<'3916f444a8a17ad749191acf9e08dad97d1a327b88c2f1d45d12f240296aa8b2'>;
@@ -238,14 +238,25 @@ type DefaultLiteralValue<CodecId extends string, Encoded> = CodecId extends keyo
     ? Encoded
     : CodecTypes[CodecId]['json']
   : Encoded;
-
+export type ImageOutput = {
+  readonly width: CodecTypes['pg/int4@1']['output'];
+  readonly height: CodecTypes['pg/int4@1']['output'];
+  readonly url: CodecTypes['pg/text@1']['output'];
+  readonly alt: CodecTypes['pg/text@1']['output'];
+};
+export type ImageInput = {
+  readonly width: CodecTypes['pg/int4@1']['input'];
+  readonly height: CodecTypes['pg/int4@1']['input'];
+  readonly url: CodecTypes['pg/text@1']['input'];
+  readonly alt: CodecTypes['pg/text@1']['input'];
+};
 export type FieldOutputTypes = {
   readonly public: {
     readonly Project: {
       readonly id: CodecTypes['pg/int4@1']['output'];
       readonly title: CodecTypes['pg/text@1']['output'];
       readonly desc: CodecTypes['pg/text@1']['output'];
-      readonly image: CodecTypes['pg/text@1']['output'];
+      readonly images: ReadonlyArray<ImageOutput>;
       readonly publishLink: CodecTypes['pg/text@1']['output'] | null;
       readonly githubLink: CodecTypes['pg/text@1']['output'] | null;
       readonly creationDate: CodecTypes['pg/timestamptz-string@1']['output'];
@@ -260,7 +271,7 @@ export type FieldInputTypes = {
       readonly id: CodecTypes['pg/int4@1']['input'];
       readonly title: CodecTypes['pg/text@1']['input'];
       readonly desc: CodecTypes['pg/text@1']['input'];
-      readonly image: CodecTypes['pg/text@1']['input'];
+      readonly images: ReadonlyArray<ImageInput>;
       readonly publishLink: CodecTypes['pg/text@1']['input'] | null;
       readonly githubLink: CodecTypes['pg/text@1']['input'] | null;
       readonly creationDate: CodecTypes['pg/timestamptz-string@1']['input'];
@@ -276,7 +287,7 @@ export type StorageColumnTypes = {
       readonly desc: CodecTypes['pg/text@1']['output'];
       readonly githubLink: CodecTypes['pg/text@1']['output'] | null;
       readonly id: CodecTypes['pg/int4@1']['output'];
-      readonly image: CodecTypes['pg/text@1']['output'];
+      readonly images: CodecTypes['pg/jsonb@1']['output'];
       readonly insights: CodecTypes['pg/text@1']['output'] | null;
       readonly publishLink: CodecTypes['pg/text@1']['output'] | null;
       readonly title: CodecTypes['pg/text@1']['output'];
@@ -291,7 +302,7 @@ export type StorageColumnInputTypes = {
       readonly desc: CodecTypes['pg/text@1']['input'];
       readonly githubLink: CodecTypes['pg/text@1']['input'] | null;
       readonly id: CodecTypes['pg/int4@1']['input'];
-      readonly image: CodecTypes['pg/text@1']['input'];
+      readonly images: CodecTypes['pg/jsonb@1']['input'];
       readonly insights: CodecTypes['pg/text@1']['input'] | null;
       readonly publishLink: CodecTypes['pg/text@1']['input'] | null;
       readonly title: CodecTypes['pg/text@1']['input'];
@@ -305,7 +316,7 @@ export namespace Models {
     id: CodecTypes['pg/int4@1']['output'];
     title: CodecTypes['pg/text@1']['output'];
     desc: CodecTypes['pg/text@1']['output'];
-    image: CodecTypes['pg/text@1']['output'];
+    images: ReadonlyArray<ImageOutput>;
     publishLink: CodecTypes['pg/text@1']['output'] | null;
     githubLink: CodecTypes['pg/text@1']['output'] | null;
     creationDate: CodecTypes['pg/timestamptz-string@1']['output'];
@@ -360,9 +371,9 @@ type ContractBase = Omit<
                   readonly codecId: 'pg/text@1';
                   readonly nullable: false;
                 };
-                readonly image: {
-                  readonly nativeType: 'text';
-                  readonly codecId: 'pg/text@1';
+                readonly images: {
+                  readonly nativeType: 'jsonb';
+                  readonly codecId: 'pg/jsonb@1';
                   readonly nullable: false;
                 };
                 readonly publishLink: {
@@ -427,9 +438,10 @@ type ContractBase = Omit<
                 readonly nullable: false;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
               };
-              readonly image: {
+              readonly images: {
                 readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+                readonly type: { readonly kind: 'valueObject'; readonly name: 'Image' };
+                readonly many: true;
               };
               readonly publishLink: {
                 readonly nullable: true;
@@ -463,12 +475,34 @@ type ContractBase = Omit<
                 readonly id: { readonly column: 'id' };
                 readonly title: { readonly column: 'title' };
                 readonly desc: { readonly column: 'desc' };
-                readonly image: { readonly column: 'image' };
+                readonly images: { readonly column: 'images' };
                 readonly publishLink: { readonly column: 'publishLink' };
                 readonly githubLink: { readonly column: 'githubLink' };
                 readonly creationDate: { readonly column: 'creationDate' };
                 readonly insights: { readonly column: 'insights' };
                 readonly tools: { readonly column: 'tools' };
+              };
+            };
+          };
+        };
+        readonly valueObjects: {
+          readonly Image: {
+            readonly fields: {
+              readonly width: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+              readonly height: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+              readonly url: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly alt: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
               };
             };
           };
@@ -496,7 +530,28 @@ type ContractBase = Omit<
   };
   readonly extensions: {};
   readonly meta: {};
-
+  readonly valueObjects: {
+    readonly Image: {
+      readonly fields: {
+        readonly width: {
+          readonly nullable: false;
+          readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+        };
+        readonly height: {
+          readonly nullable: false;
+          readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+        };
+        readonly url: {
+          readonly nullable: false;
+          readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+        };
+        readonly alt: {
+          readonly nullable: false;
+          readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+        };
+      };
+    };
+  };
   readonly profileHash: ProfileHash;
 };
 
