@@ -1,3 +1,4 @@
+import { Temporal } from "temporal-polyfill";
 import { connectDatabase, db } from "./db.ts";
 
 const placeholderImage = {
@@ -7,10 +8,12 @@ const placeholderImage = {
   alt: "Placeholder image for testing purposes"
 }
 
+const creationDate = Temporal.PlainDate.from("2026-09-19")
+
 const projects = [
-  { id: 1, title: "One", desc: "Desc One", images: [placeholderImage], publishLink: "https://example.com", githubLink: "https://github.com/example/example-repo", creationDate: "2026-09-19T16:24:00Z", insights: "SKILLS", tools: "GitHub"},
-  { id: 2, title: "Two", desc: "Desc Two", images: [placeholderImage, placeholderImage], publishLink: "https://example.com", githubLink: "https://github.com/example/example-repo", creationDate: "2026-09-19T16:24:00Z", insights: "SKILLS", tools: "GitHub"},
-  { id: 3, title: "Three", desc: "Desc Three", images: [placeholderImage, placeholderImage, placeholderImage], publishLink: "https://example.com", githubLink: "https://github.com/example/example-repo", creationDate: "2026-09-19T16:24:00Z", insights: "SKILLS", tools: "GitHub"},
+  { id: 1, title: "One", desc: "Desc One", images: [placeholderImage], publishLink: "https://example.com", githubLink: "https://github.com/example/example-repo", creationDate: creationDate, insights: "SKILLS", tools: ["GitHub"]},
+  { id: 2, title: "Two", desc: "Desc Two", images: [placeholderImage, placeholderImage], publishLink: "https://example.com", githubLink: "https://github.com/example/example-repo", creationDate: creationDate, insights: "SKILLS", tools: ["GitHub"]},
+  { id: 3, title: "Three", desc: "Desc Three", images: [placeholderImage, placeholderImage, placeholderImage], publishLink: "https://example.com", githubLink: "https://github.com/example/example-repo", creationDate: creationDate, insights: "SKILLS", tools: ["GitHub"]},
 ];
 
 let pendingSeed: Promise<void> | undefined;

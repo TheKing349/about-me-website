@@ -18,7 +18,7 @@
               "creationDate": {
                 "nullable": false,
                 "type": {
-                  "codecId": "pg/timestamptz-string@1",
+                  "codecId": "pg/date-temporal@1",
                   "kind": "scalar"
                 }
               },
@@ -73,7 +73,8 @@
                 }
               },
               "tools": {
-                "nullable": true,
+                "many": true,
+                "nullable": false,
                 "type": {
                   "codecId": "pg/text@1",
                   "kind": "scalar"
@@ -159,10 +160,17 @@
         "entries": {
           "table": {
             "project": {
+              "checks": [
+                {
+                  "expression": "array_position(\"tools\", NULL) IS NULL",
+                  "name": "project_tools_elem_not_null_89bdc909",
+                  "prefix": "project_tools_elem_not_null"
+                }
+              ],
               "columns": {
                 "creationDate": {
-                  "codecId": "pg/timestamptz-string@1",
-                  "nativeType": "timestamptz",
+                  "codecId": "pg/date-temporal@1",
+                  "nativeType": "date",
                   "nullable": false
                 },
                 "desc": {
@@ -206,8 +214,9 @@
                 },
                 "tools": {
                   "codecId": "pg/text@1",
+                  "many": true,
                   "nativeType": "text",
-                  "nullable": true
+                  "nullable": false
                 }
               },
               "foreignKeys": [],
@@ -225,7 +234,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "4500baf9956c7d9aead31be241270eaaac5f9b97cca49a77fec9a9008f857f15"
+    "storageHash": "a87c043ac89e4b9da6ed26b1491e68bf09f55ce4abcad9c54da6a3a8f8736ed8"
   },
   "capabilities": {
     "postgres": {

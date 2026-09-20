@@ -7,9 +7,9 @@ model Project {
   images        Image[]
   publishLink   String?
   githubLink    String?
-  creationDate  TimestamptzString
+  creationDate  Date
   insights      String?
-  tools         String?
+  tools         String[]
 }
 
 type Image {
