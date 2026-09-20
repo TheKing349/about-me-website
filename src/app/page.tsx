@@ -1,5 +1,10 @@
 import Navbar from "@/src/app/components/Navbar";
 
+{/* TODO: 
+    Make this look prettier. Could use inspiration from `/projects` page?
+    Not sure how I want layout to look or what style is quite yet
+*/}
+
 export default function Home() {
   return (
     <main className="flex flex-col min-h-screen">
