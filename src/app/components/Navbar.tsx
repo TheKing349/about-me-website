@@ -13,7 +13,7 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="flex flex-col p-5 items-center border-b">
+    <header className="flex flex-col p-4 items-center border-b">
       <div className="w-fit mx-auto text-center">
         <h1 className="text-xl font-bold">Aiden Kimmerling</h1>
         <p className="text-xs">
@@ -21,7 +21,7 @@ export default function Navbar() {
           <span className="block">University of Nebraska-Lincoln</span>
         </p>
       </div>
-      <nav className="flex gap-4 pt-4">
+      <nav className="flex gap-4 pt-2">
         {navLinks.map((link) => {
           const isActive = pathname === link.href;
 
