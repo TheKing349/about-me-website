@@ -1,6 +1,6 @@
 import Navbar from "@/src/app/components/Navbar";
 
-export default function Home() {
+export default function Contact() {
   return (
     <>
       <Navbar />
