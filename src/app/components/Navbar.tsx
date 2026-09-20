@@ -15,7 +15,7 @@ export default function Navbar() {
   return (
     <header className="flex flex-col p-4 items-center border-b">
       <div className="w-fit mx-auto text-center">
-        <h1 className="text-xl font-bold">Aiden Kimmerling</h1>
+        <h1 className="text-2xl font-bold">Aiden Kimmerling</h1>
         <p className="text-xs">
           <span className="block">Sophomore • Computer Science and Math</span>
           <span className="block">University of Nebraska-Lincoln</span>
