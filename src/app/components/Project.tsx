@@ -20,7 +20,7 @@ export default function Project(project: ProjectType) {
         {/* Eventually will want a carousel of images if multiple, if do multiple at all? */}
         <div>
           {project.images.map((image) =>
-            <Image className="ml-auto" {...image} src={image.url} />
+            <Image key={image.url} className="ml-auto" {...image} src={image.url} />
           )}
         </div>
       </div>
