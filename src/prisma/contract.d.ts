@@ -251,11 +251,11 @@ export type ImageInput = {
   readonly alt: CodecTypes['pg/text@1']['input'];
 };
 export type LinkTypeOutput = {
-  readonly name: CodecTypes['pg/text@1']['output'];
+  readonly name: CodecTypes['pg/text@1']['output'] | null;
   readonly url: CodecTypes['pg/text@1']['output'];
 };
 export type LinkTypeInput = {
-  readonly name: CodecTypes['pg/text@1']['input'];
+  readonly name: CodecTypes['pg/text@1']['input'] | null;
   readonly url: CodecTypes['pg/text@1']['input'];
 };
 export type FieldOutputTypes = {
@@ -719,7 +719,7 @@ type ContractBase = Omit<
           readonly LinkType: {
             readonly fields: {
               readonly name: {
-                readonly nullable: false;
+                readonly nullable: true;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
               };
               readonly url: {
@@ -776,7 +776,7 @@ type ContractBase = Omit<
     readonly LinkType: {
       readonly fields: {
         readonly name: {
-          readonly nullable: false;
+          readonly nullable: true;
           readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
         };
         readonly url: {

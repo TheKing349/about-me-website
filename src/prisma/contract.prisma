@@ -38,6 +38,6 @@ type Image {
 }
 
 type LinkType {
-  name          String
+  name          String?
   url           String
 }

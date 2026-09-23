@@ -278,7 +278,7 @@
           "LinkType": {
             "fields": {
               "name": {
-                "nullable": false,
+                "nullable": true,
                 "type": {
                   "codecId": "pg/text@1",
                   "kind": "scalar"
