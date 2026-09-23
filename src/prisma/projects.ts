@@ -5,8 +5,14 @@ export { db };
 
 export async function listProjects() {
   await seed();
-  const projects = await db.orm.public.Project.select("id", "title", "desc", "images", "publishLink", "githubLink", "creationDate", "insights", "tools").all();
-  return projects;
-}
+  const projects = await db.orm.public.Project
+    .include("projectTools", (projectTools) =>
+      projectTools.include("tool")
+    )
+    .all();
 
-export type StarterProjects = Awaited<ReturnType<typeof listProjects>>[number];
+  return projects.map(({ projectTools, ...project }) => ({
+    ...project,
+    tools: projectTools.map(({ tool }) => tool),
+  }));
+}
