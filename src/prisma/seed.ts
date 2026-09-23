@@ -41,9 +41,10 @@ async function upsertProjects() {
         throw new Error(`Tool "${toolName}" does not exist`);
       }
 
-      await db.orm.public.ProjectTool.create({
-        projectId: project.id,
-        toolId: tool.id,
+      await db.orm.public.ProjectTool.upsert({
+        create: { projectId: project.id, toolId: tool.id },
+        update: {},
+        conflictOn: { projectId: project.id, toolId: tool.id },
       });
     }
   }
