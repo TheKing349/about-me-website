@@ -1,3 +1,5 @@
+import { ProjectType, Status, Type } from "../app/components/types"
+
 const placeholderImage = {
   width: 50,
   height: 50,
@@ -21,12 +23,14 @@ export const projects = [
   {
     id: 1,
     title: "One",
-    desc: "Desc One",
+    description: "Desc One",
     images: [placeholderImage],
     links: [{url: "https://exapmle.com"}],
     creationDate: firstCreationDate,
     insights: "SKILLS",
     tools: ["GitHub", "Unity"],
+    status: Status.COMPLETED,
+    type: Type.PERSONAL,
   },
   {
     id: 2,
@@ -37,6 +41,8 @@ export const projects = [
     creationDate: secondCreationDate,
     insights: "SKILLS",
     tools: ["C#", "Unity"],
+    status: Status.ONGOING,
+    type: Type.SCHOOL,
   },
   {
     id: 3,
@@ -46,6 +52,8 @@ export const projects = [
     links: [{name: "GitHub", url: "https://github.com/example/example-repo"}, {name: "Example", url: "https://example.com"}],
     creationDate: thirdCreationDate,
     insights: "SKILLS",
-    tools: ["React", "TypeScript"]
+    tools: ["React", "TypeScript"],
+    status: Status.DISCONTINUED,
+    type: Type.LUNABOTICS,
   },
 ];

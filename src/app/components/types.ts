@@ -8,7 +8,9 @@ export type ProjectType = {
   links: LinkType[],
   creationDate: Temporal.PlainDate,
   insights: string | null,
-  tools: ToolType[]
+  tools: ToolType[],
+  status: Status,
+  type: Type
 }
 
 export type ToolType = {
@@ -25,6 +27,21 @@ export type ImageType = {
 }
 
 export type LinkType = {
-  name: string | undefined,
+  name?: string | null,
   url: string
 }
+
+export const Status = {
+  ONGOING: "ONGOING",
+  DISCONTINUED: "DISCONTINUED",
+  COMPLETED: "COMPLETED",
+};
+
+export type Status = (typeof Status)[keyof typeof Status];
+
+export const Type = {
+  PERSONAL: "PERSONAL",
+  SCHOOL: "SCHOOL",
+  LUNABOTICS: "LUNABOTICS"
+}
+export type Type = (typeof Type)[keyof typeof Type];
