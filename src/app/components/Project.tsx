@@ -7,7 +7,7 @@ export default function Project(project: ProjectType) {
       <div className="flex flex-row">
         <div>
           <h2 className="text-xl">{project.title}</h2>
-          <p className="text-xs">{project.creationDate.getDate()}</p>
+          <p className="text-xs">{project.creationDate.toString()}</p>
           <p>{project.description}</p>
 
           <div className="flex flex-row gap-2 pt-2">
