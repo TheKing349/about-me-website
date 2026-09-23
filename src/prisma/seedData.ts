@@ -39,7 +39,7 @@ export const projects = [
     tools: ["GitHub", "Unity"],
   },
   {
-    id: 2,
+    id: 3,
     title: "Three",
     desc: "Desc Three",
     images: [placeholderImage, placeholderImage, placeholderImage],
