@@ -8,8 +8,8 @@ const placeholderImage = {
 const creationDate = Temporal.PlainDate.from("2026-09-19")
 
 export const tools = [
-  { id: 1, name: "GitHub", color: "#181717" },
-  { id: 2, name: "Unity", color: "#000000" },
+  { id: 1, name: "GitHub", color: "#c080f3" },
+  { id: 2, name: "Unity", color: "#f3f4f6" },
   { id: 3, name: "C#", color: "#239120" },
   { id: 4, name: "React", color: "#61DAFB" },
   { id: 5, name: "TypeScript", color: "#3178C6" },
@@ -25,7 +25,7 @@ export const projects = [
     githubLink: "https://github.com/example/example-repo",
     creationDate,
     insights: "SKILLS",
-    tools: ["GitHub"],
+    tools: ["GitHub", "Unity"],
   },
   {
     id: 2,
@@ -36,7 +36,7 @@ export const projects = [
     githubLink: "https://github.com/example/example-repo",
     creationDate,
     insights: "SKILLS",
-    tools: ["GitHub", "Unity"],
+    tools: ["C#", "Unity"],
   },
   {
     id: 3,
@@ -47,6 +47,6 @@ export const projects = [
     githubLink: "https://github.com/example/example-repo",
     creationDate,
     insights: "SKILLS",
-    tools: ["GitHub", "Unity", "C#"],
+    tools: ["React", "TypeScript"]
   },
 ];
