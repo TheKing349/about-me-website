@@ -1,37 +1,37 @@
 import Image from "next/image"
+import { ProjectType, ToolType } from "./types"
 
-{/* TODO: 
-    Use types from `types.ts` and define props to pass in. Both for `Project` and for `Tool`.
-    Then query database and populate from that, using a map in main projects page
-*/}
-
-
-export default function Project() {
+export default function Project(project: ProjectType) {
   return (
     <section className="p-4 border rounded-lg bg-gray-100">
       <div className="flex flex-row">
         <div>
-          <h2 className="text-xl">Title</h2>
-          <p className="text-xs">Sep. 19, 2026</p>
-          <p>Description here...</p>
+          <h2 className="text-xl">{project.title}</h2>
+          <p className="text-xs">{project.creationDate.getDate()}</p>
+          <p>{project.description}</p>
 
           <div className="flex flex-row gap-2 pt-2">
-            <Tool />
-            <Tool />
-            <Tool />
+            {project.tools.map((tool) => (
+              <Tool key={tool.id} {...tool} />
+            ))}
           </div>
         </div>
+        
         {/* Eventually will want a carousel of images if multiple, if do multiple at all? */}
-        <Image className="ml-auto" width={110} height={110} src="https://placehold.net/default.svg" alt="ALT" />
+        <div>
+          {project.images.map((image) =>
+            <Image className="ml-auto" {...image} src={image.url} />
+          )}
+        </div>
       </div>
     </section>
   )
 }
 
-function Tool() { 
+function Tool(tool: ToolType) {
   return (
-    <div className="p-1 border rounded-lg bg-gray-300">
-      Name
+    <div className="p-1 border rounded-lg bg-gray-300" style={{ backgroundColor: tool.color }}>
+      {tool.name}
     </div>
   )
 }
