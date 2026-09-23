@@ -1,18 +1,25 @@
 
-export type Project = {
-  title: String,
-  description: String,
-  images: Img[],
-  publishLink: String | null,
-  githubLink: String | null,
+export type ProjectType = {
+  id: number,
+  title: string,
+  description: string,
+  images: ImageType[],
+  publishLink: string | null,
+  githubLink: string | null,
   creationDate: Date,
-  insights: String | null,
-  tools: String[]
+  insights: string | null,
+  tools: ToolType[]
 }
 
-export type Img = {
-  width: Number,
-  height: Number,
-  url: String,
-  alt: String
+export type ToolType = {
+  id: number
+  name: string,
+  color: string
+}
+
+export type ImageType = {
+  width: number,
+  height: number,
+  url: string,
+  alt: string
 }
