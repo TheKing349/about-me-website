@@ -1,6 +1,8 @@
 import Image from "next/image"
-import { ProjectType, ToolType } from "./types"
 import Link from "next/link"
+
+import { ProjectType, ToolType } from "./types"
+import formatDate from "../utils/formatDate"
 
 export default function Project(project: ProjectType) {
   return (
@@ -8,7 +10,7 @@ export default function Project(project: ProjectType) {
       <div className="flex flex-row">
         <div>
           <h2 className="text-xl">{project.title}</h2>
-          <p className="text-xs">{project.creationDate.toString()}</p>
+          <p className="text-xs">{formatDate(project.creationDate)}</p>
           <p>{project.description}</p>
 
           <div className="flex flex-row gap-2">
