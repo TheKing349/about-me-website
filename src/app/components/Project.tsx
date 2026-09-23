@@ -11,7 +11,7 @@ export default function Project(project: ProjectType) {
           <p className="text-xs">{project.creationDate.toString()}</p>
           <p>{project.description}</p>
 
-          <div className="flex flex-row gap-2 pt-2">
+          <div className="flex flex-row gap-2">
             {project.links.map((link, index) =>
               <Link className="text-blue-700 hover:underline decoration-blue-700" key={index} href={link.url}>{link.name || link.url}</Link>
             )}
