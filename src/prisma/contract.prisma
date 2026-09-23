@@ -5,7 +5,7 @@ model Project {
   title         String
   desc          String
   images        Image[]
-  links         String[]
+  links         LinkType[]
   creationDate  Date
   insights      String?
 
@@ -35,4 +35,9 @@ type Image {
   height        Int
   url           String
   alt           String
+}
+
+type LinkType {
+  name          String
+  url           String
 }

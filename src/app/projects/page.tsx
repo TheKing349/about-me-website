@@ -11,7 +11,7 @@ export default function Projects() {
       <ul className="flex flex-col p-4 gap-4 mb-auto grow">
         {projects?.map((project) => 
           <li key={project.id}>
-            <Project {...project} description={project.desc} images={[...project.images]} tools={[...project.tools]} links={[...project.links]} />
+            <Project {...project} description={project.desc} images={[...project.images]} tools={[...project.tools]} links={[...project.links]}/>
           </li>
         )}
       </ul>

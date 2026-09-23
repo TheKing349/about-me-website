@@ -63,8 +63,8 @@
                 "many": true,
                 "nullable": false,
                 "type": {
-                  "codecId": "pg/text@1",
-                  "kind": "scalar"
+                  "kind": "valueObject",
+                  "name": "LinkType"
                 }
               },
               "title": {
@@ -274,6 +274,24 @@
                 }
               }
             }
+          },
+          "LinkType": {
+            "fields": {
+              "name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "url": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              }
+            }
           }
         }
       }
@@ -285,13 +303,6 @@
         "entries": {
           "table": {
             "project": {
-              "checks": [
-                {
-                  "expression": "array_position(\"links\", NULL) IS NULL",
-                  "name": "project_links_elem_not_null_2bed5629",
-                  "prefix": "project_links_elem_not_null"
-                }
-              ],
               "columns": {
                 "creationDate": {
                   "codecId": "pg/date-temporal@1",
@@ -323,9 +334,8 @@
                   "nullable": true
                 },
                 "links": {
-                  "codecId": "pg/text@1",
-                  "many": true,
-                  "nativeType": "text",
+                  "codecId": "pg/jsonb@1",
+                  "nativeType": "jsonb",
                   "nullable": false
                 },
                 "title": {
@@ -453,7 +463,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "967b14f0e498e5f96d9c9957f9e5265d0f2bc5fed5fb1718c4e10d6c9b79c8b7"
+    "storageHash": "26198ac86150211fff8e5a6c1ca9ae8afbccfc3755efeacebe1c99ccf9e06c90"
   },
   "capabilities": {
     "postgres": {

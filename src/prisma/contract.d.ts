@@ -34,7 +34,7 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'967b14f0e498e5f96d9c9957f9e5265d0f2bc5fed5fb1718c4e10d6c9b79c8b7'>;
+  StorageHashBase<'26198ac86150211fff8e5a6c1ca9ae8afbccfc3755efeacebe1c99ccf9e06c90'>;
 export type ExecutionHash = ExecutionHashBase<string>;
 export type ProfileHash =
   ProfileHashBase<'3916f444a8a17ad749191acf9e08dad97d1a327b88c2f1d45d12f240296aa8b2'>;
@@ -250,6 +250,14 @@ export type ImageInput = {
   readonly url: CodecTypes['pg/text@1']['input'];
   readonly alt: CodecTypes['pg/text@1']['input'];
 };
+export type LinkTypeOutput = {
+  readonly name: CodecTypes['pg/text@1']['output'];
+  readonly url: CodecTypes['pg/text@1']['output'];
+};
+export type LinkTypeInput = {
+  readonly name: CodecTypes['pg/text@1']['input'];
+  readonly url: CodecTypes['pg/text@1']['input'];
+};
 export type FieldOutputTypes = {
   readonly public: {
     readonly Project: {
@@ -257,7 +265,7 @@ export type FieldOutputTypes = {
       readonly title: CodecTypes['pg/text@1']['output'];
       readonly desc: CodecTypes['pg/text@1']['output'];
       readonly images: ReadonlyArray<ImageOutput>;
-      readonly links: ReadonlyArray<CodecTypes['pg/text@1']['output']>;
+      readonly links: ReadonlyArray<LinkTypeOutput>;
       readonly creationDate: CodecTypes['pg/date-temporal@1']['output'];
       readonly insights: CodecTypes['pg/text@1']['output'] | null;
     };
@@ -279,7 +287,7 @@ export type FieldInputTypes = {
       readonly title: CodecTypes['pg/text@1']['input'];
       readonly desc: CodecTypes['pg/text@1']['input'];
       readonly images: ReadonlyArray<ImageInput>;
-      readonly links: ReadonlyArray<CodecTypes['pg/text@1']['input']>;
+      readonly links: ReadonlyArray<LinkTypeInput>;
       readonly creationDate: CodecTypes['pg/date-temporal@1']['input'];
       readonly insights: CodecTypes['pg/text@1']['input'] | null;
     };
@@ -302,7 +310,7 @@ export type StorageColumnTypes = {
       readonly id: CodecTypes['pg/int4@1']['output'];
       readonly images: CodecTypes['pg/jsonb@1']['output'];
       readonly insights: CodecTypes['pg/text@1']['output'] | null;
-      readonly links: ReadonlyArray<CodecTypes['pg/text@1']['output']>;
+      readonly links: CodecTypes['pg/jsonb@1']['output'];
       readonly title: CodecTypes['pg/text@1']['output'];
     };
     readonly projectTool: {
@@ -324,7 +332,7 @@ export type StorageColumnInputTypes = {
       readonly id: CodecTypes['pg/int4@1']['input'];
       readonly images: CodecTypes['pg/jsonb@1']['input'];
       readonly insights: CodecTypes['pg/text@1']['input'] | null;
-      readonly links: ReadonlyArray<CodecTypes['pg/text@1']['input']>;
+      readonly links: CodecTypes['pg/jsonb@1']['input'];
       readonly title: CodecTypes['pg/text@1']['input'];
     };
     readonly projectTool: {
@@ -345,7 +353,7 @@ export namespace Models {
     title: CodecTypes['pg/text@1']['output'];
     desc: CodecTypes['pg/text@1']['output'];
     images: ReadonlyArray<ImageOutput>;
-    links: ReadonlyArray<CodecTypes['pg/text@1']['output']>;
+    links: ReadonlyArray<LinkTypeOutput>;
     creationDate: CodecTypes['pg/date-temporal@1']['output'];
     insights: CodecTypes['pg/text@1']['output'] | null;
     projectTools: public_ProjectTool[];
@@ -420,8 +428,8 @@ type ContractBase = Omit<
                   readonly nullable: false;
                 };
                 readonly links: {
-                  readonly nativeType: 'text';
-                  readonly codecId: 'pg/text@1';
+                  readonly nativeType: 'jsonb';
+                  readonly codecId: 'pg/jsonb@1';
                   readonly nullable: false;
                 };
                 readonly creationDate: {
@@ -566,7 +574,7 @@ type ContractBase = Omit<
               };
               readonly links: {
                 readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+                readonly type: { readonly kind: 'valueObject'; readonly name: 'LinkType' };
                 readonly many: true;
               };
               readonly creationDate: {
@@ -708,6 +716,18 @@ type ContractBase = Omit<
               };
             };
           };
+          readonly LinkType: {
+            readonly fields: {
+              readonly name: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly url: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+            };
+          };
         };
       };
     };
@@ -748,6 +768,18 @@ type ContractBase = Omit<
           readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
         };
         readonly alt: {
+          readonly nullable: false;
+          readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+        };
+      };
+    };
+    readonly LinkType: {
+      readonly fields: {
+        readonly name: {
+          readonly nullable: false;
+          readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+        };
+        readonly url: {
           readonly nullable: false;
           readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
         };

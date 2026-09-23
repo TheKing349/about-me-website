@@ -5,7 +5,7 @@ export type ProjectType = {
   title: string,
   description: string,
   images: ImageType[],
-  links: string[],
+  links: LinkType[],
   creationDate: Temporal.PlainDate,
   insights: string | null,
   tools: ToolType[]
@@ -22,4 +22,9 @@ export type ImageType = {
   height: number,
   url: string,
   alt: string
+}
+
+export type LinkType = {
+  name: string | undefined,
+  url: string
 }
