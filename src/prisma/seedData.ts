@@ -5,7 +5,9 @@ const placeholderImage = {
   alt: "Placeholder image for testing purposes"
 }
 
-const creationDate = Temporal.PlainDate.from("2026-09-19")
+const firstCreationDate = Temporal.PlainDate.from("2025-09-19")
+const secondCreationDate = Temporal.PlainDate.from("2026-09-19")
+const thirdCreationDate = Temporal.PlainDate.from("2026-09-20")
 
 export const tools = [
   { id: 1, name: "GitHub", color: "#c080f3" },
@@ -23,7 +25,7 @@ export const projects = [
     images: [placeholderImage],
     publishLink: "https://example.com",
     githubLink: "https://github.com/example/example-repo",
-    creationDate,
+    creationDate: firstCreationDate,
     insights: "SKILLS",
     tools: ["GitHub", "Unity"],
   },
@@ -34,7 +36,7 @@ export const projects = [
     images: [placeholderImage, placeholderImage],
     publishLink: "https://example.com",
     githubLink: "https://github.com/example/example-repo",
-    creationDate,
+    creationDate: secondCreationDate,
     insights: "SKILLS",
     tools: ["C#", "Unity"],
   },
@@ -45,7 +47,7 @@ export const projects = [
     images: [placeholderImage, placeholderImage, placeholderImage],
     publishLink: "https://example.com",
     githubLink: "https://github.com/example/example-repo",
-    creationDate,
+    creationDate: thirdCreationDate,
     insights: "SKILLS",
     tools: ["React", "TypeScript"]
   },
