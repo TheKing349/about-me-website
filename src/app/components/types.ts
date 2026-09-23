@@ -1,3 +1,4 @@
+import { Temporal } from "temporal-polyfill"
 
 export type ProjectType = {
   id: number,
@@ -6,7 +7,7 @@ export type ProjectType = {
   images: ImageType[],
   publishLink: string | null,
   githubLink: string | null,
-  creationDate: Date,
+  creationDate: Temporal.PlainDate,
   insights: string | null,
   tools: ToolType[]
 }
