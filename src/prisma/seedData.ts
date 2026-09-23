@@ -23,7 +23,7 @@ export const projects = [
   {
     id: 1,
     title: "One",
-    description: "Desc One",
+    desc: "Desc One",
     images: [placeholderImage],
     links: [{url: "https://exapmle.com"}],
     creationDate: firstCreationDate,
