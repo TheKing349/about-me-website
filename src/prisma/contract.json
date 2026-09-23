@@ -20,6 +20,42 @@
   "domain": {
     "namespaces": {
       "public": {
+        "enum": {
+          "ProjectType": {
+            "codecId": "pg/text@1",
+            "members": [
+              {
+                "name": "PERSONAL",
+                "value": "PERSONAL"
+              },
+              {
+                "name": "SCHOOL",
+                "value": "SCHOOL"
+              },
+              {
+                "name": "LUNABOTICS",
+                "value": "LUNABOTICS"
+              }
+            ]
+          },
+          "Status": {
+            "codecId": "pg/text@1",
+            "members": [
+              {
+                "name": "ONGOING",
+                "value": "ONGOING"
+              },
+              {
+                "name": "DISCONTINUED",
+                "value": "DISCONTINUED"
+              },
+              {
+                "name": "COMPLETED",
+                "value": "COMPLETED"
+              }
+            ]
+          }
+        },
         "models": {
           "Project": {
             "fields": {
@@ -67,11 +103,37 @@
                   "name": "LinkType"
                 }
               },
+              "status": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                },
+                "valueSet": {
+                  "entityKind": "enum",
+                  "entityName": "Status",
+                  "namespaceId": "public",
+                  "plane": "domain"
+                }
+              },
               "title": {
                 "nullable": false,
                 "type": {
                   "codecId": "pg/text@1",
                   "kind": "scalar"
+                }
+              },
+              "type": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                },
+                "valueSet": {
+                  "entityKind": "enum",
+                  "entityName": "ProjectType",
+                  "namespaceId": "public",
+                  "plane": "domain"
                 }
               }
             },
@@ -112,8 +174,14 @@
                 "links": {
                   "column": "links"
                 },
+                "status": {
+                  "column": "status"
+                },
                 "title": {
                   "column": "title"
+                },
+                "type": {
+                  "column": "type"
                 }
               },
               "namespaceId": "public",
@@ -303,6 +371,18 @@
         "entries": {
           "table": {
             "project": {
+              "checks": [
+                {
+                  "expression": "\"status\" IN ('ONGOING', 'DISCONTINUED', 'COMPLETED')",
+                  "name": "project_status_check_42fed81a",
+                  "prefix": "project_status_check"
+                },
+                {
+                  "expression": "\"type\" IN ('PERSONAL', 'SCHOOL', 'LUNABOTICS')",
+                  "name": "project_type_check_26d21962",
+                  "prefix": "project_type_check"
+                }
+              ],
               "columns": {
                 "creationDate": {
                   "codecId": "pg/date-temporal@1",
@@ -338,10 +418,32 @@
                   "nativeType": "jsonb",
                   "nullable": false
                 },
+                "status": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false,
+                  "valueSet": {
+                    "entityKind": "valueSet",
+                    "entityName": "Status",
+                    "namespaceId": "public",
+                    "plane": "storage"
+                  }
+                },
                 "title": {
                   "codecId": "pg/text@1",
                   "nativeType": "text",
                   "nullable": false
+                },
+                "type": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false,
+                  "valueSet": {
+                    "entityKind": "valueSet",
+                    "entityName": "ProjectType",
+                    "namespaceId": "public",
+                    "plane": "storage"
+                  }
                 }
               },
               "foreignKeys": [],
@@ -457,13 +559,31 @@
               },
               "uniques": []
             }
+          },
+          "valueSet": {
+            "ProjectType": {
+              "kind": "valueSet",
+              "values": [
+                "PERSONAL",
+                "SCHOOL",
+                "LUNABOTICS"
+              ]
+            },
+            "Status": {
+              "kind": "valueSet",
+              "values": [
+                "ONGOING",
+                "DISCONTINUED",
+                "COMPLETED"
+              ]
+            }
           }
         },
         "id": "public",
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "26198ac86150211fff8e5a6c1ca9ae8afbccfc3755efeacebe1c99ccf9e06c90"
+    "storageHash": "b3d600958a9786cfbbc9de9ee4c4cd3a5681a64360a293a62ff5ebeac389b1f1"
   },
   "capabilities": {
     "postgres": {

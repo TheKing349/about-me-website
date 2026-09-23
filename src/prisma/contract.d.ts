@@ -34,7 +34,7 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'26198ac86150211fff8e5a6c1ca9ae8afbccfc3755efeacebe1c99ccf9e06c90'>;
+  StorageHashBase<'b3d600958a9786cfbbc9de9ee4c4cd3a5681a64360a293a62ff5ebeac389b1f1'>;
 export type ExecutionHash = ExecutionHashBase<string>;
 export type ProfileHash =
   ProfileHashBase<'3916f444a8a17ad749191acf9e08dad97d1a327b88c2f1d45d12f240296aa8b2'>;
@@ -268,6 +268,8 @@ export type FieldOutputTypes = {
       readonly links: ReadonlyArray<LinkTypeOutput>;
       readonly creationDate: CodecTypes['pg/date-temporal@1']['output'];
       readonly insights: CodecTypes['pg/text@1']['output'] | null;
+      readonly status: 'ONGOING' | 'DISCONTINUED' | 'COMPLETED';
+      readonly type: 'PERSONAL' | 'SCHOOL' | 'LUNABOTICS';
     };
     readonly ProjectTool: {
       readonly projectId: CodecTypes['pg/int4@1']['output'];
@@ -290,6 +292,8 @@ export type FieldInputTypes = {
       readonly links: ReadonlyArray<LinkTypeInput>;
       readonly creationDate: CodecTypes['pg/date-temporal@1']['input'];
       readonly insights: CodecTypes['pg/text@1']['input'] | null;
+      readonly status: 'ONGOING' | 'DISCONTINUED' | 'COMPLETED';
+      readonly type: 'PERSONAL' | 'SCHOOL' | 'LUNABOTICS';
     };
     readonly ProjectTool: {
       readonly projectId: CodecTypes['pg/int4@1']['input'];
@@ -311,7 +315,9 @@ export type StorageColumnTypes = {
       readonly images: CodecTypes['pg/jsonb@1']['output'];
       readonly insights: CodecTypes['pg/text@1']['output'] | null;
       readonly links: CodecTypes['pg/jsonb@1']['output'];
+      readonly status: 'ONGOING' | 'DISCONTINUED' | 'COMPLETED';
       readonly title: CodecTypes['pg/text@1']['output'];
+      readonly type: 'PERSONAL' | 'SCHOOL' | 'LUNABOTICS';
     };
     readonly projectTool: {
       readonly projectId: CodecTypes['pg/int4@1']['output'];
@@ -333,7 +339,9 @@ export type StorageColumnInputTypes = {
       readonly images: CodecTypes['pg/jsonb@1']['input'];
       readonly insights: CodecTypes['pg/text@1']['input'] | null;
       readonly links: CodecTypes['pg/jsonb@1']['input'];
+      readonly status: 'ONGOING' | 'DISCONTINUED' | 'COMPLETED';
       readonly title: CodecTypes['pg/text@1']['input'];
+      readonly type: 'PERSONAL' | 'SCHOOL' | 'LUNABOTICS';
     };
     readonly projectTool: {
       readonly projectId: CodecTypes['pg/int4@1']['input'];
@@ -356,6 +364,8 @@ export namespace Models {
     links: ReadonlyArray<LinkTypeOutput>;
     creationDate: CodecTypes['pg/date-temporal@1']['output'];
     insights: CodecTypes['pg/text@1']['output'] | null;
+    status: 'ONGOING' | 'DISCONTINUED' | 'COMPLETED';
+    type: 'PERSONAL' | 'SCHOOL' | 'LUNABOTICS';
     projectTools: public_ProjectTool[];
     readonly [RelationKeys]?: 'projectTools';
   };
@@ -441,6 +451,16 @@ type ContractBase = Omit<
                   readonly nativeType: 'text';
                   readonly codecId: 'pg/text@1';
                   readonly nullable: true;
+                };
+                readonly status: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: false;
+                };
+                readonly type: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: false;
                 };
               };
               primaryKey: { readonly columns: readonly ['id'] };
@@ -532,6 +552,16 @@ type ContractBase = Omit<
               foreignKeys: readonly [];
             };
           };
+          readonly valueSet: {
+            readonly ProjectType: {
+              readonly kind: 'valueSet';
+              readonly values: readonly ['PERSONAL', 'SCHOOL', 'LUNABOTICS'];
+            };
+            readonly Status: {
+              readonly kind: 'valueSet';
+              readonly values: readonly ['ONGOING', 'DISCONTINUED', 'COMPLETED'];
+            };
+          };
         };
       };
     };
@@ -585,6 +615,14 @@ type ContractBase = Omit<
                 readonly nullable: true;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
               };
+              readonly status: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly type: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
             };
             readonly relations: {
               readonly projectTools: {
@@ -610,6 +648,8 @@ type ContractBase = Omit<
                 readonly links: { readonly column: 'links' };
                 readonly creationDate: { readonly column: 'creationDate' };
                 readonly insights: { readonly column: 'insights' };
+                readonly status: { readonly column: 'status' };
+                readonly type: { readonly column: 'type' };
               };
             };
           };
@@ -727,6 +767,24 @@ type ContractBase = Omit<
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
               };
             };
+          };
+        };
+        readonly enum: {
+          readonly Status: {
+            readonly codecId: 'pg/text@1';
+            readonly members: readonly [
+              { readonly name: 'ONGOING'; readonly value: 'ONGOING' },
+              { readonly name: 'DISCONTINUED'; readonly value: 'DISCONTINUED' },
+              { readonly name: 'COMPLETED'; readonly value: 'COMPLETED' },
+            ];
+          };
+          readonly ProjectType: {
+            readonly codecId: 'pg/text@1';
+            readonly members: readonly [
+              { readonly name: 'PERSONAL'; readonly value: 'PERSONAL' },
+              { readonly name: 'SCHOOL'; readonly value: 'SCHOOL' },
+              { readonly name: 'LUNABOTICS'; readonly value: 'LUNABOTICS' },
+            ];
           };
         };
       };

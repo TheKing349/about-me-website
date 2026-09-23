@@ -8,6 +8,8 @@ model Project {
   links         LinkType[]
   creationDate  Date
   insights      String?
+  status        Status
+  type          ProjectType
 
   projectTools  ProjectTool[]
 }
@@ -40,4 +42,16 @@ type Image {
 type LinkType {
   name          String?
   url           String
+}
+
+enum Status {
+  ONGOING
+  DISCONTINUED
+  COMPLETED
+}
+
+enum ProjectType {
+  PERSONAL
+  SCHOOL
+  LUNABOTICS
 }
