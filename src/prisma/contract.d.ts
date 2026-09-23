@@ -34,7 +34,7 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'9f11705c913ad45b62a8f068a6d5f19044395502905b021cee8751c4fc8380ed'>;
+  StorageHashBase<'967b14f0e498e5f96d9c9957f9e5265d0f2bc5fed5fb1718c4e10d6c9b79c8b7'>;
 export type ExecutionHash = ExecutionHashBase<string>;
 export type ProfileHash =
   ProfileHashBase<'3916f444a8a17ad749191acf9e08dad97d1a327b88c2f1d45d12f240296aa8b2'>;
@@ -257,8 +257,7 @@ export type FieldOutputTypes = {
       readonly title: CodecTypes['pg/text@1']['output'];
       readonly desc: CodecTypes['pg/text@1']['output'];
       readonly images: ReadonlyArray<ImageOutput>;
-      readonly publishLink: CodecTypes['pg/text@1']['output'] | null;
-      readonly githubLink: CodecTypes['pg/text@1']['output'] | null;
+      readonly links: ReadonlyArray<CodecTypes['pg/text@1']['output']>;
       readonly creationDate: CodecTypes['pg/date-temporal@1']['output'];
       readonly insights: CodecTypes['pg/text@1']['output'] | null;
     };
@@ -280,8 +279,7 @@ export type FieldInputTypes = {
       readonly title: CodecTypes['pg/text@1']['input'];
       readonly desc: CodecTypes['pg/text@1']['input'];
       readonly images: ReadonlyArray<ImageInput>;
-      readonly publishLink: CodecTypes['pg/text@1']['input'] | null;
-      readonly githubLink: CodecTypes['pg/text@1']['input'] | null;
+      readonly links: ReadonlyArray<CodecTypes['pg/text@1']['input']>;
       readonly creationDate: CodecTypes['pg/date-temporal@1']['input'];
       readonly insights: CodecTypes['pg/text@1']['input'] | null;
     };
@@ -301,11 +299,10 @@ export type StorageColumnTypes = {
     readonly project: {
       readonly creationDate: CodecTypes['pg/date-temporal@1']['output'];
       readonly desc: CodecTypes['pg/text@1']['output'];
-      readonly githubLink: CodecTypes['pg/text@1']['output'] | null;
       readonly id: CodecTypes['pg/int4@1']['output'];
       readonly images: CodecTypes['pg/jsonb@1']['output'];
       readonly insights: CodecTypes['pg/text@1']['output'] | null;
-      readonly publishLink: CodecTypes['pg/text@1']['output'] | null;
+      readonly links: ReadonlyArray<CodecTypes['pg/text@1']['output']>;
       readonly title: CodecTypes['pg/text@1']['output'];
     };
     readonly projectTool: {
@@ -324,11 +321,10 @@ export type StorageColumnInputTypes = {
     readonly project: {
       readonly creationDate: CodecTypes['pg/date-temporal@1']['input'];
       readonly desc: CodecTypes['pg/text@1']['input'];
-      readonly githubLink: CodecTypes['pg/text@1']['input'] | null;
       readonly id: CodecTypes['pg/int4@1']['input'];
       readonly images: CodecTypes['pg/jsonb@1']['input'];
       readonly insights: CodecTypes['pg/text@1']['input'] | null;
-      readonly publishLink: CodecTypes['pg/text@1']['input'] | null;
+      readonly links: ReadonlyArray<CodecTypes['pg/text@1']['input']>;
       readonly title: CodecTypes['pg/text@1']['input'];
     };
     readonly projectTool: {
@@ -349,8 +345,7 @@ export namespace Models {
     title: CodecTypes['pg/text@1']['output'];
     desc: CodecTypes['pg/text@1']['output'];
     images: ReadonlyArray<ImageOutput>;
-    publishLink: CodecTypes['pg/text@1']['output'] | null;
-    githubLink: CodecTypes['pg/text@1']['output'] | null;
+    links: ReadonlyArray<CodecTypes['pg/text@1']['output']>;
     creationDate: CodecTypes['pg/date-temporal@1']['output'];
     insights: CodecTypes['pg/text@1']['output'] | null;
     projectTools: public_ProjectTool[];
@@ -424,15 +419,10 @@ type ContractBase = Omit<
                   readonly codecId: 'pg/jsonb@1';
                   readonly nullable: false;
                 };
-                readonly publishLink: {
+                readonly links: {
                   readonly nativeType: 'text';
                   readonly codecId: 'pg/text@1';
-                  readonly nullable: true;
-                };
-                readonly githubLink: {
-                  readonly nativeType: 'text';
-                  readonly codecId: 'pg/text@1';
-                  readonly nullable: true;
+                  readonly nullable: false;
                 };
                 readonly creationDate: {
                   readonly nativeType: 'date';
@@ -574,13 +564,10 @@ type ContractBase = Omit<
                 readonly type: { readonly kind: 'valueObject'; readonly name: 'Image' };
                 readonly many: true;
               };
-              readonly publishLink: {
-                readonly nullable: true;
+              readonly links: {
+                readonly nullable: false;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
-              };
-              readonly githubLink: {
-                readonly nullable: true;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+                readonly many: true;
               };
               readonly creationDate: {
                 readonly nullable: false;
@@ -612,8 +599,7 @@ type ContractBase = Omit<
                 readonly title: { readonly column: 'title' };
                 readonly desc: { readonly column: 'desc' };
                 readonly images: { readonly column: 'images' };
-                readonly publishLink: { readonly column: 'publishLink' };
-                readonly githubLink: { readonly column: 'githubLink' };
+                readonly links: { readonly column: 'links' };
                 readonly creationDate: { readonly column: 'creationDate' };
                 readonly insights: { readonly column: 'insights' };
               };

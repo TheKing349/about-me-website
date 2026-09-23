@@ -5,8 +5,7 @@ export type ProjectType = {
   title: string,
   description: string,
   images: ImageType[],
-  publishLink: string | null,
-  githubLink: string | null,
+  links: string[],
   creationDate: Temporal.PlainDate,
   insights: string | null,
   tools: ToolType[]

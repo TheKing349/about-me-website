@@ -5,8 +5,7 @@ model Project {
   title         String
   desc          String
   images        Image[]
-  publishLink   String?
-  githubLink    String?
+  links         String[]
   creationDate  Date
   insights      String?
 

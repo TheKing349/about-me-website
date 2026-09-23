@@ -37,13 +37,6 @@
                   "kind": "scalar"
                 }
               },
-              "githubLink": {
-                "nullable": true,
-                "type": {
-                  "codecId": "pg/text@1",
-                  "kind": "scalar"
-                }
-              },
               "id": {
                 "nullable": false,
                 "type": {
@@ -66,8 +59,9 @@
                   "kind": "scalar"
                 }
               },
-              "publishLink": {
-                "nullable": true,
+              "links": {
+                "many": true,
+                "nullable": false,
                 "type": {
                   "codecId": "pg/text@1",
                   "kind": "scalar"
@@ -106,9 +100,6 @@
                 "desc": {
                   "column": "desc"
                 },
-                "githubLink": {
-                  "column": "githubLink"
-                },
                 "id": {
                   "column": "id"
                 },
@@ -118,8 +109,8 @@
                 "insights": {
                   "column": "insights"
                 },
-                "publishLink": {
-                  "column": "publishLink"
+                "links": {
+                  "column": "links"
                 },
                 "title": {
                   "column": "title"
@@ -294,6 +285,13 @@
         "entries": {
           "table": {
             "project": {
+              "checks": [
+                {
+                  "expression": "array_position(\"links\", NULL) IS NULL",
+                  "name": "project_links_elem_not_null_2bed5629",
+                  "prefix": "project_links_elem_not_null"
+                }
+              ],
               "columns": {
                 "creationDate": {
                   "codecId": "pg/date-temporal@1",
@@ -304,11 +302,6 @@
                   "codecId": "pg/text@1",
                   "nativeType": "text",
                   "nullable": false
-                },
-                "githubLink": {
-                  "codecId": "pg/text@1",
-                  "nativeType": "text",
-                  "nullable": true
                 },
                 "id": {
                   "codecId": "pg/int4@1",
@@ -329,10 +322,11 @@
                   "nativeType": "text",
                   "nullable": true
                 },
-                "publishLink": {
+                "links": {
                   "codecId": "pg/text@1",
+                  "many": true,
                   "nativeType": "text",
-                  "nullable": true
+                  "nullable": false
                 },
                 "title": {
                   "codecId": "pg/text@1",
@@ -459,7 +453,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "9f11705c913ad45b62a8f068a6d5f19044395502905b021cee8751c4fc8380ed"
+    "storageHash": "967b14f0e498e5f96d9c9957f9e5265d0f2bc5fed5fb1718c4e10d6c9b79c8b7"
   },
   "capabilities": {
     "postgres": {
