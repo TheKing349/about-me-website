@@ -9,12 +9,31 @@ model Project {
   githubLink    String?
   creationDate  Date
   insights      String?
-  tools         String[]
+
+  projectTools  ProjectTool[]
+}
+
+model Tool {
+  id            Int     @id @default(autoincrement())
+  name          String
+  color         String
+
+  projectTools  ProjectTool[]
+}
+
+model ProjectTool {
+  projectId     Int
+  toolId        Int
+
+  project       Project @relation(fields: [projectId], references: [id])
+  tool          Tool    @relation(fields: [toolId], references: [id])
+
+  @@id([projectId, toolId])
 }
 
 type Image {
-  width       Int
-  height      Int
-  url         String
-  alt         String
+  width         Int
+  height        Int
+  url           String
+  alt           String
 }

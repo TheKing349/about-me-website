@@ -7,6 +7,14 @@
     "project": {
       "model": "Project",
       "namespace": "public"
+    },
+    "projectTool": {
+      "model": "ProjectTool",
+      "namespace": "public"
+    },
+    "tool": {
+      "model": "Tool",
+      "namespace": "public"
     }
   },
   "domain": {
@@ -71,17 +79,25 @@
                   "codecId": "pg/text@1",
                   "kind": "scalar"
                 }
-              },
-              "tools": {
-                "many": true,
-                "nullable": false,
-                "type": {
-                  "codecId": "pg/text@1",
-                  "kind": "scalar"
+              }
+            },
+            "relations": {
+              "projectTools": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "id"
+                  ],
+                  "targetFields": [
+                    "projectId"
+                  ]
+                },
+                "to": {
+                  "model": "ProjectTool",
+                  "namespace": "public"
                 }
               }
             },
-            "relations": {},
             "storage": {
               "fields": {
                 "creationDate": {
@@ -107,13 +123,131 @@
                 },
                 "title": {
                   "column": "title"
-                },
-                "tools": {
-                  "column": "tools"
                 }
               },
               "namespaceId": "public",
               "table": "project"
+            }
+          },
+          "ProjectTool": {
+            "fields": {
+              "projectId": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "toolId": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "project": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "projectId"
+                  ],
+                  "targetFields": [
+                    "id"
+                  ]
+                },
+                "to": {
+                  "model": "Project",
+                  "namespace": "public"
+                }
+              },
+              "tool": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "toolId"
+                  ],
+                  "targetFields": [
+                    "id"
+                  ]
+                },
+                "to": {
+                  "model": "Tool",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "projectId": {
+                  "column": "projectId"
+                },
+                "toolId": {
+                  "column": "toolId"
+                }
+              },
+              "namespaceId": "public",
+              "table": "projectTool"
+            }
+          },
+          "Tool": {
+            "fields": {
+              "color": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {
+              "projectTools": {
+                "cardinality": "1:N",
+                "on": {
+                  "localFields": [
+                    "id"
+                  ],
+                  "targetFields": [
+                    "toolId"
+                  ]
+                },
+                "to": {
+                  "model": "ProjectTool",
+                  "namespace": "public"
+                }
+              }
+            },
+            "storage": {
+              "fields": {
+                "color": {
+                  "column": "color"
+                },
+                "id": {
+                  "column": "id"
+                },
+                "name": {
+                  "column": "name"
+                }
+              },
+              "namespaceId": "public",
+              "table": "tool"
             }
           }
         },
@@ -160,13 +294,6 @@
         "entries": {
           "table": {
             "project": {
-              "checks": [
-                {
-                  "expression": "array_position(\"tools\", NULL) IS NULL",
-                  "name": "project_tools_elem_not_null_89bdc909",
-                  "prefix": "project_tools_elem_not_null"
-                }
-              ],
               "columns": {
                 "creationDate": {
                   "codecId": "pg/date-temporal@1",
@@ -211,10 +338,108 @@
                   "codecId": "pg/text@1",
                   "nativeType": "text",
                   "nullable": false
+                }
+              },
+              "foreignKeys": [],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id"
+                ]
+              },
+              "uniques": []
+            },
+            "projectTool": {
+              "columns": {
+                "projectId": {
+                  "codecId": "pg/int4@1",
+                  "nativeType": "int4",
+                  "nullable": false
                 },
-                "tools": {
+                "toolId": {
+                  "codecId": "pg/int4@1",
+                  "nativeType": "int4",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [
+                {
+                  "source": {
+                    "columns": [
+                      "projectId"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "projectTool"
+                  },
+                  "target": {
+                    "columns": [
+                      "id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "project"
+                  }
+                },
+                {
+                  "source": {
+                    "columns": [
+                      "toolId"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "projectTool"
+                  },
+                  "target": {
+                    "columns": [
+                      "id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "tool"
+                  }
+                }
+              ],
+              "indexes": [
+                {
+                  "columns": [
+                    "projectId"
+                  ],
+                  "name": "projectTool_projectId_idx_a96e4d92",
+                  "prefix": "projectTool_projectId_idx",
+                  "unique": false
+                },
+                {
+                  "columns": [
+                    "toolId"
+                  ],
+                  "name": "projectTool_toolId_idx_f1fb6638",
+                  "prefix": "projectTool_toolId_idx",
+                  "unique": false
+                }
+              ],
+              "primaryKey": {
+                "columns": [
+                  "projectId",
+                  "toolId"
+                ]
+              },
+              "uniques": []
+            },
+            "tool": {
+              "columns": {
+                "color": {
                   "codecId": "pg/text@1",
-                  "many": true,
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "id": {
+                  "codecId": "pg/int4@1",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "name": {
+                  "codecId": "pg/text@1",
                   "nativeType": "text",
                   "nullable": false
                 }
@@ -234,7 +459,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "a87c043ac89e4b9da6ed26b1491e68bf09f55ce4abcad9c54da6a3a8f8736ed8"
+    "storageHash": "9f11705c913ad45b62a8f068a6d5f19044395502905b021cee8751c4fc8380ed"
   },
   "capabilities": {
     "postgres": {

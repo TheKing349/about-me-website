@@ -34,7 +34,7 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'a87c043ac89e4b9da6ed26b1491e68bf09f55ce4abcad9c54da6a3a8f8736ed8'>;
+  StorageHashBase<'9f11705c913ad45b62a8f068a6d5f19044395502905b021cee8751c4fc8380ed'>;
 export type ExecutionHash = ExecutionHashBase<string>;
 export type ProfileHash =
   ProfileHashBase<'3916f444a8a17ad749191acf9e08dad97d1a327b88c2f1d45d12f240296aa8b2'>;
@@ -261,7 +261,15 @@ export type FieldOutputTypes = {
       readonly githubLink: CodecTypes['pg/text@1']['output'] | null;
       readonly creationDate: CodecTypes['pg/date-temporal@1']['output'];
       readonly insights: CodecTypes['pg/text@1']['output'] | null;
-      readonly tools: ReadonlyArray<CodecTypes['pg/text@1']['output']>;
+    };
+    readonly ProjectTool: {
+      readonly projectId: CodecTypes['pg/int4@1']['output'];
+      readonly toolId: CodecTypes['pg/int4@1']['output'];
+    };
+    readonly Tool: {
+      readonly id: CodecTypes['pg/int4@1']['output'];
+      readonly name: CodecTypes['pg/text@1']['output'];
+      readonly color: CodecTypes['pg/text@1']['output'];
     };
   };
 };
@@ -276,7 +284,15 @@ export type FieldInputTypes = {
       readonly githubLink: CodecTypes['pg/text@1']['input'] | null;
       readonly creationDate: CodecTypes['pg/date-temporal@1']['input'];
       readonly insights: CodecTypes['pg/text@1']['input'] | null;
-      readonly tools: ReadonlyArray<CodecTypes['pg/text@1']['input']>;
+    };
+    readonly ProjectTool: {
+      readonly projectId: CodecTypes['pg/int4@1']['input'];
+      readonly toolId: CodecTypes['pg/int4@1']['input'];
+    };
+    readonly Tool: {
+      readonly id: CodecTypes['pg/int4@1']['input'];
+      readonly name: CodecTypes['pg/text@1']['input'];
+      readonly color: CodecTypes['pg/text@1']['input'];
     };
   };
 };
@@ -291,7 +307,15 @@ export type StorageColumnTypes = {
       readonly insights: CodecTypes['pg/text@1']['output'] | null;
       readonly publishLink: CodecTypes['pg/text@1']['output'] | null;
       readonly title: CodecTypes['pg/text@1']['output'];
-      readonly tools: ReadonlyArray<CodecTypes['pg/text@1']['output']>;
+    };
+    readonly projectTool: {
+      readonly projectId: CodecTypes['pg/int4@1']['output'];
+      readonly toolId: CodecTypes['pg/int4@1']['output'];
+    };
+    readonly tool: {
+      readonly color: CodecTypes['pg/text@1']['output'];
+      readonly id: CodecTypes['pg/int4@1']['output'];
+      readonly name: CodecTypes['pg/text@1']['output'];
     };
   };
 };
@@ -306,7 +330,15 @@ export type StorageColumnInputTypes = {
       readonly insights: CodecTypes['pg/text@1']['input'] | null;
       readonly publishLink: CodecTypes['pg/text@1']['input'] | null;
       readonly title: CodecTypes['pg/text@1']['input'];
-      readonly tools: ReadonlyArray<CodecTypes['pg/text@1']['input']>;
+    };
+    readonly projectTool: {
+      readonly projectId: CodecTypes['pg/int4@1']['input'];
+      readonly toolId: CodecTypes['pg/int4@1']['input'];
+    };
+    readonly tool: {
+      readonly color: CodecTypes['pg/text@1']['input'];
+      readonly id: CodecTypes['pg/int4@1']['input'];
+      readonly name: CodecTypes['pg/text@1']['input'];
     };
   };
 };
@@ -321,14 +353,30 @@ export namespace Models {
     githubLink: CodecTypes['pg/text@1']['output'] | null;
     creationDate: CodecTypes['pg/date-temporal@1']['output'];
     insights: CodecTypes['pg/text@1']['output'] | null;
-    tools: ReadonlyArray<CodecTypes['pg/text@1']['output']>;
-    readonly [RelationKeys]?: never;
+    projectTools: public_ProjectTool[];
+    readonly [RelationKeys]?: 'projectTools';
+  };
+  export type public_Tool = {
+    id: CodecTypes['pg/int4@1']['output'];
+    name: CodecTypes['pg/text@1']['output'];
+    color: CodecTypes['pg/text@1']['output'];
+    projectTools: public_ProjectTool[];
+    readonly [RelationKeys]?: 'projectTools';
+  };
+  export type public_ProjectTool = {
+    projectId: CodecTypes['pg/int4@1']['output'];
+    toolId: CodecTypes['pg/int4@1']['output'];
+    project: public_Project;
+    tool: public_Tool;
+    readonly [RelationKeys]?: 'project' | 'tool';
   };
 }
 
 export declare const models: {
   public: {
     Project: Models.public_Project;
+    Tool: Models.public_Tool;
+    ProjectTool: Models.public_ProjectTool;
   };
 };
 
@@ -396,7 +444,85 @@ type ContractBase = Omit<
                   readonly codecId: 'pg/text@1';
                   readonly nullable: true;
                 };
-                readonly tools: {
+              };
+              primaryKey: { readonly columns: readonly ['id'] };
+              uniques: readonly [];
+              indexes: readonly [];
+              foreignKeys: readonly [];
+            };
+            readonly projectTool: {
+              columns: {
+                readonly projectId: {
+                  readonly nativeType: 'int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: false;
+                };
+                readonly toolId: {
+                  readonly nativeType: 'int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: false;
+                };
+              };
+              primaryKey: { readonly columns: readonly ['projectId', 'toolId'] };
+              uniques: readonly [];
+              indexes: readonly [
+                {
+                  readonly name: 'projectTool_projectId_idx_a96e4d92';
+                  readonly prefix: 'projectTool_projectId_idx';
+                  readonly columns: readonly ['projectId'];
+                  readonly unique: false;
+                },
+                {
+                  readonly name: 'projectTool_toolId_idx_f1fb6638';
+                  readonly prefix: 'projectTool_toolId_idx';
+                  readonly columns: readonly ['toolId'];
+                  readonly unique: false;
+                },
+              ];
+              foreignKeys: readonly [
+                {
+                  readonly source: {
+                    readonly namespaceId: 'public' & NamespaceId;
+                    readonly tableName: 'projectTool';
+                    readonly columns: readonly ['projectId'];
+                  };
+                  readonly target: {
+                    readonly namespaceId: 'public' & NamespaceId;
+                    readonly tableName: 'project';
+                    readonly columns: readonly ['id'];
+                  };
+                },
+                {
+                  readonly source: {
+                    readonly namespaceId: 'public' & NamespaceId;
+                    readonly tableName: 'projectTool';
+                    readonly columns: readonly ['toolId'];
+                  };
+                  readonly target: {
+                    readonly namespaceId: 'public' & NamespaceId;
+                    readonly tableName: 'tool';
+                    readonly columns: readonly ['id'];
+                  };
+                },
+              ];
+            };
+            readonly tool: {
+              columns: {
+                readonly id: {
+                  readonly nativeType: 'int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: false;
+                  readonly default: {
+                    readonly kind: 'function';
+                    readonly expression: 'autoincrement()';
+                  };
+                };
+                readonly name: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: false;
+                };
+                readonly color: {
                   readonly nativeType: 'text';
                   readonly codecId: 'pg/text@1';
                   readonly nullable: false;
@@ -419,6 +545,11 @@ type ContractBase = Omit<
   readonly targetFamily: 'sql';
   readonly roots: {
     readonly project: { readonly namespace: 'public' & NamespaceId; readonly model: 'Project' };
+    readonly tool: { readonly namespace: 'public' & NamespaceId; readonly model: 'Tool' };
+    readonly projectTool: {
+      readonly namespace: 'public' & NamespaceId;
+      readonly model: 'ProjectTool';
+    };
   };
   readonly domain: {
     readonly namespaces: {
@@ -459,13 +590,20 @@ type ContractBase = Omit<
                 readonly nullable: true;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
               };
-              readonly tools: {
-                readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
-                readonly many: true;
+            };
+            readonly relations: {
+              readonly projectTools: {
+                readonly to: {
+                  readonly namespace: 'public' & NamespaceId;
+                  readonly model: 'ProjectTool';
+                };
+                readonly cardinality: '1:N';
+                readonly on: {
+                  readonly localFields: readonly ['id'];
+                  readonly targetFields: readonly ['projectId'];
+                };
               };
             };
-            readonly relations: Record<string, never>;
             readonly storage: {
               readonly table: 'project';
               readonly namespaceId: 'public';
@@ -478,7 +616,87 @@ type ContractBase = Omit<
                 readonly githubLink: { readonly column: 'githubLink' };
                 readonly creationDate: { readonly column: 'creationDate' };
                 readonly insights: { readonly column: 'insights' };
-                readonly tools: { readonly column: 'tools' };
+              };
+            };
+          };
+          readonly ProjectTool: {
+            readonly fields: {
+              readonly projectId: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+              readonly toolId: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+            };
+            readonly relations: {
+              readonly project: {
+                readonly to: {
+                  readonly namespace: 'public' & NamespaceId;
+                  readonly model: 'Project';
+                };
+                readonly cardinality: 'N:1';
+                readonly nullable: false;
+                readonly on: {
+                  readonly localFields: readonly ['projectId'];
+                  readonly targetFields: readonly ['id'];
+                };
+              };
+              readonly tool: {
+                readonly to: { readonly namespace: 'public' & NamespaceId; readonly model: 'Tool' };
+                readonly cardinality: 'N:1';
+                readonly nullable: false;
+                readonly on: {
+                  readonly localFields: readonly ['toolId'];
+                  readonly targetFields: readonly ['id'];
+                };
+              };
+            };
+            readonly storage: {
+              readonly table: 'projectTool';
+              readonly namespaceId: 'public';
+              readonly fields: {
+                readonly projectId: { readonly column: 'projectId' };
+                readonly toolId: { readonly column: 'toolId' };
+              };
+            };
+          };
+          readonly Tool: {
+            readonly fields: {
+              readonly id: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+              readonly name: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly color: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+            };
+            readonly relations: {
+              readonly projectTools: {
+                readonly to: {
+                  readonly namespace: 'public' & NamespaceId;
+                  readonly model: 'ProjectTool';
+                };
+                readonly cardinality: '1:N';
+                readonly on: {
+                  readonly localFields: readonly ['id'];
+                  readonly targetFields: readonly ['toolId'];
+                };
+              };
+            };
+            readonly storage: {
+              readonly table: 'tool';
+              readonly namespaceId: 'public';
+              readonly fields: {
+                readonly id: { readonly column: 'id' };
+                readonly name: { readonly column: 'name' };
+                readonly color: { readonly column: 'color' };
               };
             };
           };
