@@ -21,23 +21,6 @@
     "namespaces": {
       "public": {
         "enum": {
-          "ProjectType": {
-            "codecId": "pg/text@1",
-            "members": [
-              {
-                "name": "PERSONAL",
-                "value": "PERSONAL"
-              },
-              {
-                "name": "SCHOOL",
-                "value": "SCHOOL"
-              },
-              {
-                "name": "LUNABOTICS",
-                "value": "LUNABOTICS"
-              }
-            ]
-          },
           "Status": {
             "codecId": "pg/text@1",
             "members": [
@@ -52,6 +35,23 @@
               {
                 "name": "COMPLETED",
                 "value": "COMPLETED"
+              }
+            ]
+          },
+          "Variant": {
+            "codecId": "pg/text@1",
+            "members": [
+              {
+                "name": "PERSONAL",
+                "value": "PERSONAL"
+              },
+              {
+                "name": "SCHOOL",
+                "value": "SCHOOL"
+              },
+              {
+                "name": "LUNABOTICS",
+                "value": "LUNABOTICS"
               }
             ]
           }
@@ -123,7 +123,7 @@
                   "kind": "scalar"
                 }
               },
-              "type": {
+              "variant": {
                 "nullable": false,
                 "type": {
                   "codecId": "pg/text@1",
@@ -131,7 +131,7 @@
                 },
                 "valueSet": {
                   "entityKind": "enum",
-                  "entityName": "ProjectType",
+                  "entityName": "Variant",
                   "namespaceId": "public",
                   "plane": "domain"
                 }
@@ -180,8 +180,8 @@
                 "title": {
                   "column": "title"
                 },
-                "type": {
-                  "column": "type"
+                "variant": {
+                  "column": "variant"
                 }
               },
               "namespaceId": "public",
@@ -378,9 +378,9 @@
                   "prefix": "project_status_check"
                 },
                 {
-                  "expression": "\"type\" IN ('PERSONAL', 'SCHOOL', 'LUNABOTICS')",
-                  "name": "project_type_check_26d21962",
-                  "prefix": "project_type_check"
+                  "expression": "\"variant\" IN ('PERSONAL', 'SCHOOL', 'LUNABOTICS')",
+                  "name": "project_variant_check_cb0e516e",
+                  "prefix": "project_variant_check"
                 }
               ],
               "columns": {
@@ -434,13 +434,13 @@
                   "nativeType": "text",
                   "nullable": false
                 },
-                "type": {
+                "variant": {
                   "codecId": "pg/text@1",
                   "nativeType": "text",
                   "nullable": false,
                   "valueSet": {
                     "entityKind": "valueSet",
-                    "entityName": "ProjectType",
+                    "entityName": "Variant",
                     "namespaceId": "public",
                     "plane": "storage"
                   }
@@ -561,20 +561,20 @@
             }
           },
           "valueSet": {
-            "ProjectType": {
-              "kind": "valueSet",
-              "values": [
-                "PERSONAL",
-                "SCHOOL",
-                "LUNABOTICS"
-              ]
-            },
             "Status": {
               "kind": "valueSet",
               "values": [
                 "ONGOING",
                 "DISCONTINUED",
                 "COMPLETED"
+              ]
+            },
+            "Variant": {
+              "kind": "valueSet",
+              "values": [
+                "PERSONAL",
+                "SCHOOL",
+                "LUNABOTICS"
               ]
             }
           }
@@ -583,7 +583,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "b3d600958a9786cfbbc9de9ee4c4cd3a5681a64360a293a62ff5ebeac389b1f1"
+    "storageHash": "d44fe82384ae3481b011f37580f4929b5825e43c74ca72f525d51f325e724a9f"
   },
   "capabilities": {
     "postgres": {

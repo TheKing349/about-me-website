@@ -34,7 +34,7 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'b3d600958a9786cfbbc9de9ee4c4cd3a5681a64360a293a62ff5ebeac389b1f1'>;
+  StorageHashBase<'d44fe82384ae3481b011f37580f4929b5825e43c74ca72f525d51f325e724a9f'>;
 export type ExecutionHash = ExecutionHashBase<string>;
 export type ProfileHash =
   ProfileHashBase<'3916f444a8a17ad749191acf9e08dad97d1a327b88c2f1d45d12f240296aa8b2'>;
@@ -269,7 +269,7 @@ export type FieldOutputTypes = {
       readonly creationDate: CodecTypes['pg/date-temporal@1']['output'];
       readonly insights: CodecTypes['pg/text@1']['output'] | null;
       readonly status: 'ONGOING' | 'DISCONTINUED' | 'COMPLETED';
-      readonly type: 'PERSONAL' | 'SCHOOL' | 'LUNABOTICS';
+      readonly variant: 'PERSONAL' | 'SCHOOL' | 'LUNABOTICS';
     };
     readonly ProjectTool: {
       readonly projectId: CodecTypes['pg/int4@1']['output'];
@@ -293,7 +293,7 @@ export type FieldInputTypes = {
       readonly creationDate: CodecTypes['pg/date-temporal@1']['input'];
       readonly insights: CodecTypes['pg/text@1']['input'] | null;
       readonly status: 'ONGOING' | 'DISCONTINUED' | 'COMPLETED';
-      readonly type: 'PERSONAL' | 'SCHOOL' | 'LUNABOTICS';
+      readonly variant: 'PERSONAL' | 'SCHOOL' | 'LUNABOTICS';
     };
     readonly ProjectTool: {
       readonly projectId: CodecTypes['pg/int4@1']['input'];
@@ -317,7 +317,7 @@ export type StorageColumnTypes = {
       readonly links: CodecTypes['pg/jsonb@1']['output'];
       readonly status: 'ONGOING' | 'DISCONTINUED' | 'COMPLETED';
       readonly title: CodecTypes['pg/text@1']['output'];
-      readonly type: 'PERSONAL' | 'SCHOOL' | 'LUNABOTICS';
+      readonly variant: 'PERSONAL' | 'SCHOOL' | 'LUNABOTICS';
     };
     readonly projectTool: {
       readonly projectId: CodecTypes['pg/int4@1']['output'];
@@ -341,7 +341,7 @@ export type StorageColumnInputTypes = {
       readonly links: CodecTypes['pg/jsonb@1']['input'];
       readonly status: 'ONGOING' | 'DISCONTINUED' | 'COMPLETED';
       readonly title: CodecTypes['pg/text@1']['input'];
-      readonly type: 'PERSONAL' | 'SCHOOL' | 'LUNABOTICS';
+      readonly variant: 'PERSONAL' | 'SCHOOL' | 'LUNABOTICS';
     };
     readonly projectTool: {
       readonly projectId: CodecTypes['pg/int4@1']['input'];
@@ -365,7 +365,7 @@ export namespace Models {
     creationDate: CodecTypes['pg/date-temporal@1']['output'];
     insights: CodecTypes['pg/text@1']['output'] | null;
     status: 'ONGOING' | 'DISCONTINUED' | 'COMPLETED';
-    type: 'PERSONAL' | 'SCHOOL' | 'LUNABOTICS';
+    variant: 'PERSONAL' | 'SCHOOL' | 'LUNABOTICS';
     projectTools: public_ProjectTool[];
     readonly [RelationKeys]?: 'projectTools';
   };
@@ -457,7 +457,7 @@ type ContractBase = Omit<
                   readonly codecId: 'pg/text@1';
                   readonly nullable: false;
                 };
-                readonly type: {
+                readonly variant: {
                   readonly nativeType: 'text';
                   readonly codecId: 'pg/text@1';
                   readonly nullable: false;
@@ -553,13 +553,13 @@ type ContractBase = Omit<
             };
           };
           readonly valueSet: {
-            readonly ProjectType: {
-              readonly kind: 'valueSet';
-              readonly values: readonly ['PERSONAL', 'SCHOOL', 'LUNABOTICS'];
-            };
             readonly Status: {
               readonly kind: 'valueSet';
               readonly values: readonly ['ONGOING', 'DISCONTINUED', 'COMPLETED'];
+            };
+            readonly Variant: {
+              readonly kind: 'valueSet';
+              readonly values: readonly ['PERSONAL', 'SCHOOL', 'LUNABOTICS'];
             };
           };
         };
@@ -619,7 +619,7 @@ type ContractBase = Omit<
                 readonly nullable: false;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
               };
-              readonly type: {
+              readonly variant: {
                 readonly nullable: false;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
               };
@@ -649,7 +649,7 @@ type ContractBase = Omit<
                 readonly creationDate: { readonly column: 'creationDate' };
                 readonly insights: { readonly column: 'insights' };
                 readonly status: { readonly column: 'status' };
-                readonly type: { readonly column: 'type' };
+                readonly variant: { readonly column: 'variant' };
               };
             };
           };
@@ -778,7 +778,7 @@ type ContractBase = Omit<
               { readonly name: 'COMPLETED'; readonly value: 'COMPLETED' },
             ];
           };
-          readonly ProjectType: {
+          readonly Variant: {
             readonly codecId: 'pg/text@1';
             readonly members: readonly [
               { readonly name: 'PERSONAL'; readonly value: 'PERSONAL' },

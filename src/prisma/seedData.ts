@@ -1,4 +1,4 @@
-import { ProjectType, Status, Type } from "../app/components/types"
+import { ProjectType, Status, VariantType } from "../app/components/types"
 
 const placeholderImage = {
   width: 50,
@@ -30,7 +30,7 @@ export const projects = [
     insights: "SKILLS",
     tools: ["GitHub", "Unity"],
     status: Status.COMPLETED,
-    type: Type.PERSONAL,
+    variant: VariantType.PERSONAL,
   },
   {
     id: 2,
@@ -42,7 +42,7 @@ export const projects = [
     insights: "SKILLS",
     tools: ["C#", "Unity"],
     status: Status.ONGOING,
-    type: Type.SCHOOL,
+    variant: VariantType.SCHOOL,
   },
   {
     id: 3,
@@ -54,6 +54,6 @@ export const projects = [
     insights: "SKILLS",
     tools: ["React", "TypeScript"],
     status: Status.DISCONTINUED,
-    type: Type.LUNABOTICS,
+    variant: VariantType.LUNABOTICS,
   },
 ];

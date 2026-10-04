@@ -9,8 +9,8 @@ export type ProjectType = {
   creationDate: Temporal.PlainDate,
   insights: string | null,
   tools: ToolType[],
-  status: Status,
-  type: Type
+  status: StatusType,
+  variant: VariantType
 }
 
 export type ToolType = {
@@ -37,11 +37,11 @@ export const Status = {
   COMPLETED: "COMPLETED",
 };
 
-export type Status = (typeof Status)[keyof typeof Status];
+export type StatusType = (typeof Status)[keyof typeof Status];
 
-export const Type = {
+export const VariantType = {
   PERSONAL: "PERSONAL",
   SCHOOL: "SCHOOL",
   LUNABOTICS: "LUNABOTICS"
 }
-export type Type = (typeof Type)[keyof typeof Type];
+export type VariantType = (typeof VariantType)[keyof typeof VariantType];

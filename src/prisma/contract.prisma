@@ -9,7 +9,7 @@ model Project {
   creationDate  Date
   insights      String?
   status        Status
-  type          ProjectType
+  variant       Variant
 
   projectTools  ProjectTool[]
 }
@@ -50,7 +50,7 @@ enum Status {
   COMPLETED
 }
 
-enum ProjectType {
+enum Variant {
   PERSONAL
   SCHOOL
   LUNABOTICS
