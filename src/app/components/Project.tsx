@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 
-import { ProjectType, ToolType } from "./types"
+import { ProjectType, ToolType, StatusType, VariantType } from "./types"
 import formatDate from "../utils/formatDate"
 
 export default function Project(project: ProjectType) {
@@ -9,6 +9,9 @@ export default function Project(project: ProjectType) {
     <section className="p-4 border rounded-lg bg-gray-100">
       <div className="flex flex-row">
         <div>
+          <Status status={project.status} />
+          <Variant variant={project.variant} />
+
           <h2 className="text-xl">{project.title}</h2>
           <p className="text-xs">{formatDate(project.creationDate)}</p>
           <p>{project.description}</p>
@@ -34,6 +37,22 @@ export default function Project(project: ProjectType) {
         </div>
       </div>
     </section>
+  )
+}
+
+function Status({ status }: { status: StatusType }) {
+  return (
+    <div>
+      {status}
+    </div>
+  )
+}
+
+function Variant({ variant }: { variant: VariantType }) {
+  return (
+    <div>
+      {variant}
+    </div>
   )
 }
 
