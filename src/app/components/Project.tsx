@@ -34,7 +34,7 @@ export default function Project(project: ProjectType) {
           {/* Eventually will want a carousel of images if multiple, if do multiple at all? */}
           <div className="flex flex-row gap-4">
             {project.images.map((image, index) =>
-              <Image key={index} {...image} src={image.url} />
+              <Image key={index} className="ml-auto" {...image} src={image.url} />
             )}
           </div>
         </div>
