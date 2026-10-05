@@ -1,4 +1,4 @@
-import { ProjectType, Status, VariantType } from "../app/components/types"
+import { Status, Variant } from "../app/components/types"
 
 const placeholderImage = {
   url: "https://placehold.net/default.svg",
@@ -28,7 +28,7 @@ export const projects = [
     insights: "SKILLS",
     tools: ["GitHub", "Unity"],
     status: Status.COMPLETED,
-    variant: VariantType.PERSONAL,
+    variant: Variant.PERSONAL
   },
   {
     id: 2,
@@ -40,7 +40,7 @@ export const projects = [
     insights: "SKILLS",
     tools: ["C#", "Unity"],
     status: Status.ONGOING,
-    variant: VariantType.SCHOOL,
+    variant: Variant.SCHOOL,
   },
   {
     id: 3,
@@ -52,6 +52,6 @@ export const projects = [
     insights: "SKILLS",
     tools: ["React", "TypeScript"],
     status: Status.DISCONTINUED,
-    variant: VariantType.LUNABOTICS,
+    variant: Variant.LUNABOTICS,
   },
 ];
