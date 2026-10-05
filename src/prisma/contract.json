@@ -12,50 +12,22 @@
       "model": "ProjectTool",
       "namespace": "public"
     },
+    "status": {
+      "model": "Status",
+      "namespace": "public"
+    },
     "tool": {
       "model": "Tool",
+      "namespace": "public"
+    },
+    "variant": {
+      "model": "Variant",
       "namespace": "public"
     }
   },
   "domain": {
     "namespaces": {
       "public": {
-        "enum": {
-          "Status": {
-            "codecId": "pg/text@1",
-            "members": [
-              {
-                "name": "ONGOING",
-                "value": "ONGOING"
-              },
-              {
-                "name": "DISCONTINUED",
-                "value": "DISCONTINUED"
-              },
-              {
-                "name": "COMPLETED",
-                "value": "COMPLETED"
-              }
-            ]
-          },
-          "Variant": {
-            "codecId": "pg/text@1",
-            "members": [
-              {
-                "name": "PERSONAL",
-                "value": "PERSONAL"
-              },
-              {
-                "name": "SCHOOL",
-                "value": "SCHOOL"
-              },
-              {
-                "name": "LUNABOTICS",
-                "value": "LUNABOTICS"
-              }
-            ]
-          }
-        },
         "models": {
           "Project": {
             "fields": {
@@ -103,17 +75,11 @@
                   "name": "LinkType"
                 }
               },
-              "status": {
+              "statusId": {
                 "nullable": false,
                 "type": {
-                  "codecId": "pg/text@1",
+                  "codecId": "pg/int4@1",
                   "kind": "scalar"
-                },
-                "valueSet": {
-                  "entityKind": "enum",
-                  "entityName": "Status",
-                  "namespaceId": "public",
-                  "plane": "domain"
                 }
               },
               "title": {
@@ -123,17 +89,11 @@
                   "kind": "scalar"
                 }
               },
-              "variant": {
+              "variantId": {
                 "nullable": false,
                 "type": {
-                  "codecId": "pg/text@1",
+                  "codecId": "pg/int4@1",
                   "kind": "scalar"
-                },
-                "valueSet": {
-                  "entityKind": "enum",
-                  "entityName": "Variant",
-                  "namespaceId": "public",
-                  "plane": "domain"
                 }
               }
             },
@@ -150,6 +110,38 @@
                 },
                 "to": {
                   "model": "ProjectTool",
+                  "namespace": "public"
+                }
+              },
+              "status": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "statusId"
+                  ],
+                  "targetFields": [
+                    "id"
+                  ]
+                },
+                "to": {
+                  "model": "Status",
+                  "namespace": "public"
+                }
+              },
+              "variant": {
+                "cardinality": "N:1",
+                "nullable": false,
+                "on": {
+                  "localFields": [
+                    "variantId"
+                  ],
+                  "targetFields": [
+                    "id"
+                  ]
+                },
+                "to": {
+                  "model": "Variant",
                   "namespace": "public"
                 }
               }
@@ -174,14 +166,14 @@
                 "links": {
                   "column": "links"
                 },
-                "status": {
-                  "column": "status"
+                "statusId": {
+                  "column": "statusId"
                 },
                 "title": {
                   "column": "title"
                 },
-                "variant": {
-                  "column": "variant"
+                "variantId": {
+                  "column": "variantId"
                 }
               },
               "namespaceId": "public",
@@ -252,6 +244,47 @@
               "table": "projectTool"
             }
           },
+          "Status": {
+            "fields": {
+              "color": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {},
+            "storage": {
+              "fields": {
+                "color": {
+                  "column": "color"
+                },
+                "id": {
+                  "column": "id"
+                },
+                "name": {
+                  "column": "name"
+                }
+              },
+              "namespaceId": "public",
+              "table": "status"
+            }
+          },
           "Tool": {
             "fields": {
               "color": {
@@ -308,6 +341,47 @@
               "namespaceId": "public",
               "table": "tool"
             }
+          },
+          "Variant": {
+            "fields": {
+              "color": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "name": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {},
+            "storage": {
+              "fields": {
+                "color": {
+                  "column": "color"
+                },
+                "id": {
+                  "column": "id"
+                },
+                "name": {
+                  "column": "name"
+                }
+              },
+              "namespaceId": "public",
+              "table": "variant"
+            }
           }
         },
         "valueObjects": {
@@ -357,18 +431,6 @@
         "entries": {
           "table": {
             "project": {
-              "checks": [
-                {
-                  "expression": "\"status\" IN ('ONGOING', 'DISCONTINUED', 'COMPLETED')",
-                  "name": "project_status_check_42fed81a",
-                  "prefix": "project_status_check"
-                },
-                {
-                  "expression": "\"variant\" IN ('PERSONAL', 'SCHOOL', 'LUNABOTICS')",
-                  "name": "project_variant_check_cb0e516e",
-                  "prefix": "project_variant_check"
-                }
-              ],
               "columns": {
                 "creationDate": {
                   "codecId": "pg/date-temporal@1",
@@ -404,36 +466,74 @@
                   "nativeType": "jsonb",
                   "nullable": false
                 },
-                "status": {
-                  "codecId": "pg/text@1",
-                  "nativeType": "text",
-                  "nullable": false,
-                  "valueSet": {
-                    "entityKind": "valueSet",
-                    "entityName": "Status",
-                    "namespaceId": "public",
-                    "plane": "storage"
-                  }
+                "statusId": {
+                  "codecId": "pg/int4@1",
+                  "nativeType": "int4",
+                  "nullable": false
                 },
                 "title": {
                   "codecId": "pg/text@1",
                   "nativeType": "text",
                   "nullable": false
                 },
-                "variant": {
-                  "codecId": "pg/text@1",
-                  "nativeType": "text",
-                  "nullable": false,
-                  "valueSet": {
-                    "entityKind": "valueSet",
-                    "entityName": "Variant",
-                    "namespaceId": "public",
-                    "plane": "storage"
-                  }
+                "variantId": {
+                  "codecId": "pg/int4@1",
+                  "nativeType": "int4",
+                  "nullable": false
                 }
               },
-              "foreignKeys": [],
-              "indexes": [],
+              "foreignKeys": [
+                {
+                  "source": {
+                    "columns": [
+                      "statusId"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "project"
+                  },
+                  "target": {
+                    "columns": [
+                      "id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "status"
+                  }
+                },
+                {
+                  "source": {
+                    "columns": [
+                      "variantId"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "project"
+                  },
+                  "target": {
+                    "columns": [
+                      "id"
+                    ],
+                    "namespaceId": "public",
+                    "tableName": "variant"
+                  }
+                }
+              ],
+              "indexes": [
+                {
+                  "columns": [
+                    "statusId"
+                  ],
+                  "name": "project_statusId_idx_e5a44bce",
+                  "prefix": "project_statusId_idx",
+                  "unique": false
+                },
+                {
+                  "columns": [
+                    "variantId"
+                  ],
+                  "name": "project_variantId_idx_e16bb45d",
+                  "prefix": "project_variantId_idx",
+                  "unique": false
+                }
+              ],
               "primaryKey": {
                 "columns": [
                   "id"
@@ -514,6 +614,37 @@
               },
               "uniques": []
             },
+            "status": {
+              "columns": {
+                "color": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "id": {
+                  "codecId": "pg/int4@1",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "name": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id"
+                ]
+              },
+              "uniques": []
+            },
             "tool": {
               "columns": {
                 "color": {
@@ -544,24 +675,37 @@
                 ]
               },
               "uniques": []
-            }
-          },
-          "valueSet": {
-            "Status": {
-              "kind": "valueSet",
-              "values": [
-                "ONGOING",
-                "DISCONTINUED",
-                "COMPLETED"
-              ]
             },
-            "Variant": {
-              "kind": "valueSet",
-              "values": [
-                "PERSONAL",
-                "SCHOOL",
-                "LUNABOTICS"
-              ]
+            "variant": {
+              "columns": {
+                "color": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                },
+                "id": {
+                  "codecId": "pg/int4@1",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "name": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": false
+                }
+              },
+              "foreignKeys": [],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id"
+                ]
+              },
+              "uniques": []
             }
           }
         },
@@ -569,7 +713,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "d44fe82384ae3481b011f37580f4929b5825e43c74ca72f525d51f325e724a9f"
+    "storageHash": "b22a01418d0698e043372fbe368c12d635dd40def7c9f1518885f09028e7d121"
   },
   "capabilities": {
     "postgres": {

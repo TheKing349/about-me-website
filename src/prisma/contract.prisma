@@ -1,15 +1,19 @@
 // use prisma-8
 
 model Project {
-  id            Int      @id @default(autoincrement())
+  id            Int     @id @default(autoincrement())
   title         String
   desc          String
   images        Image[]
   links         LinkType[]
   creationDate  Date
   insights      String?
-  status        Status
-  variant       Variant
+
+  statusId      Int
+  status        Status  @relation(fields: [statusId], references: [id])
+
+  variantId     Int
+  variant       Variant @relation(fields: [variantId], references: [id])
 
   projectTools  ProjectTool[]
 }
@@ -32,6 +36,18 @@ model ProjectTool {
   @@id([projectId, toolId])
 }
 
+model Status {
+  id            Int     @id @default(autoincrement())
+  name          String
+  color         String
+}
+
+model Variant {
+  id            Int     @id @default(autoincrement())
+  name          String
+  color         String
+}
+
 type Image {
   url           String
   alt           String
@@ -40,16 +56,4 @@ type Image {
 type LinkType {
   name          String?
   url           String
-}
-
-enum Status {
-  ONGOING
-  DISCONTINUED
-  COMPLETED
-}
-
-enum Variant {
-  PERSONAL
-  SCHOOL
-  LUNABOTICS
 }

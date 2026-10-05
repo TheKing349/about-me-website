@@ -34,7 +34,7 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'d44fe82384ae3481b011f37580f4929b5825e43c74ca72f525d51f325e724a9f'>;
+  StorageHashBase<'b22a01418d0698e043372fbe368c12d635dd40def7c9f1518885f09028e7d121'>;
 export type ExecutionHash = ExecutionHashBase<string>;
 export type ProfileHash =
   ProfileHashBase<'3916f444a8a17ad749191acf9e08dad97d1a327b88c2f1d45d12f240296aa8b2'>;
@@ -264,14 +264,24 @@ export type FieldOutputTypes = {
       readonly links: ReadonlyArray<LinkTypeOutput>;
       readonly creationDate: CodecTypes['pg/date-temporal@1']['output'];
       readonly insights: CodecTypes['pg/text@1']['output'] | null;
-      readonly status: 'ONGOING' | 'DISCONTINUED' | 'COMPLETED';
-      readonly variant: 'PERSONAL' | 'SCHOOL' | 'LUNABOTICS';
+      readonly statusId: CodecTypes['pg/int4@1']['output'];
+      readonly variantId: CodecTypes['pg/int4@1']['output'];
     };
     readonly ProjectTool: {
       readonly projectId: CodecTypes['pg/int4@1']['output'];
       readonly toolId: CodecTypes['pg/int4@1']['output'];
     };
+    readonly Status: {
+      readonly id: CodecTypes['pg/int4@1']['output'];
+      readonly name: CodecTypes['pg/text@1']['output'];
+      readonly color: CodecTypes['pg/text@1']['output'];
+    };
     readonly Tool: {
+      readonly id: CodecTypes['pg/int4@1']['output'];
+      readonly name: CodecTypes['pg/text@1']['output'];
+      readonly color: CodecTypes['pg/text@1']['output'];
+    };
+    readonly Variant: {
       readonly id: CodecTypes['pg/int4@1']['output'];
       readonly name: CodecTypes['pg/text@1']['output'];
       readonly color: CodecTypes['pg/text@1']['output'];
@@ -288,14 +298,24 @@ export type FieldInputTypes = {
       readonly links: ReadonlyArray<LinkTypeInput>;
       readonly creationDate: CodecTypes['pg/date-temporal@1']['input'];
       readonly insights: CodecTypes['pg/text@1']['input'] | null;
-      readonly status: 'ONGOING' | 'DISCONTINUED' | 'COMPLETED';
-      readonly variant: 'PERSONAL' | 'SCHOOL' | 'LUNABOTICS';
+      readonly statusId: CodecTypes['pg/int4@1']['input'];
+      readonly variantId: CodecTypes['pg/int4@1']['input'];
     };
     readonly ProjectTool: {
       readonly projectId: CodecTypes['pg/int4@1']['input'];
       readonly toolId: CodecTypes['pg/int4@1']['input'];
     };
+    readonly Status: {
+      readonly id: CodecTypes['pg/int4@1']['input'];
+      readonly name: CodecTypes['pg/text@1']['input'];
+      readonly color: CodecTypes['pg/text@1']['input'];
+    };
     readonly Tool: {
+      readonly id: CodecTypes['pg/int4@1']['input'];
+      readonly name: CodecTypes['pg/text@1']['input'];
+      readonly color: CodecTypes['pg/text@1']['input'];
+    };
+    readonly Variant: {
       readonly id: CodecTypes['pg/int4@1']['input'];
       readonly name: CodecTypes['pg/text@1']['input'];
       readonly color: CodecTypes['pg/text@1']['input'];
@@ -311,15 +331,25 @@ export type StorageColumnTypes = {
       readonly images: CodecTypes['pg/jsonb@1']['output'];
       readonly insights: CodecTypes['pg/text@1']['output'] | null;
       readonly links: CodecTypes['pg/jsonb@1']['output'];
-      readonly status: 'ONGOING' | 'DISCONTINUED' | 'COMPLETED';
+      readonly statusId: CodecTypes['pg/int4@1']['output'];
       readonly title: CodecTypes['pg/text@1']['output'];
-      readonly variant: 'PERSONAL' | 'SCHOOL' | 'LUNABOTICS';
+      readonly variantId: CodecTypes['pg/int4@1']['output'];
     };
     readonly projectTool: {
       readonly projectId: CodecTypes['pg/int4@1']['output'];
       readonly toolId: CodecTypes['pg/int4@1']['output'];
     };
+    readonly status: {
+      readonly color: CodecTypes['pg/text@1']['output'];
+      readonly id: CodecTypes['pg/int4@1']['output'];
+      readonly name: CodecTypes['pg/text@1']['output'];
+    };
     readonly tool: {
+      readonly color: CodecTypes['pg/text@1']['output'];
+      readonly id: CodecTypes['pg/int4@1']['output'];
+      readonly name: CodecTypes['pg/text@1']['output'];
+    };
+    readonly variant: {
       readonly color: CodecTypes['pg/text@1']['output'];
       readonly id: CodecTypes['pg/int4@1']['output'];
       readonly name: CodecTypes['pg/text@1']['output'];
@@ -335,15 +365,25 @@ export type StorageColumnInputTypes = {
       readonly images: CodecTypes['pg/jsonb@1']['input'];
       readonly insights: CodecTypes['pg/text@1']['input'] | null;
       readonly links: CodecTypes['pg/jsonb@1']['input'];
-      readonly status: 'ONGOING' | 'DISCONTINUED' | 'COMPLETED';
+      readonly statusId: CodecTypes['pg/int4@1']['input'];
       readonly title: CodecTypes['pg/text@1']['input'];
-      readonly variant: 'PERSONAL' | 'SCHOOL' | 'LUNABOTICS';
+      readonly variantId: CodecTypes['pg/int4@1']['input'];
     };
     readonly projectTool: {
       readonly projectId: CodecTypes['pg/int4@1']['input'];
       readonly toolId: CodecTypes['pg/int4@1']['input'];
     };
+    readonly status: {
+      readonly color: CodecTypes['pg/text@1']['input'];
+      readonly id: CodecTypes['pg/int4@1']['input'];
+      readonly name: CodecTypes['pg/text@1']['input'];
+    };
     readonly tool: {
+      readonly color: CodecTypes['pg/text@1']['input'];
+      readonly id: CodecTypes['pg/int4@1']['input'];
+      readonly name: CodecTypes['pg/text@1']['input'];
+    };
+    readonly variant: {
       readonly color: CodecTypes['pg/text@1']['input'];
       readonly id: CodecTypes['pg/int4@1']['input'];
       readonly name: CodecTypes['pg/text@1']['input'];
@@ -360,10 +400,12 @@ export namespace Models {
     links: ReadonlyArray<LinkTypeOutput>;
     creationDate: CodecTypes['pg/date-temporal@1']['output'];
     insights: CodecTypes['pg/text@1']['output'] | null;
-    status: 'ONGOING' | 'DISCONTINUED' | 'COMPLETED';
-    variant: 'PERSONAL' | 'SCHOOL' | 'LUNABOTICS';
+    statusId: CodecTypes['pg/int4@1']['output'];
+    variantId: CodecTypes['pg/int4@1']['output'];
     projectTools: public_ProjectTool[];
-    readonly [RelationKeys]?: 'projectTools';
+    status: public_Status;
+    variant: public_Variant;
+    readonly [RelationKeys]?: 'projectTools' | 'status' | 'variant';
   };
   export type public_Tool = {
     id: CodecTypes['pg/int4@1']['output'];
@@ -379,6 +421,18 @@ export namespace Models {
     tool: public_Tool;
     readonly [RelationKeys]?: 'project' | 'tool';
   };
+  export type public_Status = {
+    id: CodecTypes['pg/int4@1']['output'];
+    name: CodecTypes['pg/text@1']['output'];
+    color: CodecTypes['pg/text@1']['output'];
+    readonly [RelationKeys]?: never;
+  };
+  export type public_Variant = {
+    id: CodecTypes['pg/int4@1']['output'];
+    name: CodecTypes['pg/text@1']['output'];
+    color: CodecTypes['pg/text@1']['output'];
+    readonly [RelationKeys]?: never;
+  };
 }
 
 export declare const models: {
@@ -386,6 +440,8 @@ export declare const models: {
     Project: Models.public_Project;
     Tool: Models.public_Tool;
     ProjectTool: Models.public_ProjectTool;
+    Status: Models.public_Status;
+    Variant: Models.public_Variant;
   };
 };
 
@@ -448,21 +504,59 @@ type ContractBase = Omit<
                   readonly codecId: 'pg/text@1';
                   readonly nullable: true;
                 };
-                readonly status: {
-                  readonly nativeType: 'text';
-                  readonly codecId: 'pg/text@1';
+                readonly statusId: {
+                  readonly nativeType: 'int4';
+                  readonly codecId: 'pg/int4@1';
                   readonly nullable: false;
                 };
-                readonly variant: {
-                  readonly nativeType: 'text';
-                  readonly codecId: 'pg/text@1';
+                readonly variantId: {
+                  readonly nativeType: 'int4';
+                  readonly codecId: 'pg/int4@1';
                   readonly nullable: false;
                 };
               };
               primaryKey: { readonly columns: readonly ['id'] };
               uniques: readonly [];
-              indexes: readonly [];
-              foreignKeys: readonly [];
+              indexes: readonly [
+                {
+                  readonly name: 'project_statusId_idx_e5a44bce';
+                  readonly prefix: 'project_statusId_idx';
+                  readonly columns: readonly ['statusId'];
+                  readonly unique: false;
+                },
+                {
+                  readonly name: 'project_variantId_idx_e16bb45d';
+                  readonly prefix: 'project_variantId_idx';
+                  readonly columns: readonly ['variantId'];
+                  readonly unique: false;
+                },
+              ];
+              foreignKeys: readonly [
+                {
+                  readonly source: {
+                    readonly namespaceId: 'public' & NamespaceId;
+                    readonly tableName: 'project';
+                    readonly columns: readonly ['statusId'];
+                  };
+                  readonly target: {
+                    readonly namespaceId: 'public' & NamespaceId;
+                    readonly tableName: 'status';
+                    readonly columns: readonly ['id'];
+                  };
+                },
+                {
+                  readonly source: {
+                    readonly namespaceId: 'public' & NamespaceId;
+                    readonly tableName: 'project';
+                    readonly columns: readonly ['variantId'];
+                  };
+                  readonly target: {
+                    readonly namespaceId: 'public' & NamespaceId;
+                    readonly tableName: 'variant';
+                    readonly columns: readonly ['id'];
+                  };
+                },
+              ];
             };
             readonly projectTool: {
               columns: {
@@ -520,6 +614,33 @@ type ContractBase = Omit<
                 },
               ];
             };
+            readonly status: {
+              columns: {
+                readonly id: {
+                  readonly nativeType: 'int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: false;
+                  readonly default: {
+                    readonly kind: 'function';
+                    readonly expression: 'autoincrement()';
+                  };
+                };
+                readonly name: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: false;
+                };
+                readonly color: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: false;
+                };
+              };
+              primaryKey: { readonly columns: readonly ['id'] };
+              uniques: readonly [];
+              indexes: readonly [];
+              foreignKeys: readonly [];
+            };
             readonly tool: {
               columns: {
                 readonly id: {
@@ -547,15 +668,32 @@ type ContractBase = Omit<
               indexes: readonly [];
               foreignKeys: readonly [];
             };
-          };
-          readonly valueSet: {
-            readonly Status: {
-              readonly kind: 'valueSet';
-              readonly values: readonly ['ONGOING', 'DISCONTINUED', 'COMPLETED'];
-            };
-            readonly Variant: {
-              readonly kind: 'valueSet';
-              readonly values: readonly ['PERSONAL', 'SCHOOL', 'LUNABOTICS'];
+            readonly variant: {
+              columns: {
+                readonly id: {
+                  readonly nativeType: 'int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: false;
+                  readonly default: {
+                    readonly kind: 'function';
+                    readonly expression: 'autoincrement()';
+                  };
+                };
+                readonly name: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: false;
+                };
+                readonly color: {
+                  readonly nativeType: 'text';
+                  readonly codecId: 'pg/text@1';
+                  readonly nullable: false;
+                };
+              };
+              primaryKey: { readonly columns: readonly ['id'] };
+              uniques: readonly [];
+              indexes: readonly [];
+              foreignKeys: readonly [];
             };
           };
         };
@@ -574,6 +712,8 @@ type ContractBase = Omit<
       readonly namespace: 'public' & NamespaceId;
       readonly model: 'ProjectTool';
     };
+    readonly status: { readonly namespace: 'public' & NamespaceId; readonly model: 'Status' };
+    readonly variant: { readonly namespace: 'public' & NamespaceId; readonly model: 'Variant' };
   };
   readonly domain: {
     readonly namespaces: {
@@ -611,13 +751,13 @@ type ContractBase = Omit<
                 readonly nullable: true;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
               };
-              readonly status: {
+              readonly statusId: {
                 readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
               };
-              readonly variant: {
+              readonly variantId: {
                 readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
               };
             };
             readonly relations: {
@@ -632,6 +772,30 @@ type ContractBase = Omit<
                   readonly targetFields: readonly ['projectId'];
                 };
               };
+              readonly status: {
+                readonly to: {
+                  readonly namespace: 'public' & NamespaceId;
+                  readonly model: 'Status';
+                };
+                readonly cardinality: 'N:1';
+                readonly nullable: false;
+                readonly on: {
+                  readonly localFields: readonly ['statusId'];
+                  readonly targetFields: readonly ['id'];
+                };
+              };
+              readonly variant: {
+                readonly to: {
+                  readonly namespace: 'public' & NamespaceId;
+                  readonly model: 'Variant';
+                };
+                readonly cardinality: 'N:1';
+                readonly nullable: false;
+                readonly on: {
+                  readonly localFields: readonly ['variantId'];
+                  readonly targetFields: readonly ['id'];
+                };
+              };
             };
             readonly storage: {
               readonly table: 'project';
@@ -644,8 +808,8 @@ type ContractBase = Omit<
                 readonly links: { readonly column: 'links' };
                 readonly creationDate: { readonly column: 'creationDate' };
                 readonly insights: { readonly column: 'insights' };
-                readonly status: { readonly column: 'status' };
-                readonly variant: { readonly column: 'variant' };
+                readonly statusId: { readonly column: 'statusId' };
+                readonly variantId: { readonly column: 'variantId' };
               };
             };
           };
@@ -692,6 +856,32 @@ type ContractBase = Omit<
               };
             };
           };
+          readonly Status: {
+            readonly fields: {
+              readonly id: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+              readonly name: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly color: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+            };
+            readonly relations: Record<string, never>;
+            readonly storage: {
+              readonly table: 'status';
+              readonly namespaceId: 'public';
+              readonly fields: {
+                readonly id: { readonly column: 'id' };
+                readonly name: { readonly column: 'name' };
+                readonly color: { readonly column: 'color' };
+              };
+            };
+          };
           readonly Tool: {
             readonly fields: {
               readonly id: {
@@ -730,6 +920,32 @@ type ContractBase = Omit<
               };
             };
           };
+          readonly Variant: {
+            readonly fields: {
+              readonly id: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
+              readonly name: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+              readonly color: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
+              };
+            };
+            readonly relations: Record<string, never>;
+            readonly storage: {
+              readonly table: 'variant';
+              readonly namespaceId: 'public';
+              readonly fields: {
+                readonly id: { readonly column: 'id' };
+                readonly name: { readonly column: 'name' };
+                readonly color: { readonly column: 'color' };
+              };
+            };
+          };
         };
         readonly valueObjects: {
           readonly Image: {
@@ -755,24 +971,6 @@ type ContractBase = Omit<
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
               };
             };
-          };
-        };
-        readonly enum: {
-          readonly Status: {
-            readonly codecId: 'pg/text@1';
-            readonly members: readonly [
-              { readonly name: 'ONGOING'; readonly value: 'ONGOING' },
-              { readonly name: 'DISCONTINUED'; readonly value: 'DISCONTINUED' },
-              { readonly name: 'COMPLETED'; readonly value: 'COMPLETED' },
-            ];
-          };
-          readonly Variant: {
-            readonly codecId: 'pg/text@1';
-            readonly members: readonly [
-              { readonly name: 'PERSONAL'; readonly value: 'PERSONAL' },
-              { readonly name: 'SCHOOL'; readonly value: 'SCHOOL' },
-              { readonly name: 'LUNABOTICS'; readonly value: 'LUNABOTICS' },
-            ];
           };
         };
       };

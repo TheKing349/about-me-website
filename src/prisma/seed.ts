@@ -1,13 +1,46 @@
 import { connectDatabase, db } from "./db.ts";
-import { projects, tools } from "./seedData.ts"
+import { projects, statuses, variants, tools } from "./seedData.ts"
 
 let pendingSeed: Promise<void> | undefined;
 
 async function runSeed(): Promise<void> {
   await connectDatabase();
 
+  await upsertStatuses();
+  await upsertVariants();
   await upsertTools();
+  
   await upsertProjects();
+}
+
+async function upsertStatuses() {
+  for (const status of statuses) {
+    await db.orm.public.Status.upsert({
+      create: status,
+      update: {
+        name: status.name,
+        color: status.color,
+      },
+      conflictOn: {
+        id: status.id,
+      },
+    });
+  }
+}
+
+async function upsertVariants() {
+  for (const variant of variants) {
+    await db.orm.public.Variant.upsert({
+      create: variant,
+      update: {
+        name: variant.name,
+        color: variant.color,
+      },
+      conflictOn: {
+        id: variant.id,
+      },
+    });
+  }
 }
 
 async function upsertTools() {
@@ -22,11 +55,35 @@ async function upsertTools() {
 
 async function upsertProjects() {
   for (const project of projects) {
-    const { tools, ...projectData } = project;
+    const { tools, status, variant, ...projectData } = project;
+
+    const statusRecord = await db.orm.public.Status
+      .where({ name: status })
+      .first();
+
+    const variantRecord = await db.orm.public.Variant
+      .where({ name: variant })
+      .first();
+
+    if (!statusRecord) {
+      throw new Error(`Status "${status}" does not exist`);
+    }
+
+    if (!variantRecord) {
+      throw new Error(`Variant "${variant}" does not exist`);
+    }
 
     await db.orm.public.Project.upsert({
-      create: projectData,
-      update: projectData,
+      create: {
+        ...projectData,
+        statusId: statusRecord.id,
+        variantId: variantRecord.id
+      },
+      update: {
+        ...projectData,
+        statusId: statusRecord.id,
+        variantId: variantRecord.id
+      },
       conflictOn: {
         id: project.id,
       },
@@ -42,9 +99,15 @@ async function upsertProjects() {
       }
 
       await db.orm.public.ProjectTool.upsert({
-        create: { projectId: project.id, toolId: tool.id },
+        create: {
+          projectId: project.id,
+          toolId: tool.id,
+        },
         update: {},
-        conflictOn: { projectId: project.id, toolId: tool.id },
+        conflictOn: {
+          projectId: project.id,
+          toolId: tool.id,
+        },
       });
     }
   }
