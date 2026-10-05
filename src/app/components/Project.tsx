@@ -85,9 +85,9 @@ function Tools({ tools, className }: { tools: ToolType[], className?: string }) 
 
 function Images({ images, className }: { images: ImageType[], className?: string }) {
   return (
-    <div className={`flex flex-row justify-end gap-2 w-full md:w-auto ${className}`}>
+    <div className={`flex flex-row justify-end gap-2 w-full ${className}`}>
       {images.map((image, index) => (
-        <div key={index} className="relative aspect-square flex-1 min-w-0 md:flex-none md:w-40">
+        <div key={index} className="relative aspect-square flex-1 md:w-40">
           <Image fill src={image.url} alt={image.alt} className="object-contain" />
         </div>
       ))}
