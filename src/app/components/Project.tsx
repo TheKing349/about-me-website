@@ -1,53 +1,95 @@
 import Image from "next/image"
 import Link from "next/link"
 
-import { ProjectType } from "./types"
+import { ImageType, LinkType, ProjectType, StatusType, ToolType, VariantType } from "./types"
 import formatDate from "../utils/formatDate"
 
 export default function Project(project: ProjectType) {
   return (
     <section className="p-4 border rounded-lg bg-gray-100">
       <div className="flex flex-col md:flex-row gap-4">
-        <div className="max-w-lg">
+        <div className="flex flex-col max-w-lg">
           <div className="flex flex-row gap-2">
-            <Bubble className="w-fit" text={project.variant.name} style={{ backgroundColor: project.variant.color }} />
-            <Bubble className="md:hidden w-fit" text={project.status.name} style={{ backgroundColor: project.status.color }} />
+            <Variant variant={project.variant} />
+            <Status status={project.status} />
           </div>
 
           <h2 className="text-xl">{project.title}</h2>
           <p className="text-xs">{formatDate(project.creationDate)}</p>
           <p>{project.description}</p>
 
-          <div className="flex flex-row gap-2">
-            {project.links.map((link, index) => (
-              <Link key={index} href={link.url}
-                className="text-blue-700 hover:underline decoration-blue-700"
-              >
-                {link.name || link.url}
-              </Link>
-            ))}
-          </div>
-
-          <div className="flex flex-row gap-2 pt-2">
-            {project.tools.map((tool) => (
-              <Bubble key={tool.id} text={tool.name} style={{ backgroundColor: tool.color }} />
-            ))}
-          </div>
+          <Links links={project.links} />
+          <Tools tools={project.tools} />
         </div>
 
         <div className="flex flex-col gap-4 md:ml-auto w-full md:w-auto">
-          <Bubble className="hidden md:block md:ml-auto w-fit" text={project.status.name} style={{ backgroundColor: project.status.color }} />
-
-          <div className="flex flex-row justify-end gap-2 w-full md:w-auto">
-            {project.images.map((image, index) => (
-              <div key={index} className="relative aspect-square flex-1 min-w-0 md:flex-none md:w-40">
-                <Image fill src={image.url} alt={image.alt} className="object-contain" />
-              </div>
-            ))}
-          </div>
+          <Status status={project.status} />
+          <Images images={project.images} />
         </div>
       </div>
     </section>
+  )
+}
+
+function Variant({ variant, className }: { variant: VariantType, className?: string }) {
+  return (
+    <Bubble
+      className={`w-fit ${className}`}
+      text={variant.name}
+      style={{ backgroundColor: variant.color }}
+    />
+  )
+}
+
+function Status({ status, className }: { status: StatusType, className?: string }) {
+  return (
+    <Bubble
+      className={`md:hidden w-fit ${className}`}
+      text={status.name}
+      style={{ backgroundColor: status.color }}
+    />
+  )
+}
+
+function Links({ links, className }: { links: LinkType[], className?: string }) {
+  return (
+    <div className={`flex flex-row gap-2 ${className}`}>
+      {links.map((link, index) => (
+        <Link
+          key={index}
+          href={link.url}
+          className="text-blue-700 hover:underline decoration-blue-700"
+        >
+          {link.name || link.url}
+        </Link>
+      ))}
+    </div>
+  )
+}
+
+function Tools({ tools, className }: { tools: ToolType[], className?: string }) {
+  return (
+    <div className={`flex flex-row gap-2 pt-2 md:mt-auto ${className}`}>
+      {tools.map((tool) => (
+        <Bubble
+          key={tool.id}
+          text={tool.name}
+          style={{ backgroundColor: tool.color }}
+        />
+      ))}
+    </div>
+  )
+}
+
+function Images({ images, className }: { images: ImageType[], className?: string }) {
+  return (
+    <div className={`flex flex-row justify-end gap-2 w-full md:w-auto ${className}`}>
+      {images.map((image, index) => (
+        <div key={index} className="relative aspect-square flex-1 min-w-0 md:flex-none md:w-40">
+          <Image fill src={image.url} alt={image.alt} className="object-contain" />
+        </div>
+      ))}
+    </div>
   )
 }
 
