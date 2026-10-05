@@ -8,18 +8,18 @@ export default function Project(project: ProjectType) {
   return (
     <section className="p-4 border rounded-lg bg-gray-100">
       <div className="flex flex-row">
-        <div>
+        <div className="max-w-lg">
           <Bubble className="w-fit" text={project.variant} />
 
           <h2 className="text-xl">{project.title}</h2>
           <p className="text-xs">{formatDate(project.creationDate)}</p>
-          <p>{project.description}</p>
+          <p className="text-justify">{project.description}</p>
 
           <div className="flex flex-row gap-2">
             {project.links.map((link, index) => (
               <Link key={index} href={link.url}
                 className="text-blue-700 hover:underline decoration-blue-700"
-                >
+              >
                 {link.name || link.url}
               </Link>
             ))}
@@ -31,7 +31,7 @@ export default function Project(project: ProjectType) {
             ))}
           </div>
         </div>
-        
+
         <div className="flex flex-col gap-4 ml-auto">
           <Bubble className="ml-auto" text={project.status} />
 
