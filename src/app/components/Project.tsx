@@ -11,7 +11,7 @@ export default function Project(project: ProjectType) {
         <div className="flex flex-col max-w-lg">
           <div className="flex flex-row gap-2">
             <Variant variant={project.variant} />
-            <Status status={project.status} />
+            <Status status={project.status} className="md:hidden" />
           </div>
 
           <h2 className="text-xl">{project.title}</h2>
@@ -19,11 +19,11 @@ export default function Project(project: ProjectType) {
           <p>{project.description}</p>
 
           <Links links={project.links} />
-          <Tools tools={project.tools} />
+          <Tools tools={project.tools} className="md:mt-auto" />
         </div>
 
         <div className="flex flex-col gap-4 md:ml-auto w-full md:w-auto">
-          <Status status={project.status} />
+          <Status status={project.status} className="hidden md:block md:ml-auto"/>
           <Images images={project.images} />
         </div>
       </div>
@@ -44,7 +44,7 @@ function Variant({ variant, className }: { variant: VariantType, className?: str
 function Status({ status, className }: { status: StatusType, className?: string }) {
   return (
     <Bubble
-      className={`md:hidden w-fit ${className}`}
+      className={`w-fit ${className}`}
       text={status.name}
       style={{ backgroundColor: status.color }}
     />
@@ -69,7 +69,7 @@ function Links({ links, className }: { links: LinkType[], className?: string }) 
 
 function Tools({ tools, className }: { tools: ToolType[], className?: string }) {
   return (
-    <div className={`flex flex-row gap-2 pt-2 md:mt-auto ${className}`}>
+    <div className={`flex flex-row gap-2 pt-2 ${className}`}>
       {tools.map((tool) => (
         <Bubble
           key={tool.id}
