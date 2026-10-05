@@ -23,7 +23,7 @@ export default function Project(project: ProjectType) {
         </div>
 
         <div className="flex flex-col gap-4 md:ml-auto w-full md:w-auto">
-          <Status status={project.status} className="hidden md:block md:ml-auto"/>
+          <Status status={project.status} className="hidden md:block"/>
           <Images images={project.images} />
         </div>
 
@@ -46,7 +46,7 @@ function Variant({ variant, className }: { variant: VariantType, className?: str
 function Status({ status, className }: { status: StatusType, className?: string }) {
   return (
     <Bubble
-      className={`w-fit ${className}`}
+      className={`w-fit ml-auto ${className}`}
       text={status.name}
       style={{ backgroundColor: status.color }}
     />
