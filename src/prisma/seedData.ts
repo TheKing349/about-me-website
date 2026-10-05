@@ -10,7 +10,7 @@ const thirdCreationDate = Temporal.PlainDate.from("2026-09-20")
 export const statuses = [
   {id: 1, name: "Ongoing", color: "#22c55e"},
   {id: 2, name: "Discontinued", color: "#ef4444"},
-  {id: 3, name: "Complete", color: "#3b82f6"},
+  {id: 3, name: "Completed", color: "#3b82f6"},
 ]
 
 export const variants = [
