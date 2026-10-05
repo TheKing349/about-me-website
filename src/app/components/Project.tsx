@@ -9,7 +9,10 @@ export default function Project(project: ProjectType) {
     <section className="p-4 border rounded-lg bg-gray-100">
       <div className="flex flex-col md:flex-row gap-4">
         <div className="max-w-lg">
-          <Bubble className="w-fit" text={project.variant} />
+          <div className="flex flex-row gap-2">
+            <Bubble className="w-fit" text={project.variant} />
+            <Bubble className="md:hidden w-fit" text={project.status} />
+          </div>
 
           <h2 className="text-xl">{project.title}</h2>
           <p className="text-xs">{formatDate(project.creationDate)}</p>
@@ -33,7 +36,7 @@ export default function Project(project: ProjectType) {
         </div>
 
         <div className="flex flex-col gap-4 md:ml-auto w-full md:w-auto">
-          <Bubble className="md:ml-auto w-fit" text={project.status} />
+          <Bubble className="hidden md:block md:ml-auto w-fit" text={project.status} />
 
           <div className="flex flex-row justify-end gap-2 w-full md:w-auto">
             {project.images.map((image, index) => (
