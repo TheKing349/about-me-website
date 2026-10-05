@@ -7,7 +7,7 @@ import formatDate from "../utils/formatDate"
 export default function Project(project: ProjectType) {
   return (
     <section className="p-4 border rounded-lg bg-gray-100">
-      <div className="flex flex-row">
+      <div className="flex flex-col md:flex-row gap-4">
         <div className="max-w-lg">
           <Bubble className="w-fit" text={project.variant} />
 
@@ -32,13 +32,13 @@ export default function Project(project: ProjectType) {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 ml-auto">
-          <Bubble className="ml-auto" text={project.status} />
+        <div className="flex flex-col gap-4 md:ml-auto w-full md:w-auto">
+          <Bubble className="md:ml-auto w-fit" text={project.status} />
 
-          <div className="flex flex-1 flex-row justify-end gap-2">
+          <div className="flex flex-row justify-end gap-2 w-full md:w-auto">
             {project.images.map((image, index) => (
-              <div key={index} className="relative h-full aspect-square">
-                <Image fill src={image.url} alt={image.alt} />
+              <div key={index} className="relative aspect-square flex-1 min-w-0 md:flex-none md:w-40">
+                <Image fill src={image.url} alt={image.alt} className="object-contain" />
               </div>
             ))}
           </div>
