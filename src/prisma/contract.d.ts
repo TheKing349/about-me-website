@@ -239,14 +239,10 @@ type DefaultLiteralValue<CodecId extends string, Encoded> = CodecId extends keyo
     : CodecTypes[CodecId]['json']
   : Encoded;
 export type ImageOutput = {
-  readonly width: CodecTypes['pg/int4@1']['output'];
-  readonly height: CodecTypes['pg/int4@1']['output'];
   readonly url: CodecTypes['pg/text@1']['output'];
   readonly alt: CodecTypes['pg/text@1']['output'];
 };
 export type ImageInput = {
-  readonly width: CodecTypes['pg/int4@1']['input'];
-  readonly height: CodecTypes['pg/int4@1']['input'];
   readonly url: CodecTypes['pg/text@1']['input'];
   readonly alt: CodecTypes['pg/text@1']['input'];
 };
@@ -738,14 +734,6 @@ type ContractBase = Omit<
         readonly valueObjects: {
           readonly Image: {
             readonly fields: {
-              readonly width: {
-                readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
-              };
-              readonly height: {
-                readonly nullable: false;
-                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
-              };
               readonly url: {
                 readonly nullable: false;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
@@ -813,14 +801,6 @@ type ContractBase = Omit<
   readonly valueObjects: {
     readonly Image: {
       readonly fields: {
-        readonly width: {
-          readonly nullable: false;
-          readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
-        };
-        readonly height: {
-          readonly nullable: false;
-          readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
-        };
         readonly url: {
           readonly nullable: false;
           readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };

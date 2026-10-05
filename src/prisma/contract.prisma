@@ -33,8 +33,6 @@ model ProjectTool {
 }
 
 type Image {
-  width         Int
-  height        Int
   url           String
   alt           String
 }
