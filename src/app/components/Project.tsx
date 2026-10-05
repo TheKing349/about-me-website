@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 
-import { ProjectType, StatusColors, VariantColors } from "./types"
+import { ProjectType } from "./types"
 import formatDate from "../utils/formatDate"
 
 export default function Project(project: ProjectType) {
@@ -10,8 +10,8 @@ export default function Project(project: ProjectType) {
       <div className="flex flex-col md:flex-row gap-4">
         <div className="max-w-lg">
           <div className="flex flex-row gap-2">
-            <Bubble className="w-fit" text={project.variant} style={{ backgroundColor: VariantColors[project.variant] }} />
-            <Bubble className="md:hidden w-fit" text={project.status} style={{ backgroundColor: StatusColors[project.status] }} />
+            <Bubble className="w-fit" text={project.variant.name} style={{ backgroundColor: project.variant.color }} />
+            <Bubble className="md:hidden w-fit" text={project.status.name} style={{ backgroundColor: project.status.color }} />
           </div>
 
           <h2 className="text-xl">{project.title}</h2>
@@ -36,7 +36,7 @@ export default function Project(project: ProjectType) {
         </div>
 
         <div className="flex flex-col gap-4 md:ml-auto w-full md:w-auto">
-          <Bubble className="hidden md:block md:ml-auto w-fit" text={project.status} style={{ backgroundColor: StatusColors[project.status] }} />
+          <Bubble className="hidden md:block md:ml-auto w-fit" text={project.status.name} style={{ backgroundColor: project.status.name }} />
 
           <div className="flex flex-row justify-end gap-2 w-full md:w-auto">
             {project.images.map((image, index) => (
