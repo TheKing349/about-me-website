@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 
-import { ProjectType, ToolType, StatusType, VariantType } from "./types"
+import { ProjectType } from "./types"
 import formatDate from "../utils/formatDate"
 
 export default function Project(project: ProjectType) {
@@ -9,8 +9,7 @@ export default function Project(project: ProjectType) {
     <section className="p-4 border rounded-lg bg-gray-100">
       <div className="flex flex-row">
         <div>
-          <Status status={project.status} />
-          <Variant variant={project.variant} />
+          <Bubble className="w-fit" text={project.variant} />
 
           <h2 className="text-xl">{project.title}</h2>
           <p className="text-xs">{formatDate(project.creationDate)}</p>
@@ -24,42 +23,30 @@ export default function Project(project: ProjectType) {
 
           <div className="flex flex-row gap-2 pt-2">
             {project.tools.map((tool) => (
-              <Tool key={tool.id} {...tool} />
+              <Bubble key={tool.id} text={tool.name} style={{ backgroundColor: tool.color }} />
             ))}
           </div>
         </div>
         
-        {/* Eventually will want a carousel of images if multiple, if do multiple at all? */}
-        <div className="flex flex-row gap-4 ml-auto">
-          {project.images.map((image, index) =>
-            <Image key={index} {...image} src={image.url} />
-          )}
+        <div className="flex flex-col gap-4 ml-auto">
+          <Bubble className="ml-auto" text={project.status} />
+          
+          {/* Eventually will want a carousel of images if multiple, if do multiple at all? */}
+          <div className="flex flex-row gap-4">
+            {project.images.map((image, index) =>
+              <Image key={index} {...image} src={image.url} />
+            )}
+          </div>
         </div>
       </div>
     </section>
   )
 }
 
-function Status({ status }: { status: StatusType }) {
+function Bubble({ text, className, style}: { text: string, className?: string, style?: React.CSSProperties }) {
   return (
-    <div>
-      {status}
-    </div>
-  )
-}
-
-function Variant({ variant }: { variant: VariantType }) {
-  return (
-    <div>
-      {variant}
-    </div>
-  )
-}
-
-function Tool(tool: ToolType) {
-  return (
-    <div className="p-1 border rounded-lg bg-gray-300" style={{ backgroundColor: tool.color }}>
-      {tool.name}
+    <div className={`px-1 border rounded-lg text-sm ${className}`} style={style}>
+      {text}
     </div>
   )
 }
