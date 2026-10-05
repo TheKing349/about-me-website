@@ -13,11 +13,15 @@ export async function listProjects() {
     .include("projectTools", (projectTools) =>
       projectTools.include("tool")
     )
+    .include("status")
+    .include("variant")
     .orderBy((p) => p.creationDate.desc())
     .all();
 
-  return projects.map(({ projectTools, ...project }) => ({
-    ...project,
-    tools: projectTools.map(({ tool }) => tool),
-  }));
+  return projects.map(
+    ({ projectTools, statusId, variantId, ...project }) => ({
+      ...project,
+      tools: projectTools.map(({ tool }) => tool),
+    })
+);
 }
