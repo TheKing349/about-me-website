@@ -16,7 +16,7 @@ export default function Project(project: ProjectType) {
 
           <h2 className="text-xl">{project.title}</h2>
           <p className="text-xs">{formatDate(project.creationDate)}</p>
-          <p className="text-justify">{project.description}</p>
+          <p>{project.description}</p>
 
           <div className="flex flex-row gap-2">
             {project.links.map((link, index) => (
