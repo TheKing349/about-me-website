@@ -33,7 +33,7 @@ export const projects = [
   {
     id: 2,
     title: "Two",
-    desc: "Desc Two",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     images: [placeholderImage, placeholderImage],
     links: [{name: "GitHub", url: "https://github.com/example/example-repo"}, {url: "https://example.com"}],
     creationDate: secondCreationDate,
@@ -45,7 +45,7 @@ export const projects = [
   {
     id: 3,
     title: "Three",
-    desc: "Desc Three",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     images: [placeholderImage, placeholderImage, placeholderImage],
     links: [{name: "GitHub", url: "https://github.com/example/example-repo"}, {name: "Example", url: "https://example.com"}],
     creationDate: thirdCreationDate,
