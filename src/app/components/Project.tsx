@@ -36,7 +36,7 @@ export default function Project(project: ProjectType) {
         </div>
 
         <div className="flex flex-col gap-4 md:ml-auto w-full md:w-auto">
-          <Bubble className="hidden md:block md:ml-auto w-fit" text={project.status.name} style={{ backgroundColor: project.status.name }} />
+          <Bubble className="hidden md:block md:ml-auto w-fit" text={project.status.name} style={{ backgroundColor: project.status.color }} />
 
           <div className="flex flex-row justify-end gap-2 w-full md:w-auto">
             {project.images.map((image, index) => (
