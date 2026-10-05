@@ -14,9 +14,9 @@ export default function Project(project: ProjectType) {
             <Status status={project.status} className="md:hidden" />
           </div>
 
-          <h2 className="text-xl">{project.title}</h2>
+          <h2 className="pt-2 text-xl">{project.title}</h2>
           <p className="text-xs">{formatDate(project.creationDate)}</p>
-          <p>{project.description}</p>
+          <p className="pt-2">{project.description}</p>
 
           <Links links={project.links} />
           <Tools tools={project.tools} className="hidden md:flex md:mt-auto md:pt-4" />
