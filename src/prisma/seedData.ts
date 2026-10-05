@@ -1,8 +1,6 @@
 import { ProjectType, Status, VariantType } from "../app/components/types"
 
 const placeholderImage = {
-  width: 50,
-  height: 50,
   url: "https://placehold.net/default.svg",
   alt: "Placeholder image for testing purposes"
 }

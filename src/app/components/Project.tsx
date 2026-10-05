@@ -16,9 +16,13 @@ export default function Project(project: ProjectType) {
           <p>{project.description}</p>
 
           <div className="flex flex-row gap-2">
-            {project.links.map((link, index) =>
-              <Link className="text-blue-700 hover:underline decoration-blue-700" key={index} href={link.url}>{link.name || link.url}</Link>
-            )}
+            {project.links.map((link, index) => (
+              <Link key={index} href={link.url}
+                className="text-blue-700 hover:underline decoration-blue-700"
+                >
+                {link.name || link.url}
+              </Link>
+            ))}
           </div>
 
           <div className="flex flex-row gap-2 pt-2">
@@ -30,12 +34,13 @@ export default function Project(project: ProjectType) {
         
         <div className="flex flex-col gap-4 ml-auto">
           <Bubble className="ml-auto" text={project.status} />
-          
-          {/* Eventually will want a carousel of images if multiple, if do multiple at all? */}
-          <div className="flex flex-row gap-4">
-            {project.images.map((image, index) =>
-              <Image key={index} className="ml-auto" {...image} src={image.url} />
-            )}
+
+          <div className="flex flex-1 flex-row justify-end gap-2">
+            {project.images.map((image, index) => (
+              <div key={index} className="relative h-full aspect-square">
+                <Image fill src={image.url} alt={image.alt} />
+              </div>
+            ))}
           </div>
         </div>
       </div>
