@@ -7,7 +7,7 @@ import formatDate from "../utils/formatDate"
 export default function Project(project: ProjectType) {
   return (
     <section className="p-4 border rounded-lg bg-gray-100">
-      <div className="flex flex-col md:flex-row gap-4">
+      <div className="flex flex-col md:flex-row gap-2">
         <div className="flex flex-col max-w-lg">
           <div className="flex flex-row gap-2">
             <Variant variant={project.variant} />
@@ -19,7 +19,7 @@ export default function Project(project: ProjectType) {
           <p>{project.description}</p>
 
           <Links links={project.links} />
-          <Tools tools={project.tools} className="hidden md:flex md:mt-auto" />
+          <Tools tools={project.tools} className="hidden md:flex md:mt-auto md:pt-4" />
         </div>
 
         <div className="flex flex-col gap-4 md:ml-auto w-full md:w-auto">
