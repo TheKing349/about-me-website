@@ -19,13 +19,15 @@ export default function Project(project: ProjectType) {
           <p>{project.description}</p>
 
           <Links links={project.links} />
-          <Tools tools={project.tools} className="md:mt-auto" />
+          <Tools tools={project.tools} className="hidden md:flex md:mt-auto" />
         </div>
 
         <div className="flex flex-col gap-4 md:ml-auto w-full md:w-auto">
           <Status status={project.status} className="hidden md:block md:ml-auto"/>
           <Images images={project.images} />
         </div>
+
+        <Tools tools={project.tools} className="md:hidden" />
       </div>
     </section>
   )
@@ -69,7 +71,7 @@ function Links({ links, className }: { links: LinkType[], className?: string }) 
 
 function Tools({ tools, className }: { tools: ToolType[], className?: string }) {
   return (
-    <div className={`flex flex-row gap-2 pt-2 ${className}`}>
+    <div className={`flex flex-row gap-2 ${className}`}>
       {tools.map((tool) => (
         <Bubble
           key={tool.id}
