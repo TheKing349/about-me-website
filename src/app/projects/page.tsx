@@ -8,7 +8,7 @@ export default function Projects() {
   return (
     <main className="flex flex-col min-h-screen">
       <Navbar />
-      <ul className="flex flex-col p-4 gap-4 mb-auto grow">
+      <ul className="flex flex-col p-4 gap-3 mb-auto grow">
         {projects?.map((project) => 
           <li key={project.id}>
             <Project {...project} description={project.desc} images={[...project.images]} tools={[...project.tools]} links={[...project.links]}/>
