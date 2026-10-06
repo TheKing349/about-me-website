@@ -4,9 +4,9 @@ import Link from "next/link"
 import { ImageType, LinkType, ProjectType, StatusType, ToolType, VariantType } from "./types"
 import formatDate from "../utils/formatDate"
 
-export default function Project(project: ProjectType) {
+export default function Project({ className, project }: { className?: string, project: ProjectType} ) {
   return (
-    <section className="p-4 border rounded-lg bg-gray-100">
+    <section className={`p-4 border rounded-lg bg-gray-100 ${className}`}>
       <div className="flex flex-col md:flex-row gap-2">
         <div className="flex flex-col max-w-lg">
           <div className="flex flex-row gap-2">
