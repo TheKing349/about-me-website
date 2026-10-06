@@ -3,6 +3,8 @@ import { templateProject } from "./projectTemplate";
 
 export default function Admin() {
   return (
-    <Project className="p-4" project={templateProject} />
+    <section className="p-4">
+      <Project project={templateProject} />
+    </section>
   )
 }
