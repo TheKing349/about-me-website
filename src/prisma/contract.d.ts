@@ -254,11 +254,11 @@ export type ImageInput = {
   readonly alt: CodecTypes['pg/text@1']['input'];
   readonly url: CodecTypes['pg/text@1']['input'];
 };
-export type LinkTypeOutput = {
+export type LinkOutput = {
   readonly name: CodecTypes['pg/text@1']['output'] | null;
   readonly url: CodecTypes['pg/text@1']['output'];
 };
-export type LinkTypeInput = {
+export type LinkInput = {
   readonly name: CodecTypes['pg/text@1']['input'] | null;
   readonly url: CodecTypes['pg/text@1']['input'];
 };
@@ -270,7 +270,7 @@ export type FieldOutputTypes = {
       readonly id: CodecTypes['pg/int4@1']['output'];
       readonly images: ReadonlyArray<ImageOutput>;
       readonly insights: CodecTypes['pg/text@1']['output'] | null;
-      readonly links: ReadonlyArray<LinkTypeOutput>;
+      readonly links: ReadonlyArray<LinkOutput>;
       readonly statusId: CodecTypes['pg/int4@1']['output'];
       readonly title: CodecTypes['pg/text@1']['output'];
       readonly variantId: CodecTypes['pg/int4@1']['output'];
@@ -304,7 +304,7 @@ export type FieldInputTypes = {
       readonly id: CodecTypes['pg/int4@1']['input'];
       readonly images: ReadonlyArray<ImageInput>;
       readonly insights: CodecTypes['pg/text@1']['input'] | null;
-      readonly links: ReadonlyArray<LinkTypeInput>;
+      readonly links: ReadonlyArray<LinkInput>;
       readonly statusId: CodecTypes['pg/int4@1']['input'];
       readonly title: CodecTypes['pg/text@1']['input'];
       readonly variantId: CodecTypes['pg/int4@1']['input'];
@@ -406,7 +406,7 @@ export namespace Models {
     id: CodecTypes['pg/int4@1']['output'];
     images: ReadonlyArray<ImageOutput>;
     insights: CodecTypes['pg/text@1']['output'] | null;
-    links: ReadonlyArray<LinkTypeOutput>;
+    links: ReadonlyArray<LinkOutput>;
     statusId: CodecTypes['pg/int4@1']['output'];
     title: CodecTypes['pg/text@1']['output'];
     variantId: CodecTypes['pg/int4@1']['output'];
@@ -752,7 +752,7 @@ type ContractBase = Omit<
               };
               readonly links: {
                 readonly nullable: false;
-                readonly type: { readonly kind: 'valueObject'; readonly name: 'LinkType' };
+                readonly type: { readonly kind: 'valueObject'; readonly name: 'Link' };
                 readonly many: true;
               };
               readonly statusId: {
@@ -968,7 +968,7 @@ type ContractBase = Omit<
               };
             };
           };
-          readonly LinkType: {
+          readonly Link: {
             readonly fields: {
               readonly name: {
                 readonly nullable: true;
@@ -1019,7 +1019,7 @@ type ContractBase = Omit<
         };
       };
     };
-    readonly LinkType: {
+    readonly Link: {
       readonly fields: {
         readonly name: {
           readonly nullable: true;

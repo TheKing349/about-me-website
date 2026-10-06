@@ -72,7 +72,7 @@
                 "nullable": false,
                 "type": {
                   "kind": "valueObject",
-                  "name": "LinkType"
+                  "name": "Link"
                 }
               },
               "statusId": {
@@ -403,7 +403,7 @@
               }
             }
           },
-          "LinkType": {
+          "Link": {
             "fields": {
               "name": {
                 "nullable": true,
