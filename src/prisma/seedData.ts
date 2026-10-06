@@ -60,4 +60,16 @@ export const projects = [
     status: "Discontinued",
     variant: "Lunabotics",
   },
+  {
+    id: 4,
+    title: "Four",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    images: [],
+    links: [{name: "GitHub", url: "https://github.com/example/example-repo"}, {name: "Example", url: "https://example.com"}],
+    creationDate: Temporal.PlainDate.from("2026-09-21"),
+    insights: "SKILLS",
+    tools: ["React", "TypeScript"],
+    status: "Discontinued",
+    variant: "Lunabotics",
+  },
 ];
