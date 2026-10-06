@@ -1,5 +1,3 @@
-import { Temporal } from "temporal-polyfill"
-
 export type ProjectType = {
   id: number,
   title: string,
@@ -25,7 +23,7 @@ export type ImageType = {
 }
 
 export type LinkType = {
-  name?: string | null,
+  name: string | null,
   url: string
 }
 

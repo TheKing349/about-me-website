@@ -58,44 +58,44 @@ async function upsertProjects() {
     const { tools, status, variant, ...projectData } = project;
 
     const statusRecord = await db.orm.public.Status
-      .where({ name: status })
+      .where({ name: status.name })
       .first();
 
     const variantRecord = await db.orm.public.Variant
-      .where({ name: variant })
+      .where({ name: variant.name })
       .first();
 
     if (!statusRecord) {
-      throw new Error(`Status "${status}" does not exist`);
+      throw new Error(`Status "${status.name}" does not exist`);
     }
 
     if (!variantRecord) {
-      throw new Error(`Variant "${variant}" does not exist`);
+      throw new Error(`Variant "${variant.name}" does not exist`);
     }
 
     await db.orm.public.Project.upsert({
       create: {
         ...projectData,
         statusId: statusRecord.id,
-        variantId: variantRecord.id
+        variantId: variantRecord.id,
       },
       update: {
         ...projectData,
         statusId: statusRecord.id,
-        variantId: variantRecord.id
+        variantId: variantRecord.id,
       },
       conflictOn: {
         id: project.id,
       },
     });
 
-    for (const toolName of tools) {
+    for (const toolData of tools) {
       const tool = await db.orm.public.Tool
-        .where({ name: toolName })
+        .where({ name: toolData.name })
         .first();
 
       if (!tool) {
-        throw new Error(`Tool "${toolName}" does not exist`);
+        throw new Error(`Tool "${toolData.name}" does not exist`);
       }
 
       await db.orm.public.ProjectTool.upsert({
