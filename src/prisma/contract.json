@@ -4,23 +4,23 @@
   "target": "postgres",
   "profileHash": "3916f444a8a17ad749191acf9e08dad97d1a327b88c2f1d45d12f240296aa8b2",
   "roots": {
-    "project": {
+    "Project": {
       "model": "Project",
       "namespace": "public"
     },
-    "projectTool": {
+    "ProjectTool": {
       "model": "ProjectTool",
       "namespace": "public"
     },
-    "status": {
+    "Status": {
       "model": "Status",
       "namespace": "public"
     },
-    "tool": {
+    "Tool": {
       "model": "Tool",
       "namespace": "public"
     },
-    "variant": {
+    "Variant": {
       "model": "Variant",
       "namespace": "public"
     }
@@ -38,7 +38,7 @@
                   "kind": "scalar"
                 }
               },
-              "desc": {
+              "description": {
                 "nullable": false,
                 "type": {
                   "codecId": "pg/text@1",
@@ -151,8 +151,8 @@
                 "creationDate": {
                   "column": "creationDate"
                 },
-                "desc": {
-                  "column": "desc"
+                "description": {
+                  "column": "description"
                 },
                 "id": {
                   "column": "id"
@@ -177,7 +177,7 @@
                 }
               },
               "namespaceId": "public",
-              "table": "project"
+              "table": "Project"
             }
           },
           "ProjectTool": {
@@ -241,7 +241,7 @@
                 }
               },
               "namespaceId": "public",
-              "table": "projectTool"
+              "table": "ProjectTool"
             }
           },
           "Status": {
@@ -282,7 +282,7 @@
                 }
               },
               "namespaceId": "public",
-              "table": "status"
+              "table": "Status"
             }
           },
           "Tool": {
@@ -339,7 +339,7 @@
                 }
               },
               "namespaceId": "public",
-              "table": "tool"
+              "table": "Tool"
             }
           },
           "Variant": {
@@ -380,7 +380,7 @@
                 }
               },
               "namespaceId": "public",
-              "table": "variant"
+              "table": "Variant"
             }
           }
         },
@@ -430,14 +430,14 @@
       "public": {
         "entries": {
           "table": {
-            "project": {
+            "Project": {
               "columns": {
                 "creationDate": {
                   "codecId": "pg/date-temporal@1",
                   "nativeType": "date",
                   "nullable": false
                 },
-                "desc": {
+                "description": {
                   "codecId": "pg/text@1",
                   "nativeType": "text",
                   "nullable": false
@@ -489,14 +489,14 @@
                       "statusId"
                     ],
                     "namespaceId": "public",
-                    "tableName": "project"
+                    "tableName": "Project"
                   },
                   "target": {
                     "columns": [
                       "id"
                     ],
                     "namespaceId": "public",
-                    "tableName": "status"
+                    "tableName": "Status"
                   }
                 },
                 {
@@ -505,14 +505,14 @@
                       "variantId"
                     ],
                     "namespaceId": "public",
-                    "tableName": "project"
+                    "tableName": "Project"
                   },
                   "target": {
                     "columns": [
                       "id"
                     ],
                     "namespaceId": "public",
-                    "tableName": "variant"
+                    "tableName": "Variant"
                   }
                 }
               ],
@@ -521,16 +521,16 @@
                   "columns": [
                     "statusId"
                   ],
-                  "name": "project_statusId_idx_e5a44bce",
-                  "prefix": "project_statusId_idx",
+                  "name": "Project_statusId_idx_e5a44bce",
+                  "prefix": "Project_statusId_idx",
                   "unique": false
                 },
                 {
                   "columns": [
                     "variantId"
                   ],
-                  "name": "project_variantId_idx_e16bb45d",
-                  "prefix": "project_variantId_idx",
+                  "name": "Project_variantId_idx_e16bb45d",
+                  "prefix": "Project_variantId_idx",
                   "unique": false
                 }
               ],
@@ -541,7 +541,7 @@
               },
               "uniques": []
             },
-            "projectTool": {
+            "ProjectTool": {
               "columns": {
                 "projectId": {
                   "codecId": "pg/int4@1",
@@ -561,14 +561,14 @@
                       "projectId"
                     ],
                     "namespaceId": "public",
-                    "tableName": "projectTool"
+                    "tableName": "ProjectTool"
                   },
                   "target": {
                     "columns": [
                       "id"
                     ],
                     "namespaceId": "public",
-                    "tableName": "project"
+                    "tableName": "Project"
                   }
                 },
                 {
@@ -577,14 +577,14 @@
                       "toolId"
                     ],
                     "namespaceId": "public",
-                    "tableName": "projectTool"
+                    "tableName": "ProjectTool"
                   },
                   "target": {
                     "columns": [
                       "id"
                     ],
                     "namespaceId": "public",
-                    "tableName": "tool"
+                    "tableName": "Tool"
                   }
                 }
               ],
@@ -593,16 +593,16 @@
                   "columns": [
                     "projectId"
                   ],
-                  "name": "projectTool_projectId_idx_a96e4d92",
-                  "prefix": "projectTool_projectId_idx",
+                  "name": "ProjectTool_projectId_idx_a96e4d92",
+                  "prefix": "ProjectTool_projectId_idx",
                   "unique": false
                 },
                 {
                   "columns": [
                     "toolId"
                   ],
-                  "name": "projectTool_toolId_idx_f1fb6638",
-                  "prefix": "projectTool_toolId_idx",
+                  "name": "ProjectTool_toolId_idx_f1fb6638",
+                  "prefix": "ProjectTool_toolId_idx",
                   "unique": false
                 }
               ],
@@ -614,7 +614,7 @@
               },
               "uniques": []
             },
-            "status": {
+            "Status": {
               "columns": {
                 "color": {
                   "codecId": "pg/text@1",
@@ -645,7 +645,7 @@
               },
               "uniques": []
             },
-            "tool": {
+            "Tool": {
               "columns": {
                 "color": {
                   "codecId": "pg/text@1",
@@ -676,7 +676,7 @@
               },
               "uniques": []
             },
-            "variant": {
+            "Variant": {
               "columns": {
                 "color": {
                   "codecId": "pg/text@1",
@@ -713,7 +713,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "b22a01418d0698e043372fbe368c12d635dd40def7c9f1518885f09028e7d121"
+    "storageHash": "d3a998893569db6a39f2f771f5f6c78ad99a36e7a16e7475a54ccf8b5da8ca1e"
   },
   "capabilities": {
     "postgres": {
@@ -728,6 +728,8 @@
       "checkConstraint": true,
       "defaultInInsert": true,
       "enums": true,
+      "insertOnConflictSkip": true,
+      "insertOnConflictWithoutTarget": true,
       "lateral": true,
       "returning": true,
       "scalarList": true

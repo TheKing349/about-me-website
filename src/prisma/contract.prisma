@@ -3,7 +3,7 @@
 model Project {
   id            Int     @id @default(autoincrement())
   title         String
-  desc          String
+  description   String
   images        Image[]
   links         LinkType[]
   creationDate  Date
