@@ -30,7 +30,7 @@ export const templateProject = {
   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   images: [placeholderImage],
   links: [{name: "Example", url: "https://example.com"}],
-  creationDate: Temporal.PlainDate.from("2025-09-19"),
+  creationDate: Temporal.Now.plainDateISO(),
   insights: "SKILLS",
   tools: templateTools,
   status: statusTemplate,
