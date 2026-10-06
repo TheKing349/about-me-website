@@ -71,13 +71,9 @@ function Links({ links, className }: { links: LinkType[], className?: string }) 
 
 function Tools({ tools, className }: { tools: ToolType[], className?: string }) {
   return (
-    <div className={`flex flex-row gap-2 ${className}`}>
+    <div className={`flex flex-row gap-1 ${className}`}>
       {tools.map((tool) => (
-        <Bubble
-          key={tool.id}
-          text={tool.name}
-          style={{ backgroundColor: tool.color }}
-        />
+        <Bubble key={tool.id} text={tool.name} className="bg-gray-300" />
       ))}
     </div>
   )
