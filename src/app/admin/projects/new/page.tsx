@@ -12,32 +12,35 @@ const initialState: FormState = {
 export default function NewProject() {
   const [state, formAction, isPending] = useActionState(submitContactForm, initialState)
   return (
+    <div className="flex flex-row p-4">
     <div>
-      <form action={formAction}>
+        <h1 className="text-2xl">Add New Project</h1>
+
+        <form className="mt-4" ref={formRef} onChange={populatePreviewProject} action={formAction}>
         {/* Title */}
-        <div>
-          <label>Title</label>
+          <div className="flex flex-col">
+            <label className="text-lg">Title</label>
           <input name="title" type="text" placeholder="Project Title" required />
         </div>
 
         {/* Description */}
-        <div>
-          <label>Description</label>
-          <textarea name="title" placeholder="Project Description" required />
+          <div className="flex flex-col">
+            <label className="text-lg">Description</label>
+            <textarea name="description" placeholder="Project Description" required />
         </div>
 
         {/* Creation Date */}
         <div>
-          <label>Creation Date</label>
-          <input type="date" id="birthDate" name="birthDate"
-            // defaultValue={new Date().toISOString().split('T')[0]}
+            <label className="text-lg">Creation Date: </label>
+            <input type="date" id="creationDate" name="creationDate"
+              defaultValue={new Date().toISOString().split('T')[0]}
           />
         </div>
 
         {/* Variant Dropdown */}
         <div>
-          <label>Variant</label>
-          <select required defaultValue="">
+            <label className="text-lg">Variant: </label>
+            <select className="ml-4" required defaultValue="" name="variant">
             <option value="" disabled>-- Choose a Variant --</option>
             {/* TODO: Populate from available Variants */}
             {/* TODO: Add ability to add a new Variant */}
@@ -49,8 +52,8 @@ export default function NewProject() {
 
         {/* Status Dropdown */}
         <div>
-          <label>Status</label>
-          <select required defaultValue="">
+            <label className="text-lg">Status: </label>
+            <select className="ml-4" required defaultValue="" name="status">
             <option value="" disabled>-- Choose a Status --</option>
             {/* TODO: Populate from available Statuses */}
             {/* TODO: Add ability to add a new Status */}
@@ -62,18 +65,30 @@ export default function NewProject() {
 
         {/* Tools */}
         <div>
-          <label>Tools</label>
+            <label className="text-lg" htmlFor="tools">Tools</label>
+            <select className="" required multiple name="tools">
+              {/* TODO: Populate from available Tools */}
+              {/* TODO: Add ability to add a new Tool */}
+              {/* TODO: Better multiple select (checkboxes?) */}
+              <option value="github">GitHub</option>
+              <option value="unity">Unity</option>
+              <option value="react">React</option>
+            </select>
         </div>
 
         {/* Links */}
-        <div>
-          <label>Links</label>
-          <button>Add Link</button>
+          <div className="flex flex-col">
+            <label className="text-lg">Links</label>
+            <div className="flex flex-row">
+              <input name="link1_label" type="text" placeholder="Link Title" />
+              <input name="link1_url" type="text" placeholder="Link URL" />
+            </div>
+            <button className="mr-auto" type="button">Add Link</button>
         </div>
 
         {/* Images */}
-        <div>
-          <label>Images</label>
+          <div className="flex flex-col">
+            <label className="text-lg">Images</label>
         </div>
 
         {/* Submit Button */}
@@ -81,6 +96,11 @@ export default function NewProject() {
           {isPending ? 'Adding project...' : 'Add Project'}
         </button>
       </form>
+      </div>
+
+      <div>
+        {previewProject && <Project project={previewProject} />}
+      </div>
     </div>
   )
 }
