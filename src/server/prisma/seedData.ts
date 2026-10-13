@@ -1,6 +1,6 @@
 import { Temporal } from "temporal-polyfill"
 
-import { ImageType, LinkType, ProjectType, StatusType, ToolType, VariantType } from "../app/components/types";
+import { ImageType, LinkType, ProjectType, StatusType, ToolType, VariantType } from "@/src/components/types";
 
 let placeholderImage: ImageType = {
   url: "https://placehold.net/default.svg",
