@@ -1,7 +1,7 @@
-import Navbar from "@/src/app/components/Navbar";
-import Project from "@/src/app/components/Project"
+import Navbar from "@/src/components/Navbar";
+import Project from "@/src/components/Project"
 
-const { listProjects } = await import("@/src/prisma/projects")
+const { listProjects } = await import("@/src/server/prisma/projects")
 const projects = await listProjects().catch(() => undefined);
 
 export default function Projects() {

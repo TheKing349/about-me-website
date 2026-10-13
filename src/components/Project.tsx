@@ -2,7 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 
 import { ImageType, LinkType, ProjectType, StatusType, ToolType, VariantType } from "./types"
-import formatDate from "../utils/formatDate"
+import formatDate from "@/src/utils/formatDate"
 
 export default function Project({ className, project }: { className?: string, project: ProjectType} ) {
   return (
