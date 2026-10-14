@@ -2,7 +2,7 @@ import { listStatuses } from '@/src/server/prisma/query/statuses'
 import { listVariants } from '@/src/server/prisma/query/variants'
 import { listTools } from '@/src/server/prisma/query/tools'
 
-import { PreviewProjectProvider } from './NewProjectContext';
+import { PreviewProjectProvider } from '../../../../context/NewProjectContext';
 import NewProjectForm from './NewProjectForm';
 import NewProjectPreview from './NewProjectPreview';
 
