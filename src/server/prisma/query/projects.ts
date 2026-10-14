@@ -1,5 +1,5 @@
-import { db } from "./db.ts";
-import { seed } from "./seed.ts";
+import { db } from "../db.ts";
+import { seed } from "../seed.ts";
 
 import { ImageType, LinkType, ProjectType } from "@/src/components/types.ts";
 
