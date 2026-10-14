@@ -58,6 +58,7 @@ export default function NewProject() {
       color: "#3b82f6"
     }))
 
+    // TODO: Errors out when user types `https://`
     const linkNames = formData.getAll("linkLabel").map(String);
     const linkUrls = formData.getAll("linkUrl").map(String);
 
@@ -66,6 +67,7 @@ export default function NewProject() {
       name: linkNames[index] ?? "",
     }))
     
+    // TODO: Errors out when user types anything
     const imageUrls = formData.getAll("imageUrl").map(String);
     const imageAlts = formData.getAll("imageAlt").map(String);
 
@@ -91,11 +93,11 @@ export default function NewProject() {
   }
 
   return (
-    <div className="flex flex-row p-4">
-      <div>
+    <div className="flex flex-col p-4 md:flex-row">
+      <div className="md:w-7/20">
         <h1 className="text-2xl">Add New Project</h1>
 
-        <form className="mt-4" ref={formRef} onChange={populatePreviewProject} action={formAction}>
+        <form className="mt-2" ref={formRef} onChange={populatePreviewProject} action={formAction}>
           {/* Title */}
           <div className="flex flex-col">
             <label className="text-lg">Title</label>
@@ -180,7 +182,8 @@ export default function NewProject() {
         </form>
       </div>
 
-      <div>
+      <div className="mt-5 md:ml-5 md:w-7/10">
+        <h1 className="text-2xl">Preview</h1>
         {previewProject && <Project project={previewProject} />}
       </div>
     </div>
