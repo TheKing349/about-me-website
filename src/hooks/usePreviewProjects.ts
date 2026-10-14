@@ -2,15 +2,14 @@
 
 import { useRef, useState } from 'react'
 
-import { ImageType, LinkType, ProjectType, StatusType, ToolType, VariantType } from '@/src/components/types'
+import { ImageType, LinkType, ProjectFormType, ProjectType, StatusType, ToolType, VariantType } from '@/src/components/types'
 
 export default function usePreviewProject() {
- 
   const formRef = useRef<HTMLFormElement>(null);
 
   const [previewProject, setPreviewProject] = useState<ProjectType | null>(null);
 
-  function populatePreviewProject() {
+  function populatePreviewProject({ newProjectForm }: { newProjectForm: ProjectFormType }) {
     if (!formRef.current) return;
 
     const formData = new FormData(formRef.current);
@@ -19,31 +18,25 @@ export default function usePreviewProject() {
     const description = String(formData.get("description") != "" ? formData.get("description") : "Project description here")
     const creationDate = Temporal.PlainDate.from(String(formData.get("creationDate")))
     
-    // TODO: Get Status from available ones in db
-    // Probably check if status change before calling to db
-    const status: StatusType = {
-      id: 0,
-      name: String(formData.get("status") != null ? formData.get("status") : "Status"),
+    const status: StatusType = newProjectForm.statuses.find(
+      status => status.name === String(formData.get("status"))
+    ) || {
+      id: -1,
+      name: "Status",
       color: "#22c55e"
     }
     
-    // TODO: Get Status from available ones in db
-    // Probably check if status change before calling to db
-    const variant: VariantType = {
-      id: 0,
-      name: String(formData.get("variant") != null ? formData.get("variant") : "Variant"),
+    const variant: VariantType = newProjectForm.variants.find(
+      variant => variant.name === String(formData.get("variant"))
+    ) || {
+      id: -1,
+      name: "Variant",
       color: "#3b82f6"
     }
 
-    // TODO: Get Status from available ones in db
-    // Probably check if status change before calling to db
-    const toolsNames = formData.getAll("tools").map(String);
-
-    const tools: ToolType[] = toolsNames.map((name, index) => ({
-      id: index,
-      name,
-      color: "#3b82f6"
-    }))
+    const tools: ToolType[] = newProjectForm.tools.filter(
+      tool => formData.getAll("tools").includes(tool.name)
+    )
 
     // TODO: Errors out when user types `https://`
     const linkNames = formData.getAll("linkLabel").map(String);
@@ -80,5 +73,4 @@ export default function usePreviewProject() {
   }
 
   return { formRef, previewProject, populatePreviewProject };
-
 }

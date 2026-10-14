@@ -18,14 +18,19 @@ export default function NewProjectForm({ className, newProjectForm }: {className
   const { formRef, populatePreviewProject } = usePreviewProjectContext()
 
   useEffect(() => {
-    populatePreviewProject();
+    populatePreviewProject({newProjectForm});
   }, []);
 
   return (
     <div className={`${className}`}>
       <h1 className="text-2xl">Add New Project</h1>
 
-      <form className="mt-2" ref={formRef} onChange={populatePreviewProject} action={formAction}>
+      <form 
+        className="mt-2" 
+        ref={formRef}
+        onChange={() => populatePreviewProject({newProjectForm})} 
+        action={formAction}
+      >
         {/* Title */}
         <div className="flex flex-col">
           <label className="text-lg">Title</label>
@@ -53,7 +58,13 @@ export default function NewProjectForm({ className, newProjectForm }: {className
             <option value="" disabled>-- Choose a Variant --</option>
             {/* TODO: Add ability to add a new Variant */}
             {newProjectForm.variants?.map((variant) => 
-              <option key={variant.id} value={variant.name}>{variant.name}</option>
+              <option
+                key={variant.id}
+                value={variant.name}
+                style={{ backgroundColor: variant.color }}
+              >
+                {variant.name}
+              </option>
             )}
           </select>
         </div>
@@ -65,7 +76,13 @@ export default function NewProjectForm({ className, newProjectForm }: {className
             <option value="" disabled>-- Choose a Status --</option>
             {/* TODO: Add ability to add a new Status */}
             {newProjectForm.statuses?.map((status) =>
-              <option key={status.id} value={status.name}>{status.name}</option>
+              <option
+                key={status.id}
+                value={status.name}
+                style={{ backgroundColor: status.color }}
+              >
+                {status.name}
+              </option>
             )}
           </select>
         </div>
