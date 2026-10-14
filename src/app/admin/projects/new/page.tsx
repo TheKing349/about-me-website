@@ -75,7 +75,7 @@ export default function NewProject() {
           </div>
 
           {/* Tools */}
-          <div>
+          <div className="flex flex-col">
             <label className="text-lg" htmlFor="tools">Tools</label>
             <select className="" required multiple name="tools">
               {/* TODO: Populate from available Tools */}
