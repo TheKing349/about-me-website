@@ -32,18 +32,24 @@ export default function NewProject() {
     const description = String(formData.get("description") != "" ? formData.get("description") : "Project description here")
     const creationDate = Temporal.PlainDate.from(String(formData.get("creationDate")))
     
+    // TODO: Get Status from available ones in db
+    // Probably check if status change before calling to db
     const status: StatusType = {
       id: 0,
       name: String(formData.get("status")),
       color: "#22c55e"
     }
     
+    // TODO: Get Status from available ones in db
+    // Probably check if status change before calling to db
     const variant: VariantType = {
       id: 0,
       name: String(formData.get("variant")),
       color: "#3b82f6"
     }
 
+    // TODO: Get Status from available ones in db
+    // Probably check if status change before calling to db
     const toolsNames = formData.getAll("tools").map(String);
 
     const tools: ToolType[] = toolsNames.map((name, index) => ({
@@ -56,7 +62,7 @@ export default function NewProject() {
     const linkUrls = formData.getAll("linkUrl").map(String);
 
     const links: LinkType[] = linkUrls.map((url, index) => ({
-      url,
+      url: url != "" ? (url.includes("https://") ? url : "https://" + url) : "",
       name: linkNames[index] ?? "",
     }))
     
@@ -64,7 +70,7 @@ export default function NewProject() {
     const imageAlts = formData.getAll("imageAlt").map(String);
 
     const images: ImageType[] = imageUrls.map((url, index) => ({
-      url,
+      url: url != "" ? url : "https://placehold.net/default.svg",
       alt: imageAlts[index] ?? ""
     }));
 
@@ -153,15 +159,18 @@ export default function NewProject() {
           <div className="flex flex-col">
             <label className="text-lg">Links</label>
             <div className="flex flex-row">
-              <input name="link1_label" type="text" placeholder="Link Title" />
-              <input name="link1_url" type="text" placeholder="Link URL" />
+              <input name="linkLabel" type="text" placeholder="Link Title" />
+              <input name="linkUrl" type="text" placeholder="Link URL" />
             </div>
+            {/* TODO: Have button add new inputs */}
             <button className="mr-auto" type="button">Add Link</button>
           </div>
 
           {/* Images */}
           <div className="flex flex-col">
             <label className="text-lg">Images</label>
+            <input name="imageUrl" type="text" placeholder="Image URL" />
+            <input name="imageAlt" type="text" placeholder="Image Alt Text" />
           </div>
 
           {/* Submit Button */}
