@@ -23,7 +23,7 @@ export default function usePreviewProject() {
     // Probably check if status change before calling to db
     const status: StatusType = {
       id: 0,
-      name: String(formData.get("status")),
+      name: String(formData.get("status") != null ? formData.get("status") : "Status"),
       color: "#22c55e"
     }
     
@@ -31,7 +31,7 @@ export default function usePreviewProject() {
     // Probably check if status change before calling to db
     const variant: VariantType = {
       id: 0,
-      name: String(formData.get("variant")),
+      name: String(formData.get("variant") != null ? formData.get("variant") : "Variant"),
       color: "#3b82f6"
     }
 
