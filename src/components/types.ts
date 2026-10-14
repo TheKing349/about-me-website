@@ -38,3 +38,8 @@ export type VariantType = {
   name: string,
   color: string
 }
+
+export type ProjectFormType = {
+  statuses: StatusType[],
+  variants: VariantType[]
+}

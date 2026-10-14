@@ -5,6 +5,7 @@ import { useEffect, useActionState } from 'react'
 import { FormState } from '@/src/server/actions/submitForm.ts'
 import { submitContactForm } from '@/src/server/actions/submitForm'
 import usePreviewProjectContext from './NewProjectContext'
+import { ProjectFormType } from '@/src/components/types'
 
 const initialState: FormState = {
   errors: {},
@@ -12,7 +13,7 @@ const initialState: FormState = {
   success: false,
 }
 
-export default function NewProjectForm({ className }: {className?: string }) {
+export default function NewProjectForm({ className, newProjectForm }: {className?: string, newProjectForm: ProjectFormType }) {
   const [state, formAction, isPending] = useActionState(submitContactForm, initialState)
   const { formRef, populatePreviewProject } = usePreviewProjectContext()
 
@@ -50,11 +51,10 @@ export default function NewProjectForm({ className }: {className?: string }) {
           <label className="text-lg">Variant: </label>
           <select className="ml-4" required defaultValue="" name="variant">
             <option value="" disabled>-- Choose a Variant --</option>
-            {/* TODO: Populate from available Variants */}
             {/* TODO: Add ability to add a new Variant */}
-            <option value="lunabotics">Lunabotics</option>
-            <option value="personal">Personal</option>
-            <option value="school">School</option>
+            {newProjectForm.variants?.map((variant) => 
+              <option key={variant.id} value={variant.name}>{variant.name}</option>
+            )}
           </select>
         </div>
 
@@ -63,11 +63,10 @@ export default function NewProjectForm({ className }: {className?: string }) {
           <label className="text-lg">Status: </label>
           <select className="ml-4" required defaultValue="" name="status">
             <option value="" disabled>-- Choose a Status --</option>
-            {/* TODO: Populate from available Statuses */}
             {/* TODO: Add ability to add a new Status */}
-            <option value="completed">Completed</option>
-            <option value="ongoing">Ongoing</option>
-            <option value="discontinued">Discontinued</option>
+            {newProjectForm.statuses?.map((status) =>
+              <option key={status.id} value={status.name}>{status.name}</option>
+            )}
           </select>
         </div>
 
