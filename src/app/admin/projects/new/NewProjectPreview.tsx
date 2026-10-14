@@ -1,7 +1,7 @@
 'use client'
 
 import Project from "@/src/components/Project"
-import usePreviewProjectContext from '../../../../context/NewProjectContext'
+import usePreviewProjectContext from '@/src/context/NewProjectContext'
 
 export default function NewProjectPreview({ className }: {className?: string }) {
   const { previewProject } = usePreviewProjectContext()

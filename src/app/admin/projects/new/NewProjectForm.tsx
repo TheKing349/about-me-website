@@ -4,7 +4,7 @@ import { useEffect, useActionState } from 'react'
 
 import { FormState } from '@/src/server/actions/submitForm.ts'
 import { submitContactForm } from '@/src/server/actions/submitForm'
-import usePreviewProjectContext from '../../../../context/NewProjectContext'
+import usePreviewProjectContext from '@/src/context/NewProjectContext'
 import { ProjectFormType } from '@/src/components/types'
 
 const initialState: FormState = {
