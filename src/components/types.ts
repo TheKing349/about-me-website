@@ -41,5 +41,6 @@ export type VariantType = {
 
 export type ProjectFormType = {
   statuses: StatusType[],
-  variants: VariantType[]
+  variants: VariantType[],
+  tools: ToolType[]
 }

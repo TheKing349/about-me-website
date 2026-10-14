@@ -74,12 +74,11 @@ export default function NewProjectForm({ className, newProjectForm }: {className
         <div className="flex flex-col">
           <label className="text-lg" htmlFor="tools">Tools</label>
           <select className="" required multiple name="tools">
-            {/* TODO: Populate from available Tools */}
             {/* TODO: Add ability to add a new Tool */}
             {/* TODO: Better multiple select (checkboxes?) */}
-            <option value="github">GitHub</option>
-            <option value="unity">Unity</option>
-            <option value="react">React</option>
+            {newProjectForm.tools?.map((tool) =>
+              <option key={tool.id} value={tool.name}>{tool.name}</option>
+            )}
           </select>
         </div>
 
