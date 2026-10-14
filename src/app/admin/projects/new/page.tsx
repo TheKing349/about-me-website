@@ -100,6 +100,7 @@ export default function NewProject() {
 
           {/* Images */}
           <div className="flex flex-col">
+            {/* TODO: Option for importing image file */}
             <label className="text-lg">Images</label>
             <input name="imageUrl" type="text" placeholder="Image URL" />
             <input name="imageAlt" type="text" placeholder="Image Alt Text" />
@@ -112,9 +113,9 @@ export default function NewProject() {
         </form>
       </div>
 
-      <div className="mt-5 md:ml-5 md:w-7/10">
+      <div className="mt-5 md:ml-5 md:mt-0 md:w-7/10">
         <h1 className="text-2xl">Preview</h1>
-        {previewProject && <Project project={previewProject} />}
+        {previewProject && <Project className="mt-2" project={previewProject} />}
       </div>
     </div>
   )
