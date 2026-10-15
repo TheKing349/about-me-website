@@ -1,11 +1,12 @@
 'use client'
 
 import { useActionState } from 'react'
+import Image from 'next/image'
 
 import { FormState } from '@/src/server/actions/submitForm.ts'
 import { submitContactForm } from '@/src/server/actions/submitForm'
-import { ImageType, ProjectFormType, StatusType, ToolType, VariantType } from '@/src/components/types'
-import Image from 'next/image'
+import { ProjectFormType, StatusType, VariantType } from '@/src/components/types'
+import ToolDropdown from '@/src/components/ToolDropdown'
 
 const initialState: FormState = {
   errors: {},
@@ -52,8 +53,7 @@ export default function NewProjectForm({ className, newProjectForm }: { classNam
           />
 
           <Links />
-          <ToolDropdown tools={newProjectForm.tools} className="hidden md:flex md:mr-auto md:pt-4" />
-          {/* TODO: Add links and tools inputs */}
+          <ToolDropdown tools={newProjectForm.tools} className="hidden md:block md:mr-auto md:pt-4" />
         </div>
 
         <div className="flex flex-col gap-4 w-full md:ml-auto md:w-auto">
@@ -120,27 +120,6 @@ function StatusDropdown({ className, statuses }: { className?: string, statuses:
   )
 }
 
-function ToolDropdown({ tools, className }: { tools: ToolType[], className?: string }) {
-  return (
-    <section className={`${className}`}>
-      <select
-        id="toolId"
-        name="toolId"
-        required
-        defaultValue=""
-        className="w-fit px-1 border rounded-lg text-sm bg-gray-200 ml-auto"
-      >
-        <option value="" disabled>Choose tool</option>
-
-        {tools.map((tool) => (
-          <option key={tool.id} value={tool.id}>
-            {tool.name}
-          </option>
-        ))}
-      </select>
-    </section>
-  )
-}
 function Links({ className }: { className?: string }) {
   return (
     <div className={`flex flex-col gap-2 md:flex-row ${className}`}>
