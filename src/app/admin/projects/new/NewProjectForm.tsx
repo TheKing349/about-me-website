@@ -40,7 +40,7 @@ export default function NewProjectForm({ className, newProjectForm }: { classNam
               name="creationDate"
               required
               defaultValue={new Date().toISOString().split('T')[0]}
-              className="mt-2 text-sm"
+              className="mt-2 text-sm cursor-pointer"
             />
           </div>
 
@@ -67,7 +67,7 @@ export default function NewProjectForm({ className, newProjectForm }: { classNam
       <button
         type="submit"
         disabled={isPending}
-        className="mt-4 px-3 py-1 border rounded-lg"
+        className="mt-4 px-3 py-1 border rounded-lg cursor-pointer"
       >
         Create Project
       </button>
@@ -84,7 +84,7 @@ function VariantDropdown ({ className, variants }: { className?: string, variant
         name="variantId"
         required
         defaultValue=""
-        className="w-fit px-1 border rounded-lg text-sm bg-gray-200"
+        className="w-fit px-1 border rounded-lg text-sm bg-gray-200 cursor-pointer"
       >
         <option value="" disabled>Choose variant</option>
 
@@ -106,7 +106,7 @@ function StatusDropdown({ className, statuses }: { className?: string, statuses:
         name="statusId"
         required
         defaultValue=""
-        className="w-fit px-1 border rounded-lg text-sm bg-gray-200 ml-auto"
+        className="w-fit px-1 border rounded-lg text-sm bg-gray-200 ml-auto cursor-pointer"
       >
         <option value="" disabled>Choose status</option>
 

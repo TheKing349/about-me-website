@@ -64,7 +64,7 @@ export default function ToolDropdown({ tools, className }: { tools: ToolType[], 
                     prev.map((item) => item.id === row.id ? { ...item, toolId: toolId } : item)
                   )
                 }}
-                className="w-auto shrink-0 px-1 border rounded-lg text-sm bg-gray-200"
+                className="w-auto shrink-0 px-1 border rounded-lg text-sm bg-gray-200 cursor-pointer"
               >
                 <option value="" disabled>Choose tool</option>
 
@@ -94,7 +94,7 @@ export default function ToolDropdown({ tools, className }: { tools: ToolType[], 
                   )
                 }
                 aria-label="Remove tool"
-                className="text-gray-500 hover:text-red-500"
+                className="text-gray-500 hover:text-red-500 cursor-pointer"
               >
                 x
               </button>}
@@ -112,7 +112,7 @@ export default function ToolDropdown({ tools, className }: { tools: ToolType[], 
           setRows((prev) => [...prev, { id: nextId, toolId: "" }])
           setNextId((prev) => prev + 1)
         }}
-        className="mt-2 px-2 py-1 border rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+        className="mt-2 px-2 py-1 border rounded-lg text-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
       >
         + Add tool
       </button>
