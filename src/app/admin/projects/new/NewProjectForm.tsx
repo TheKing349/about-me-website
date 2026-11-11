@@ -18,7 +18,7 @@ export default function NewProjectForm({ className, newProjectForm }: { classNam
   const [state, formAction, isPending] = useActionState(submitContactForm, initialState)
 
   return (
-    <form action={formAction} className={`p-4 border rounded-lg bg-gray-100 ${className}`}>
+    <form action={formAction} className={`p-4 border rounded-lg bg-gray-100 ${className}`} noValidate>
       <div className="flex flex-col md:flex-row gap-2">
         <div className="flex flex-col max-w-lg">
           <div className="flex flex-row gap-2">
@@ -31,6 +31,7 @@ export default function NewProjectForm({ className, newProjectForm }: { classNam
             name="title"
             required
             placeholder="Project Title"
+            defaultValue={state?.errors?.title || ""}
             className="pt-2 text-xl bg-transparent border-b border-gray-300 outline-none placeholder:text-gray-500"
           />
 
@@ -71,6 +72,8 @@ export default function NewProjectForm({ className, newProjectForm }: { classNam
       >
         Create Project
       </button>
+
+      {state && <p>{state.message}</p>}
     </form>
   )
 }
@@ -81,7 +84,7 @@ function VariantDropdown ({ className, variants }: { className?: string, variant
       <label htmlFor="variantId" className="sr-only">Variant</label>
       <select
         id="variantId"
-        name="variantId"
+        name="variantDropdown"
         required
         defaultValue=""
         className="w-fit px-1 border rounded-lg text-sm bg-gray-200 cursor-pointer"
@@ -103,7 +106,7 @@ function StatusDropdown({ className, statuses }: { className?: string, statuses:
     <section className={`ml-auto ${className}`}>
       <select
         id="statusId"
-        name="statusId"
+        name="statusDropdown"
         required
         defaultValue=""
         className="w-fit px-1 border rounded-lg text-sm bg-gray-200 ml-auto cursor-pointer"
@@ -125,10 +128,12 @@ function Links({ className }: { className?: string }) {
     <div className={`flex flex-col gap-2 md:flex-row ${className}`}>
       <input
         type="text"
+        name="linkNames"
         placeholder="Link name"
       />
       <input
         type="text"
+        name="linkUrls"
         placeholder="https://example.com"
       />
     </div>

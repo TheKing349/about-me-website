@@ -4,17 +4,34 @@ import { z } from 'zod'
 
 // Define validation rules using Zod
 const schema = z.object({
-  name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
-  email: z.string().email({ message: 'Please enter a valid email address.' }),
-  message: z.string().min(10, { message: 'Message must be at least 10 characters.' }),
+  variantDropdown: z.array(z.string().refine((val) => val !== '' && !val.toString().includes("Choose")), {
+    message: 'Please select a valid option (cannot be the default choice).',
+  }),
+  statusDropdown: z.array(z.string().refine((val) => val !== '' && !val.toString().includes("Choose")), {
+    message: 'Please select a valid option (cannot be the default choice).',
+  }),
+  toolsDropdown: z.array(z.string().refine((val) => val !== '' && !val.toString().includes("Choose")), {
+    message: 'Please select a valid option (cannot be the default choice).',
+  }),
+  title: z.string().min(4, { message: 'Project title must be at least 4 characters. '}),
+  description: z.string().min(15, { message: 'Description must be at least 15 characters. '}),
+  creationDate: z.iso.date(),
+  linkNames: z.array(z.string()),
+  linkUrls: z.array(z.url("Invalid URL format")),
+  // imageUrls:  z.array(z.url("Invalid URL format")),
 })
 
 // Define the state type for our form
 export type FormState = {
   errors?: {
-    name?: string[];
-    email?: string[];
-    message?: string[];
+    variantDropdown?: string[];
+    statusDropdown?: string[];
+    toolsDropdown?: string[];
+    title?: string[];
+    description?: string[];
+    linkNames?: string[];
+    linkUrls?: string[];
+    imageUrls?: string[];
   };
   message?: string | null;
   success?: boolean;
@@ -23,13 +40,20 @@ export type FormState = {
 export async function submitContactForm(prevState: FormState, formData: FormData): Promise<FormState> {
   // Extract data from the form
   const validatedFields = schema.safeParse({
-    name: formData.get('name'),
-    email: formData.get('email'),
-    message: formData.get('message'),
+    variantDropdown: formData.getAll("variantDropdown"),
+    statusDropdown: formData.getAll("statusDropdown"),
+    toolsDropdown: formData.getAll("toolsDropdown"),
+    title: formData.get("title"),
+    description: formData.get("description"),
+    creationDate: formData.get("creationDate"),
+    linkNames: formData.getAll("linkNames"),
+    linkUrls: formData.getAll("linkUrls"),
+    // imageUrls: formData.getAll("imageUrls"),
   })
 
   // Return server-side errors if validation fails
   if (!validatedFields.success) {
+    console.log(validatedFields.error.flatten().fieldErrors)
     return {
       success: false,
       errors: validatedFields.error.flatten().fieldErrors,

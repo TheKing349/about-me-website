@@ -50,7 +50,7 @@ export default function ToolDropdown({ tools, className }: { tools: ToolType[], 
 
               <select
                 id={`toolId-${row.id}`}
-                name={row.toolId ? "toolId" : undefined}
+                name="toolDropdown"
                 required={index === 0 && Boolean(row.toolId)}
                 value={row.toolId}
                 onChange={(e) => {
