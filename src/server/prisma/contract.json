@@ -75,6 +75,13 @@
                   "name": "Link"
                 }
               },
+              "pinned": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/bool@1",
+                  "kind": "scalar"
+                }
+              },
               "statusId": {
                 "nullable": false,
                 "type": {
@@ -165,6 +172,9 @@
                 },
                 "links": {
                   "column": "links"
+                },
+                "pinned": {
+                  "column": "pinned"
                 },
                 "statusId": {
                   "column": "statusId"
@@ -466,6 +476,11 @@
                   "nativeType": "jsonb",
                   "nullable": false
                 },
+                "pinned": {
+                  "codecId": "pg/bool@1",
+                  "nativeType": "bool",
+                  "nullable": false
+                },
                 "statusId": {
                   "codecId": "pg/int4@1",
                   "nativeType": "int4",
@@ -713,7 +728,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "d3a998893569db6a39f2f771f5f6c78ad99a36e7a16e7475a54ccf8b5da8ca1e"
+    "storageHash": "d5a3599d241b090f97c363545ac33dd58741e1cdff5d3b4f8a342be26c5cffd8"
   },
   "capabilities": {
     "postgres": {

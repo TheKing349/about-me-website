@@ -34,7 +34,7 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'d3a998893569db6a39f2f771f5f6c78ad99a36e7a16e7475a54ccf8b5da8ca1e'>;
+  StorageHashBase<'d5a3599d241b090f97c363545ac33dd58741e1cdff5d3b4f8a342be26c5cffd8'>;
 export type ExecutionHash = ExecutionHashBase<string>;
 export type ProfileHash =
   ProfileHashBase<'3916f444a8a17ad749191acf9e08dad97d1a327b88c2f1d45d12f240296aa8b2'>;
@@ -271,6 +271,7 @@ export type FieldOutputTypes = {
       readonly images: ReadonlyArray<ImageOutput>;
       readonly insights: CodecTypes['pg/text@1']['output'] | null;
       readonly links: ReadonlyArray<LinkOutput>;
+      readonly pinned: CodecTypes['pg/bool@1']['output'];
       readonly statusId: CodecTypes['pg/int4@1']['output'];
       readonly title: CodecTypes['pg/text@1']['output'];
       readonly variantId: CodecTypes['pg/int4@1']['output'];
@@ -305,6 +306,7 @@ export type FieldInputTypes = {
       readonly images: ReadonlyArray<ImageInput>;
       readonly insights: CodecTypes['pg/text@1']['input'] | null;
       readonly links: ReadonlyArray<LinkInput>;
+      readonly pinned: CodecTypes['pg/bool@1']['input'];
       readonly statusId: CodecTypes['pg/int4@1']['input'];
       readonly title: CodecTypes['pg/text@1']['input'];
       readonly variantId: CodecTypes['pg/int4@1']['input'];
@@ -339,6 +341,7 @@ export type StorageColumnTypes = {
       readonly images: CodecTypes['pg/jsonb@1']['output'];
       readonly insights: CodecTypes['pg/text@1']['output'] | null;
       readonly links: CodecTypes['pg/jsonb@1']['output'];
+      readonly pinned: CodecTypes['pg/bool@1']['output'];
       readonly statusId: CodecTypes['pg/int4@1']['output'];
       readonly title: CodecTypes['pg/text@1']['output'];
       readonly variantId: CodecTypes['pg/int4@1']['output'];
@@ -373,6 +376,7 @@ export type StorageColumnInputTypes = {
       readonly images: CodecTypes['pg/jsonb@1']['input'];
       readonly insights: CodecTypes['pg/text@1']['input'] | null;
       readonly links: CodecTypes['pg/jsonb@1']['input'];
+      readonly pinned: CodecTypes['pg/bool@1']['input'];
       readonly statusId: CodecTypes['pg/int4@1']['input'];
       readonly title: CodecTypes['pg/text@1']['input'];
       readonly variantId: CodecTypes['pg/int4@1']['input'];
@@ -407,6 +411,7 @@ export namespace Models {
     images: ReadonlyArray<ImageOutput>;
     insights: CodecTypes['pg/text@1']['output'] | null;
     links: ReadonlyArray<LinkOutput>;
+    pinned: CodecTypes['pg/bool@1']['output'];
     statusId: CodecTypes['pg/int4@1']['output'];
     title: CodecTypes['pg/text@1']['output'];
     variantId: CodecTypes['pg/int4@1']['output'];
@@ -505,6 +510,11 @@ type ContractBase = Omit<
                 readonly links: {
                   readonly nativeType: 'jsonb';
                   readonly codecId: 'pg/jsonb@1';
+                  readonly nullable: false;
+                };
+                readonly pinned: {
+                  readonly nativeType: 'bool';
+                  readonly codecId: 'pg/bool@1';
                   readonly nullable: false;
                 };
                 readonly statusId: {
@@ -755,6 +765,10 @@ type ContractBase = Omit<
                 readonly type: { readonly kind: 'valueObject'; readonly name: 'Link' };
                 readonly many: true;
               };
+              readonly pinned: {
+                readonly nullable: false;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/bool@1' };
+              };
               readonly statusId: {
                 readonly nullable: false;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
@@ -815,6 +829,7 @@ type ContractBase = Omit<
                 readonly images: { readonly column: 'images' };
                 readonly insights: { readonly column: 'insights' };
                 readonly links: { readonly column: 'links' };
+                readonly pinned: { readonly column: 'pinned' };
                 readonly statusId: { readonly column: 'statusId' };
                 readonly title: { readonly column: 'title' };
                 readonly variantId: { readonly column: 'variantId' };

@@ -6,7 +6,7 @@ export default definePrismaConfig({
     agents: [],
   },
   orm: ormConfig({
-    contract: "./src/prisma/contract.prisma",
+    contract: "./src/server/prisma/contract.prisma",
     db: {
       connection: process.env.DATABASE_URL!,
     },
