@@ -20,12 +20,33 @@ export async function listProjects(): Promise<ProjectType[]> {
     .orderBy((p) => p.creationDate.desc())
     .all();
 
-    return projects.map(
-      ({ projectTools, statusId, variantId, ...project }): ProjectType => ({
-        ...project,
-        images: project.images as ImageType[],
-        links: project.links as LinkType[],
-        tools: projectTools.map(({ tool }) => tool),
-      })
-    );
+  return projects.map(
+    ({ projectTools, statusId, variantId, ...project }): ProjectType => ({
+      ...project,
+      images: project.images as ImageType[],
+      links: project.links as LinkType[],
+      tools: projectTools.map(({ tool }) => tool),
+    })
+  );
+}
+
+export async function listPinnedProjects(): Promise<ProjectType[]> {
+  await seed();
+  const projects = await db.orm.public.Project
+    .include("projectTools", (projectTools) =>
+      projectTools.include("tool")
+    )
+    .include("status")
+    .include("variant")
+    .where((p) => p.pinned.eq(true))
+    .all();
+
+  return projects.map(
+    ({ projectTools, statusId, variantId, ...project }): ProjectType => ({
+      ...project,
+      images: project.images as ImageType[],
+      links: project.links as LinkType[],
+      tools: projectTools.map(({ tool }) => tool),
+    })
+  );
 }

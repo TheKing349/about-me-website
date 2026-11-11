@@ -1,5 +1,5 @@
 import Navbar from "@/src/components/Navbar";
-import Project from "@/src/components/Project"
+import ProjectList from "@/src/components/ProjectList";
 
 const { listProjects } = await import("@/src/server/prisma/query/projects")
 const projects = await listProjects().catch(() => undefined);
@@ -8,13 +8,7 @@ export default function Projects() {
   return (
     <main className="flex flex-col min-h-screen">
       <Navbar />
-      <ul className="flex flex-col p-4 gap-3 mb-auto grow">
-        {projects?.map((project) => 
-          <li key={project.id}>
-            <Project project={project} />
-          </li>
-        )}
-      </ul>
+      <ProjectList projects={projects} />
     </main>
   )
 }
