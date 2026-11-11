@@ -38,7 +38,8 @@ export const projects: ProjectType[] = [
     insights: "SKILLS",
     tools: [tools[0], tools[1]],
     status: statuses[0],
-    variant: variants[0]
+    variant: variants[0],
+    pinned: true
   },
   {
     id: 2,
@@ -51,6 +52,7 @@ export const projects: ProjectType[] = [
     tools: [tools[2]],
     status: statuses[1],
     variant: variants[1],
+    pinned: false
   },
   {
     id: 3,
@@ -63,6 +65,7 @@ export const projects: ProjectType[] = [
     tools: [tools[3], tools[4]],
     status: statuses[2],
     variant: variants[2],
+    pinned: false
   },
   {
     id: 4,
@@ -75,5 +78,6 @@ export const projects: ProjectType[] = [
     tools: [tools[3], tools[4]],
     status: statuses[2],
     variant: variants[2],
+    pinned: true
   },
 ];

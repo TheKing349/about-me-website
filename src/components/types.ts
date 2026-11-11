@@ -8,7 +8,8 @@ export type ProjectType = {
   insights: string | null,
   tools: ToolType[],
   status: StatusType,
-  variant: VariantType
+  variant: VariantType,
+  pinned: boolean
 }
 
 export type ToolType = {
