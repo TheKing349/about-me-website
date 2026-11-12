@@ -34,7 +34,7 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'d1a0931afbf1a45ffe53a62abdd3650bbc82c4f4e3eff46591c3f170f5f3772a'>;
+  StorageHashBase<'2c7d31b813917eebd6fee4dddc3abe57e2a59836c61016019699df7d78440843'>;
 export type ExecutionHash = ExecutionHashBase<string>;
 export type ProfileHash =
   ProfileHashBase<'3916f444a8a17ad749191acf9e08dad97d1a327b88c2f1d45d12f240296aa8b2'>;
@@ -266,7 +266,7 @@ export type FieldOutputTypes = {
   readonly public: {
     readonly AboutMe: {
       readonly id: CodecTypes['pg/int4@1']['output'];
-      readonly text: CodecTypes['pg/text@1']['output'] | null;
+      readonly text: CodecTypes['pg/text@1']['output'];
       readonly title: CodecTypes['pg/text@1']['output'] | null;
     };
     readonly Project: {
@@ -306,7 +306,7 @@ export type FieldInputTypes = {
   readonly public: {
     readonly AboutMe: {
       readonly id: CodecTypes['pg/int4@1']['input'];
-      readonly text: CodecTypes['pg/text@1']['input'] | null;
+      readonly text: CodecTypes['pg/text@1']['input'];
       readonly title: CodecTypes['pg/text@1']['input'] | null;
     };
     readonly Project: {
@@ -346,7 +346,7 @@ export type StorageColumnTypes = {
   readonly public: {
     readonly AboutMe: {
       readonly id: CodecTypes['pg/int4@1']['output'];
-      readonly text: CodecTypes['pg/text@1']['output'] | null;
+      readonly text: CodecTypes['pg/text@1']['output'];
       readonly title: CodecTypes['pg/text@1']['output'] | null;
     };
     readonly Project: {
@@ -386,7 +386,7 @@ export type StorageColumnInputTypes = {
   readonly public: {
     readonly AboutMe: {
       readonly id: CodecTypes['pg/int4@1']['input'];
-      readonly text: CodecTypes['pg/text@1']['input'] | null;
+      readonly text: CodecTypes['pg/text@1']['input'];
       readonly title: CodecTypes['pg/text@1']['input'] | null;
     };
     readonly Project: {
@@ -426,7 +426,7 @@ export type StorageColumnInputTypes = {
 export namespace Models {
   export type public_AboutMe = {
     id: CodecTypes['pg/int4@1']['output'];
-    text: CodecTypes['pg/text@1']['output'] | null;
+    text: CodecTypes['pg/text@1']['output'];
     title: CodecTypes['pg/text@1']['output'] | null;
     readonly [RelationKeys]?: never;
   };
@@ -517,7 +517,7 @@ type ContractBase = Omit<
                 readonly text: {
                   readonly nativeType: 'text';
                   readonly codecId: 'pg/text@1';
-                  readonly nullable: true;
+                  readonly nullable: false;
                 };
                 readonly title: {
                   readonly nativeType: 'text';
@@ -799,7 +799,7 @@ type ContractBase = Omit<
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
               };
               readonly text: {
-                readonly nullable: true;
+                readonly nullable: false;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
               };
               readonly title: {

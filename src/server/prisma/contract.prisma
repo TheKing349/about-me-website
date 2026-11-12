@@ -52,7 +52,7 @@ model Variant {
 model AboutMe {
   id            Int   @id @default(autoincrement())
   title         String?
-  text          String?
+  text          String
 }
 
 type Image {
