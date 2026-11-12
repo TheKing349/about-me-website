@@ -17,7 +17,7 @@ export default function Home() {
           {aboutMes?.map((aboutMe) => 
             <li key={aboutMe.id}>
               {aboutMe.title && <h3 className="font-bold">{aboutMe.title}</h3>}
-              {aboutMe.text && <p className="whitespace-pre-line">{aboutMe.text}</p>}
+              <p className="whitespace-pre-line">{aboutMe.text}</p>
             </li>
           )}
         </ul>
