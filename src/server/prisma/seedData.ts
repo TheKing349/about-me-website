@@ -1,8 +1,8 @@
 import { Temporal } from "temporal-polyfill"
 
-import { AboutMeType, ImageType, LinkType, ProjectType, StatusType, ToolType, VariantType } from "@/src/components/types";
+import { AboutMeType, ImageType, ProjectType, StatusType, ToolType, VariantType } from "@/src/components/types";
 
-let placeholderImage: ImageType = {
+const placeholderImage: ImageType = {
   url: "https://placehold.net/default.svg",
   alt: "Placeholder image for testing purposes"
 };
@@ -100,12 +100,12 @@ export const aboutMes: AboutMeType[] = [
     title: "Lunabotics",
     text: "In addition to classes, (REWORD) I am also a member —— and lead apprentice —— for Lunabotics at UNL as a programmer. Here we build a robot for a competition where the robot digs dirt, navigates through an obstacle zone, and dumps the dirt. Programming is mainly involved with getting the robot to move and making it autonomous, completing the tasks by itself using sensors. \n\n Through my time in Lunabotics, I have strengthened my ability to work in a team-environment, ensuring maintainable code is written, deadlines are hit and learning how to solve complex problems, such as full autonomy on a robot."
   },
-  {
-    id: 4,
-    order: 4,
-    title: "Homelab",
-    text: "Outside of university, I built and maintain a modest homelab, serving as cloud storage, password management, and a VPN provider. My setup consists of a 2015 Mac Mini, with external hard drives with redundancy for the main storage. I also have a Raspberry Pi 5 that acts as the VPN provider, as well as a backup for my main server."
-  },
+  // {
+  //   id: 4,
+  //   order: 4,
+  //   title: "Homelab",
+  //   text: "Outside of university, I built and maintain a modest homelab, serving as cloud storage, password management, and a VPN provider. My setup consists of a 2015 Mac Mini, with external hard drives with redundancy for the main storage. I also have a Raspberry Pi 5 that acts as the VPN provider, as well as a backup for my main server."
+  // },
   {
     id: 5,
     order: 5,

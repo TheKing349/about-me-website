@@ -119,9 +119,9 @@ async function upsertAboutMes() {
   for (const aboutMe of aboutMes) {
     await db.orm.public.AboutMe.upsert({
       create: aboutMe,
-        update: {
+      update: {
         title: aboutMe.title,
-        text: aboutMe.text,
+        text: aboutMe.text
       },
       conflictOn: {
         id: aboutMe.id,
