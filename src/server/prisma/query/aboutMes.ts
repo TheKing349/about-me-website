@@ -7,7 +7,7 @@ export { db };
 
 export async function listAboutMes(): Promise<AboutMeType[]> {
   await seed();
-  const aboutMes = await db.orm.public.AboutMe.orderBy((a) => a.id.asc()).all();
+  const aboutMes = await db.orm.public.AboutMe.orderBy((a) => a.order.asc()).all();
 
   return aboutMes;
 }

@@ -48,6 +48,7 @@ export type ProjectFormType = {
 
 export type AboutMeType = {
   id: number,
+  order: number,
   title?: string | null,
   text: string
 }
