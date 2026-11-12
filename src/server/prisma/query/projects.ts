@@ -14,7 +14,7 @@ export async function listProjects({ pinned = false } = {}): Promise<ProjectType
     )
     .include("status")
     .include("variant")
-    .where((p) => p.pinned.eq(pinned))
+    .where(pinned ? { pinned: true } : {})
     .orderBy((p) => p.creationDate.desc())
     .all();
 
