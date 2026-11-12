@@ -39,6 +39,7 @@ export async function listPinnedProjects(): Promise<ProjectType[]> {
     .include("status")
     .include("variant")
     .where((p) => p.pinned.eq(true))
+    .orderBy((p) => p.creationDate.desc())
     .all();
 
   return projects.map(
