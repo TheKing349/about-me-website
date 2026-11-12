@@ -1,8 +1,8 @@
 import Navbar from "@/src/components/Navbar";
 import ProjectList from "../components/ProjectList";
 
-const { listPinnedProjects } = await import("@/src/server/prisma/query/projects")
-const pinnedProjects = await listPinnedProjects().catch(() => undefined);
+const { listProjects } = await import("@/src/server/prisma/query/projects")
+const pinnedProjects = await listProjects({pinned: true}).catch(() => undefined);
 
 const { listAboutMes } = await import("@/src/server/prisma/query/aboutMes")
 const aboutMes = await listAboutMes().catch(() => undefined);
