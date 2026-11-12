@@ -50,7 +50,7 @@ model Variant {
 }
 
 model AboutMe {
-  id            Int   @id @default(autoincrement())
+  id            Int     @id @default(autoincrement())
   title         String?
   text          String
 }
