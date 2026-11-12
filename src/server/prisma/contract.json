@@ -4,6 +4,10 @@
   "target": "postgres",
   "profileHash": "3916f444a8a17ad749191acf9e08dad97d1a327b88c2f1d45d12f240296aa8b2",
   "roots": {
+    "AboutMe": {
+      "model": "AboutMe",
+      "namespace": "public"
+    },
     "Project": {
       "model": "Project",
       "namespace": "public"
@@ -29,6 +33,47 @@
     "namespaces": {
       "public": {
         "models": {
+          "AboutMe": {
+            "fields": {
+              "id": {
+                "nullable": false,
+                "type": {
+                  "codecId": "pg/int4@1",
+                  "kind": "scalar"
+                }
+              },
+              "text": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "title": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              }
+            },
+            "relations": {},
+            "storage": {
+              "fields": {
+                "id": {
+                  "column": "id"
+                },
+                "text": {
+                  "column": "text"
+                },
+                "title": {
+                  "column": "title"
+                }
+              },
+              "namespaceId": "public",
+              "table": "AboutMe"
+            }
+          },
           "Project": {
             "fields": {
               "creationDate": {
@@ -440,6 +485,37 @@
       "public": {
         "entries": {
           "table": {
+            "AboutMe": {
+              "columns": {
+                "id": {
+                  "codecId": "pg/int4@1",
+                  "default": {
+                    "expression": "autoincrement()",
+                    "kind": "function"
+                  },
+                  "nativeType": "int4",
+                  "nullable": false
+                },
+                "text": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                },
+                "title": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                }
+              },
+              "foreignKeys": [],
+              "indexes": [],
+              "primaryKey": {
+                "columns": [
+                  "id"
+                ]
+              },
+              "uniques": []
+            },
             "Project": {
               "columns": {
                 "creationDate": {
@@ -728,7 +804,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "d5a3599d241b090f97c363545ac33dd58741e1cdff5d3b4f8a342be26c5cffd8"
+    "storageHash": "d1a0931afbf1a45ffe53a62abdd3650bbc82c4f4e3eff46591c3f170f5f3772a"
   },
   "capabilities": {
     "postgres": {

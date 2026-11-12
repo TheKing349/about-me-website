@@ -1,5 +1,5 @@
 import { connectDatabase, db } from "./db.ts";
-import { projects, statuses, variants, tools } from "./seedData.ts"
+import { projects, statuses, variants, tools, aboutMes } from "./seedData.ts"
 
 let pendingSeed: Promise<void> | undefined;
 
@@ -11,6 +11,8 @@ async function runSeed(): Promise<void> {
   await upsertTools();
   
   await upsertProjects();
+
+  await upsertAboutMes();
 }
 
 async function upsertStatuses() {
@@ -110,6 +112,21 @@ async function upsertProjects() {
         },
       });
     }
+  }
+}
+
+async function upsertAboutMes() {
+  for (const aboutMe of aboutMes) {
+    await db.orm.public.AboutMe.upsert({
+      create: aboutMe,
+        update: {
+        title: aboutMe.title,
+        text: aboutMe.text,
+      },
+      conflictOn: {
+        id: aboutMe.id,
+      },
+    });
   }
 }
 

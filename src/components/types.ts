@@ -45,3 +45,9 @@ export type ProjectFormType = {
   variants: VariantType[],
   tools: ToolType[]
 }
+
+export type AboutMeType = {
+  id: number,
+  title?: string | null,
+  text?: string | null
+}
